@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PréstamoMX · 墨西哥现金贷 APP 联合方案 v1.0</title>
+<style>
+  :root {
+    --primary: #FFD400;
+    --primary-dark: #E5BF00;
+    --success: #00C853;
+    --danger: #FF3D71;
+    --warning: #FF9500;
+    --ink: #1A1A1A;
+    --ink-2: #4A4A4A;
+    --muted: #8E8E93;
+    --line: #E5E5EA;
+    --bg: #F2F2F7;
+    --card: #FFFFFF;
+    --es: #FF6B35;
+    --cn: #1A73E8;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg); color: var(--ink);
+    line-height: 1.65; font-size: 15px;
+  }
+  a { color: var(--ink); text-decoration: none; }
+  a:hover { color: var(--primary-dark); }
+  h1, h2, h3, h4 { margin: 0 0 12px 0; line-height: 1.3; }
+  h1 { font-size: 32px; font-weight: 800; }
+  h2 { font-size: 24px; font-weight: 700; margin-top: 36px; padding-top: 24px; border-top: 2px solid var(--ink); }
+  h3 { font-size: 19px; font-weight: 700; margin-top: 24px; }
+  h4 { font-size: 16px; font-weight: 700; }
+  p { margin: 0 0 12px 0; }
+  ul, ol { margin: 0 0 12px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  code { background: #F4F4F6; padding: 2px 6px; border-radius: 4px; font-family: "SF Mono", Menlo, monospace; font-size: 13px; }
+  pre { background: #1A1A1A; color: #E8E8E8; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 13px; }
+  blockquote { border-left: 4px solid var(--primary); margin: 0; padding: 8px 16px; background: #FFFBE0; color: var(--ink-2); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+
+  /* Layout */
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  .hero { background: linear-gradient(135deg, #FFD400 0%, #FF6B35 100%); color: #1A1A1A; padding: 56px 24px; border-radius: 0 0 24px 24px; margin-bottom: 24px; }
+  .hero h1 { font-size: 42px; }
+  .hero p { font-size: 16px; opacity: 0.9; }
+  .hero .tag { display: inline-block; background: rgba(0,0,0,0.85); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-right: 6px; margin-top: 12px; }
+  .nav { position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); z-index: 100; padding: 12px 24px; border-bottom: 1px solid var(--line); margin: 0 -24px 24px -24px; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; }
+  .nav a { color: var(--ink-2); padding: 4px 8px; border-radius: 6px; }
+  .nav a:hover { background: var(--bg); }
+
+  /* Card */
+  .card { background: var(--card); border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 16px; border: 1px solid var(--line); }
+  .card-yellow { border-left: 4px solid var(--primary); }
+  .card-green { border-left: 4px solid var(--success); }
+  .card-pink { border-left: 4px solid var(--danger); }
+  .card-orange { border-left: 4px solid var(--warning); }
+  .card-ink { border-left: 4px solid var(--ink); }
+  .card h3 { margin-top: 0; }
+
+  /* Grid */
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th, td { padding: 8px 12px; text-align: left; border: 1px solid var(--line); }
+  th { background: var(--bg); font-weight: 700; }
+  tr:nth-child(even) td { background: #FAFAFC; }
+
+  /* Tags */
+  .tag-p0, .tag-p1, .tag-p2, .tag-must, .tag-opt, .tag-no { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+  .tag-p0 { background: #FF3D71; color: white; }
+  .tag-p1 { background: #FF9500; color: white; }
+  .tag-p2 { background: #8E8E93; color: white; }
+  .tag-must { background: #00C853; color: white; }
+  .tag-opt { background: #FFD400; color: #1A1A1A; }
+  .tag-no { background: #E5E5EA; color: #8E8E93; }
+
+  /* Design comparison */
+  .design-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0; }
+  .design-card { background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  .design-card .lang-bar { padding: 10px 16px; font-size: 13px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+  .design-card .lang-bar.es { background: var(--es); color: white; }
+  .design-card .lang-bar.cn { background: var(--cn); color: white; }
+  .design-card .lang-bar .label { font-size: 11px; opacity: 0.85; }
+  .design-card img { width: 100%; display: block; }
+  .design-card .caption { padding: 12px 16px; font-size: 13px; color: var(--ink-2); background: #FAFAFC; border-top: 1px solid var(--line); }
+  @media (max-width: 900px) { .design-pair { grid-template-columns: 1fr; } }
+
+  /* Single image */
+  .design-single { background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); margin: 12px 0; max-width: 360px; }
+  .design-single .lang-bar { padding: 10px 16px; font-size: 13px; font-weight: 700; color: white; }
+  .design-single .lang-bar.es { background: var(--es); }
+  .design-single .lang-bar.cn { background: var(--cn); }
+  .design-single img { width: 100%; display: block; }
+  .design-single .caption { padding: 12px 16px; font-size: 13px; color: var(--ink-2); background: #FAFAFC; }
+
+  /* Highlight box */
+  .highlight { background: linear-gradient(135deg, #FFFBE0 0%, #FFF5E0 100%); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin: 16px 0; }
+  .highlight-pink { background: linear-gradient(135deg, #FFE8EE 0%, #FFEDF1 100%); border: 1px solid var(--danger); border-radius: 12px; padding: 20px; margin: 16px 0; }
+  .highlight-green { background: linear-gradient(135deg, #E5F8EC 0%, #E8FAEE 100%); border: 1px solid var(--success); border-radius: 12px; padding: 20px; margin: 16px 0; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 16px 0; }
+  .stat { background: var(--card); border-radius: 12px; padding: 20px; border: 1px solid var(--line); }
+  .stat .num { font-size: 36px; font-weight: 800; color: var(--ink); }
+  .stat .num.yellow { color: #B89400; }
+  .stat .num.pink { color: var(--danger); }
+  .stat .num.green { color: var(--success); }
+  .stat .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* Mermaid-like tree */
+  .tree { font-family: "SF Mono", Menlo, monospace; white-space: pre; background: #1A1A1A; color: #FFD400; padding: 20px; border-radius: 8px; overflow-x: auto; font-size: 12px; line-height: 1.5; }
+
+  /* Number circle */
+  .num-circle { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; background: var(--primary); color: var(--ink); font-weight: 800; align-items: center; justify-content: center; font-size: 13px; margin-right: 6px; }
+
+  /* TOC */
+  .toc { background: var(--card); border-radius: 12px; padding: 20px; border: 1px solid var(--line); margin: 16px 0; }
+  .toc h3 { margin-top: 0; }
+  .toc ol { columns: 2; column-gap: 32px; }
+  .toc li { break-inside: avoid; }
+  @media (max-width: 700px) { .toc ol { columns: 1; } }
+
+  /* Footer */
+  footer { background: #1A1A1A; color: #E8E8E8; padding: 40px 24px; border-radius: 24px 24px 0 0; margin-top: 40px; }
+  footer h3 { color: var(--primary); }
+  footer a { color: #FFD400; }
+
+  /* Print */
+  @media print {
+    .nav { position: static; }
+    .card, .design-card, .design-single { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 顶部 Hero ============ -->
+<div class="hero">
+  <div class="container" style="padding-bottom:0; padding-top:0;">
+    <h1>PréstamoMX · 联合方案</h1>
+    <p style="font-size:18px; margin-top:8px;">墨西哥现金贷 APP · 信息触达方案 + 优惠券使用率提升</p>
+    <p style="font-size:14px; opacity:0.85; margin-top:8px;">v1.0 · 2026-08-16 · 中文方案文档（界面文案含 es-MX 西语对照）</p>
+    <div style="margin-top:16px;">
+      <span class="tag">🇲🇽 墨西哥市场</span>
+      <span class="tag">📱 现金贷 APP</span>
+      <span class="tag">🎯 双项目联合</span>
+      <span class="tag">📐 12+12 触达体系</span>
+      <span class="tag">🎟️ 8+1 券体系</span>
+      <span class="tag">⚖️ CNBV/CONDUSEF/LFPDPPP 合规</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 顶部导航 ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#summary">📋 摘要</a>
+    <a href="#correlation">🔗 关联分析</a>
+    <a href="#p1">📡 项目1 触达</a>
+    <a href="#p1-designs">🎨 项目1 设计稿</a>
+    <a href="#p2">🎟️ 项目2 券</a>
+    <a href="#p2-designs">🎨 项目2 设计稿</a>
+    <a href="#roadmap">🚀 落地路线</a>
+    <a href="#verify">✅ 验收对照</a>
+    <a href="#appendix">📎 附录</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ============ 一页摘要 ============ -->
+<section id="summary">
+  <h2>📋 一页摘要</h2>
+
+  <div class="highlight">
+    <h3 style="margin-top:0;">核心结论</h3>
+    <p><strong>两个项目不是并列关系，而是「渠道 × 内容」的乘积关系。</strong>项目 1 是「管道」，项目 2 是「管道里流的内容」。任何一者单独做都不可能成，必须同步落地。</p>
+    <ul>
+      <li><strong>没有项目 1 的触达体系</strong>，项目 2 的券推不出去（频次/静默/合规没人管）</li>
+      <li><strong>没有项目 2 的券内容</strong>，项目 1 的触达形式空转（触达不等于转化）</li>
+      <li><strong>必须共建 4 个底座</strong>：触达中台、营销偏好中心、合规规则中心、A/B 平台</li>
+    </ul>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num yellow">12</div><div class="label">触达形式</div></div>
+    <div class="stat"><div class="num yellow">12</div><div class="label">触达结点</div></div>
+    <div class="stat"><div class="num">144</div><div class="label">矩阵交叉点</div></div>
+    <div class="stat"><div class="num pink">5+1</div><div class="label">提升策略</div></div>
+    <div class="stat"><div class="num pink">8+1</div><div class="label">券类型</div></div>
+    <div class="stat"><div class="num green">4+1</div><div class="label">用户分层</div></div>
+    <div class="stat"><div class="num green">4</div><div class="label">A/B 实验</div></div>
+    <div class="stat"><div class="num">12</div><div class="label">高保真设计稿（中英对照 ×6 ×2）</div></div>
+  </div>
+
+  <h3>两项目核心指标对比</h3>
+  <table>
+    <thead>
+      <tr><th>维度</th><th>项目 1 信息触达</th><th>项目 2 优惠券</th><th>联合目标</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>核心产出</td><td>12 形式 + 12 结点 + 144 矩阵</td><td>5 策略 + 8+1 券 + 5 分层</td><td>触达 × 内容双轮驱动</td></tr>
+      <tr><td>核心目标</td><td>触达体系 100% 覆盖</td><td>核销率 15% → 30%</td><td>MAU 券用户占比 0 → 35%</td></tr>
+      <tr><td>关键指标</td><td>触达率 ≥ 95%、打开率 ≥ 20%</td><td>ROI 1:4 → 1:6、复借 18% → 28%</td><td>复借率 18% → 30%+</td></tr>
+      <tr><td>合规底线</td><td>CNBV/CONDUSEF/LFPDPPP</td><td>抗诱导多头、规则透明</td><td>投诉率 < 0.15%</td></tr>
+      <tr><td>落地周期</td><td>6 个月分 3 阶段</td><td>12 周分 3 阶段</td><td>6 个月联合完成</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 关联分析 ============ -->
+<section id="correlation">
+  <h2>🔗 关联分析（两个项目的协同设计）</h2>
+
+  <h3>0 · 一页结论</h3>
+  <div class="highlight-pink">
+    <h4 style="margin-top:0;">为什么必须联动？</h4>
+    <p>两个项目分别解决了同一个问题的两面：</p>
+    <ul>
+      <li><strong>项目 1（信息触达）</strong>：解决"怎么把信息送到用户眼前"——定义通道、时机、频次、合规</li>
+      <li><strong>项目 2（优惠券）</strong>：解决"送什么内容能让用户动起来"——定义内容、激励、闭环</li>
+    </ul>
+    <p>两者不是并列，而是 <strong>「管道 × 内容」</strong> 的乘积关系。单做任一项，转化率都上不去。</p>
+  </div>
+
+  <h3>1 · 总体架构</h3>
+  <div class="tree">
+┌─────────────────────────────────────────────────────────────┐
+│  项目 1：信息触达方案（管道层）                                │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐              │
+│  │ 12 触达形式 │  │ 12 触达结点 │  │ 144 矩阵    │              │
+│  │ Push/横幅  │  │ 注册/实名  │  │ 形式×结点   │              │
+│  └─────┬──────┘  └─────┬──────┘  └─────┬──────┘              │
+│        │               │               │                    │
+│        └───── 管道定义层（被项目 2 完整复用） ────┘            │
+└─────────┬───────────────┬───────────────┬────────────────────┘
+          │               │               │
+          ▼               ▼               ▼
+┌─────────────────────────────────────────────────────────────┐
+│  触达中台（共建底座）                                          │
+│  频次控制 | 静默保护 | 疲劳度 | 灰度发布 | 渠道下发              │
+└─────────┬───────────────┬───────────────┬────────────────────┘
+          │               │               │
+          ▼               ▼               ▼
+┌─────────────────────────────────────────────────────────────┐
+│  项目 2：优惠券使用率提升（内容层）                            │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐              │
+│  │ 5 大策略    │  │ 8+1 券体系 │  │ 4+1 用户分层 │              │
+│  │ 场景化/智能 │  │ 提额/免息  │  │ 新/首借/复借 │              │
+│  └─────┬──────┘  └─────┬──────┘  └─────┬──────┘              │
+│        │               │               │                    │
+│        └── 内容承载层（嵌入管道的具体物料） ──┘                │
+└─────────┬───────────────┬───────────────┬────────────────────┘
+          │               │               │
+          ▼               ▼               ▼
+┌─────────────────────────────────────────────────────────────┐
+│  业务层（用户感知的产品能力）                                  │
+│  申请页自动匹配券 | 还款页自动抵扣 | 邀请即时到账 | 流失召回页   │
+└─────────────────────────────────────────────────────────────┘</div>
+
+  <h3>2 · 触达形式层 · 直接复用关系</h3>
+  <p>项目 2 <strong>100% 复用</strong>项目 1 的 12 触达形式。券是内容，触达形式是通道。</p>
+  <table>
+    <thead><tr><th>项目 1 形式</th><th>项目 2 中如何复用</th><th>复用场景</th></tr></thead>
+    <tbody>
+      <tr><td>Push 推送</td><td>券到期前 24h 提醒、券发放通知</td><td>策略 2 智能时机</td></tr>
+      <tr><td>站内横幅</td><td>首页「我的优惠券」入口、场景化推荐 Banner</td><td>策略 1 场景化推荐</td></tr>
+      <tr><td>模态弹窗</td><td>申请页券自动匹配、还款成功弹窗 + 邀请券</td><td>策略 1 / 激励循环</td></tr>
+      <tr><td>短信 SMS</td><td>还款日 D-3 提醒、券发放通知</td><td>策略 2 智能时机</td></tr>
+      <tr><td>邮件 Email</td><td>高净值用户专属券、月度账单 + 券包</td><td>用户分层 C-1</td></tr>
+      <tr><td>WhatsApp / IM</td><td>催收 + 罚息减免券、邀请进度更新</td><td>策略 5 邀请 / 策略 6 召回</td></tr>
+      <tr><td>Toast 浮窗</td><td>券到账提示、券使用成功反馈</td><td>操作反馈</td></tr>
+      <tr><td>Slide-up 抽屉</td><td>提额活动落地（带券）、复借邀请（带券）</td><td>提额活动 / 复借邀请</td></tr>
+      <tr><td>引导蒙层</td><td>首次使用券中心教学、首单券 3 步引导</td><td>新用户首次</td></tr>
+      <tr><td>状态栏角标</td><td>优惠券未使用数</td><td>持续提示</td></tr>
+      <tr><td>运营浮窗</td><td>客服入口 + 券咨询、限时活动浮标</td><td>客服 + 活动</td></tr>
+      <tr><td>桌面 Widget</td><td>显示待还款 + 可用券数</td><td>持续提醒</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3 · 触达结点层 · 项目 2 的 7 结点 = 项目 1 的子集</h3>
+  <table>
+    <thead><tr><th>项目 2 结点</th><th>对应项目 1 结点</th><th>业务属性（券）</th><th>通道优先级</th></tr></thead>
+    <tbody>
+      <tr><td>N1 注册成功</td><td>结点 1 注册成功</td><td>体验金 + 免息券</td><td>WhatsApp → APP 内卡片</td></tr>
+      <tr><td>N2 首次放款</td><td>结点 6 放款到账</td><td>提额券 + 邀请券</td><td>APP 内弹窗 → Push</td></tr>
+      <tr><td>N3 放款后 D+3</td><td>结点 9 复借邀请</td><td>利息折扣券</td><td>APP 内 + Push</td></tr>
+      <tr><td>N4 放款后 D+7</td><td>结点 9 复借邀请</td><td>还款折扣券预告</td><td>Push（仅一次）</td></tr>
+      <tr><td>N5 还款日 D-3</td><td>结点 7 还款前</td><td>还款折扣券 + 提醒</td><td>APP 内卡片 + WhatsApp</td></tr>
+      <tr><td>N6 还款成功</td><td>结点 9 复借邀请</td><td>Cashback + 邀请券</td><td>APP 内弹窗</td></tr>
+      <tr><td>N7 逾期 D+1</td><td>结点 8 逾期分级</td><td>罚息减免券</td><td>SMS（合规） + APP 内</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4 · 共用基础设施 · 4 个底座</h3>
+  <div class="grid grid-2">
+    <div class="card card-yellow">
+      <h3 style="margin-top:0;">底座 1：触达中台</h3>
+      <p><strong>项目 1 主建，项目 2 接入</strong></p>
+      <ul>
+        <li>频次控制：单日 ≤ 3 条/用户（共用）</li>
+        <li>静默保护：22:00-8:00（共用）</li>
+        <li>疲劳度模型：7 天 push 累积</li>
+        <li>灰度发布：用户分流 1%→100%</li>
+        <li>渠道下发：Push/短信/IM/邮件 路由</li>
+        <li>触达日志：5 漏斗事件共用埋点</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h3 style="margin-top:0;">底座 2：营销偏好中心</h3>
+      <p><strong>项目 1 出入口，项目 2 复用</strong></p>
+      <ul>
+        <li>入口：APP「设置 → 营销偏好」</li>
+        <li>关闭粒度：总开关 / 4 类细分</li>
+        <li>默认状态：全开启，新用户首次确认</li>
+        <li>撤回授权：LFPDPPP 强制</li>
+        <li>反馈文案：「关闭后将不再收到」</li>
+      </ul>
+    </div>
+    <div class="card card-pink">
+      <h3 style="margin-top:0;">底座 3：合规规则中心</h3>
+      <p><strong>法务/合规主，两项目协同</strong></p>
+      <ul>
+        <li>催收时段（工作日 9-20 / 周末 10-18）</li>
+        <li>节假日禁催</li>
+        <li>CAT 透明（提额券必挂）</li>
+        <li>不得"100% garantizado"文案</li>
+        <li>LFPDPPP opt-in</li>
+        <li>CONDUSEF 投诉响应 30 天</li>
+      </ul>
+    </div>
+    <div class="card card-orange">
+      <h3 style="margin-top:0;">底座 4：A/B 实验平台</h3>
+      <p><strong>数据组主，两项目共用</strong></p>
+      <ul>
+        <li>流量分流：触达形式 / 券策略</li>
+        <li>灰度发布：新触达形式 / 新券类型</li>
+        <li>多变量：形式×文案×时机 / 券×结点×形式</li>
+        <li>实验报告：自动 p-value</li>
+        <li>项目 2 的 4 个 A/B 直接跑在此平台</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>5 · 5 大风险与对冲</h3>
+  <table>
+    <thead><tr><th>风险</th><th>场景</th><th>对冲措施</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>触达资源争抢</td>
+        <td>还款提醒 vs 券到期提醒同天触发，双 push 打扰</td>
+        <td>同用户同窗口合并；优先级：还款 > 券 > 营销；配额 60:40</td>
+      </tr>
+      <tr>
+        <td>复借诱导争议</td>
+        <td>"复借 3 次解锁 50 MXN" 可能被认定为诱导多头</td>
+        <td>邀请上限 5 人/月；不得"借更多"文案；7 天借款 ≥ 3 次不发券</td>
+      </tr>
+      <tr>
+        <td>疲劳度叠加</td>
+        <td>项目 1 7 天 ≤ 10 条，项目 2 ≤ 5 条，叠加后用户反而更少</td>
+        <td>共用「疲劳度模型」总配额池，不叠加</td>
+      </tr>
+      <tr>
+        <td>数据埋点冲突</td>
+        <td>项目 1「触达」vs 项目 2「曝光/点击/领取/使用」埋点重复</td>
+        <td>统一字段 expose_at；触达中台管理；5 漏斗事件共用 SDK</td>
+      </tr>
+      <tr>
+        <td>静默时段冲突</td>
+        <td>22:00-8:00 静默，但 D0 当天 23:50 用户才想起要还</td>
+        <td>D0 21:00-23:00 最后窗口；进 APP 后不受限</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6 · 联合指标与北极星</h3>
+  <table>
+    <thead><tr><th>层级</th><th>项目 1 指标</th><th>项目 2 指标</th><th>联合目标</th></tr></thead>
+    <tbody>
+      <tr><td>北极星</td><td>—</td><td>月活券用户/MAU</td><td><strong>0 → 35%</strong></td></tr>
+      <tr><td>业务 1</td><td>30 日复借率 25% → 30%</td><td>30d 复借 18% → 28%</td><td><strong>18% → 30%+</strong></td></tr>
+      <tr><td>业务 2</td><td>—</td><td>活动 ROI 1:4 → 1:6</td><td><strong>1:6+</strong></td></tr>
+      <tr><td>体验</td><td>关闭通知率 25% → 12%</td><td>关闭 push &lt; 25%</td><td><strong>&lt; 15%</strong></td></tr>
+      <tr><td>合规</td><td>CONDUSEF 投诉 0.4% → 0.1%</td><td>券相关投诉 &lt; 0.5%</td><td><strong>&lt; 0.15%</strong></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 项目 1 ============ -->
+<section id="p1">
+  <h2>📡 项目 1：信息触达方案</h2>
+
+  <h3>1.1 业务背景</h3>
+  <div class="card card-yellow">
+    <h4 style="margin-top:0;">墨西哥现金贷市场环境</h4>
+    <ul>
+      <li><strong>市场</strong>：1.29 亿人口、49% 银行渗透率、1.5 万亿 MXN 信贷缺口</li>
+      <li><strong>主力玩家</strong>：Kueski / Stori / Albo / NuMexico / Mercado Crédito / Aplazo</li>
+      <li><strong>目标用户</strong>：4 类画像（蓝领工人/年轻 Z 世代/中小企业主/中产家庭）</li>
+    </ul>
+
+    <h4>🇲🇽 监管要点（贯穿全文）</h4>
+    <table>
+      <thead><tr><th>法规</th><th>要求</th></tr></thead>
+      <tbody>
+        <tr><td><strong>CNBV</strong></td><td>SOFOM 牌照、合同须披露 CAT、年化、IVA</td></tr>
+        <tr><td><strong>CONDUSEF</strong></td><td>催收人员须 REDECO 注册；用户可提前还款；投诉 30 天答复</td></tr>
+        <tr><td><strong>LFPDPPP</strong></td><td>ARCO 四项权利；营销必须 opt-in；隐私声明主动勾选</td></tr>
+        <tr><td><strong>催收时段</strong></td><td>工作日 9:00-20:00；周末 10:00-18:00；节假日禁催</td></tr>
+        <tr><td><strong>REDECO</strong></td><td>催收备案</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>1.2 需求分析与痛点</h3>
+  <div class="card card-pink">
+    <h4 style="margin-top:0;">7 大痛点</h4>
+    <ol>
+      <li><strong>触达形式单一</strong>：过度依赖 Push，其他形式覆盖不足</li>
+      <li><strong>触达结点不全</strong>：复借/召回/提额 等高价值结点缺失</li>
+      <li><strong>频次失控</strong>：用户被反复打扰，关闭通知率 25%</li>
+      <li><strong>转化率低</strong>：Push 打开率仅 8-12%，业务转化弱</li>
+      <li><strong>合规风险</strong>：营销文案无 opt-in、催收时段违规</li>
+      <li><strong>数据孤岛</strong>：触达数据与业务数据未打通</li>
+      <li><strong>节日运营弱</strong>：Buen Fin / 亡灵节 / 圣诞 等节日无专项触达</li>
+    </ol>
+  </div>
+
+  <h3>1.3 竞品调研（6 竞品）</h3>
+  <table>
+    <thead><tr><th>竞品</th><th>类型</th><th>形式均分</th><th>结点覆盖</th><th>借鉴点</th></tr></thead>
+    <tbody>
+      <tr><td>Kueski</td><td>现金贷+BNPL</td><td>3.2</td><td>92%</td><td>状态条进度、逾期颜色分级</td></tr>
+      <tr><td>Stori</td><td>信用卡+现金贷</td><td>3.5</td><td>92%</td><td>邮件序列、卡片化触达入口</td></tr>
+      <tr><td>Albo</td><td>综合金融</td><td>3.1</td><td>100%</td><td>任务系统、生命周期自动化</td></tr>
+      <tr><td><strong>NuMexico ⭐</strong></td><td>借记/信用卡</td><td><strong>4.4</strong></td><td><strong>100%</strong></td><td><strong>触达中台、WhatsApp 催收、Widget（行业标杆）</strong></td></tr>
+      <tr><td>Mercado Crédito</td><td>电商金融</td><td>3.8</td><td>100%</td><td>场景化触达、运营浮窗常态化</td></tr>
+      <tr><td>Aplazo</td><td>BNPL</td><td>2.3</td><td>67%</td><td>频次克制策略</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.4 产品规划 · 12 触达形式</h3>
+  <table>
+    <thead><tr><th>#</th><th>形式</th><th>优先级</th><th>频次上限</th><th>关键约束</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Push 推送</td><td><span class="tag-p0">P0</span></td><td>单日 ≤ 3 条</td><td>9:00-21:00 时段</td></tr>
+      <tr><td>2</td><td>站内横幅</td><td><span class="tag-p0">P0</span></td><td>同时 ≤ 2 个</td><td>全天</td></tr>
+      <tr><td>3</td><td>模态弹窗</td><td><span class="tag-p0">P0</span></td><td>单日 ≤ 1 条/类型</td><td>全天</td></tr>
+      <tr><td>4</td><td>短信 SMS</td><td><span class="tag-p0">P0</span></td><td>单日 ≤ 2 条</td><td>含 CAT；9:00-20:00 催收</td></tr>
+      <tr><td>5</td><td>邮件 Email</td><td><span class="tag-p1">P1</span></td><td>单日 ≤ 1 封</td><td>须含 unsubscribe 链接</td></tr>
+      <tr><td>6</td><td>WhatsApp / IM</td><td><span class="tag-p0">P0</span></td><td>单日 ≤ 2 条</td><td>9:00-20:00 催收</td></tr>
+      <tr><td>7</td><td>Toast 浮窗</td><td><span class="tag-p0">P0</span></td><td>单页 ≤ 1 条/操作</td><td>3-5s 自动消失</td></tr>
+      <tr><td>8</td><td>Slide-up 抽屉</td><td><span class="tag-p1">P1</span></td><td>单日 ≤ 1 次</td><td>全天</td></tr>
+      <tr><td>9</td><td>引导蒙层</td><td><span class="tag-p1">P1</span></td><td>每功能 1 次</td><td>ARCO 隐私说明</td></tr>
+      <tr><td>10</td><td>状态栏角标</td><td><span class="tag-p0">P0</span></td><td>不限</td><td>99+ 上限</td></tr>
+      <tr><td>11</td><td>运营浮窗</td><td><span class="tag-p1">P1</span></td><td>同时 ≤ 1 个</td><td>长按关 24h</td></tr>
+      <tr><td>12</td><td>桌面 Widget</td><td><span class="tag-p2">P2</span></td><td>用户主动添加</td><td>实时刷新</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.5 产品规划 · 12 触达结点</h3>
+  <div class="grid grid-3">
+    <div class="card"><span class="num-circle">1</span><strong>注册成功</strong><br><small>引导完成实名（KYC）</small><br><small>目标：注册-实名 ≥ 60%</small></div>
+    <div class="card"><span class="num-circle">2</span><strong>实名引导</strong><br><small>INE + 自拍 + 地址验证</small><br><small>目标：实名完成率 ≥ 80%</small></div>
+    <div class="card"><span class="num-circle">3</span><strong>绑卡引导</strong><br><small>SPEI / OXXO</small><br><small>目标：绑卡 ≥ 75%</small></div>
+    <div class="card"><span class="num-circle">4</span><strong>风控审核中</strong><br><small>进度条 + 预计时长</small><br><small>目标：审核期间留存 ≥ 70%</small></div>
+    <div class="card"><span class="num-circle">5</span><strong>审批结果</strong><br><small>通过 → 放款；拒绝 → 改善</small><br><small>目标：通过→放款 ≥ 90%</small></div>
+    <div class="card"><span class="num-circle">6</span><strong>放款到账</strong><br><small>情感高峰、推荐意愿强</small><br><small>目标：推荐注册率 ≥ 10%</small></div>
+    <div class="card"><span class="num-circle">7</span><strong>还款前 3/1/0 日</strong><br><small>金额 + 日期 + 渠道</small><br><small>目标：D0 还款率 ≥ 60%</small></div>
+    <div class="card"><span class="num-circle">8</span><strong>逾期分级</strong><br><small>轻 1-7 / 中 7-30 / 重 30+</small><br><small>目标：7 日回收率 ≥ 88%</small></div>
+    <div class="card"><span class="num-circle">9</span><strong>复借邀请</strong><br><small>D+3 / D+7 / D+15 / D+30</small><br><small>目标：30 日复借率 ≥ 30%</small></div>
+    <div class="card"><span class="num-circle">10</span><strong>流失召回</strong><br><small>按天数分级</small><br><small>目标：召回率 ≥ 15%</small></div>
+    <div class="card"><span class="num-circle">11</span><strong>提额/活动期</strong><br><small>提额券 + 活动日</small><br><small>目标：提额使用率 ≥ 50%</small></div>
+    <div class="card"><span class="num-circle">12</span><strong>合规 opt-in</strong><br><small>营销授权 5 类</small><br><small>目标：授权完整率 ≥ 95%</small></div>
+  </div>
+
+  <h3>1.6 业务场景矩阵（12×12 关键节选）</h3>
+  <table>
+    <thead><tr><th>结点 \ 形式</th><th>Push</th><th>横幅</th><th>弹窗</th><th>短信</th><th>邮件</th><th>IM/WA</th><th>Toast</th><th>抽屉</th><th>蒙层</th><th>角标</th><th>浮窗</th><th>Widget</th></tr></thead>
+    <tbody>
+      <tr><td>注册成功</td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td></tr>
+      <tr><td>实名引导</td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td></tr>
+      <tr><td>绑卡引导</td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-no">—</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td></tr>
+      <tr><td>风控审核中</td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-no">—</span></td></tr>
+      <tr><td>审批结果</td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td></tr>
+      <tr><td>放款到账</td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>还款前 3/1/0 日</td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>逾期分级（轻）</td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td></tr>
+      <tr><td>逾期分级（中）</td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td></tr>
+      <tr><td>逾期分级（重）</td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td></tr>
+      <tr><td>复借邀请</td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-opt">⚠️</span></td></tr>
+      <tr><td>流失召回</td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td></tr>
+      <tr><td>提额/活动期</td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-opt">⚠️</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-opt">⚠️</span></td></tr>
+      <tr><td>合规 opt-in</td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-must">✅</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td><td><span class="tag-no">—</span></td></tr>
+    </tbody>
+  </table>
+  <p><small>说明：✅ 强推荐（首选 1-2 种） · ⚠️ 可选（次选） · — 不建议（避免打扰）</small></p>
+
+  <h3>1.7 指标体系（5 层）</h3>
+  <div class="grid grid-2">
+    <div class="card card-yellow">
+      <h4 style="margin-top:0;">触达层（5）</h4>
+      <ul>
+        <li>触达率 ≥ 95%</li>
+        <li>打开率 ≥ 20%</li>
+        <li>点击率 ≥ 12%</li>
+        <li>转化率 ≥ 8%</li>
+        <li>关闭率 ≤ 5%</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h4 style="margin-top:0;">业务层（6）</h4>
+      <ul>
+        <li>注册-实名转化 ≥ 60%</li>
+        <li>首贷转化 ≥ 40%</li>
+        <li>30 日复借率 ≥ 30%</li>
+        <li>7 日回收率 ≥ 88%</li>
+        <li>召回率 ≥ 15%</li>
+        <li>提额使用率 ≥ 50%</li>
+      </ul>
+    </div>
+    <div class="card card-pink">
+      <h4 style="margin-top:0;">体验层（4）</h4>
+      <ul>
+        <li>关闭通知率 ≤ 15%</li>
+        <li>卸载率 ≤ 12%</li>
+        <li>App Store 评分 ≥ 4.3</li>
+        <li>NPS ≥ 35</li>
+      </ul>
+    </div>
+    <div class="card card-orange">
+      <h4 style="margin-top:0;">合规层（5）</h4>
+      <ul>
+        <li>CONDUSEF 投诉率 ≤ 0.1%</li>
+        <li>催收时段合规率 100%</li>
+        <li>opt-in 完整率 ≥ 95%</li>
+        <li>ARCO 响应 ≤ 20 天</li>
+        <li>利率披露合规 100%</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>1.8 6 个月落地路线</h3>
+  <div class="grid grid-3">
+    <div class="card card-yellow">
+      <h4 style="margin-top:0;">Phase 1（Month 1-2）基础建设</h4>
+      <ul>
+        <li>触达中台搭建（统一调度、频次控制、疲劳度）</li>
+        <li>补齐 4 触达形式（Toast/Slide-up/横幅/浮窗）</li>
+        <li>补齐 3 结点（放款到账/复借邀请/流失召回）</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h4 style="margin-top:0;">Phase 2（Month 3-4）体系完善</h4>
+      <ul>
+        <li>引导蒙层、桌面 Widget、WhatsApp Business API</li>
+        <li>A/B 测试平台 + 灰度发布能力</li>
+        <li>12 结点 100% 覆盖</li>
+      </ul>
+    </div>
+    <div class="card card-pink">
+      <h4 style="margin-top:0;">Phase 3（Month 5-6）精细化</h4>
+      <ul>
+        <li>节日触达日历（Buen Fin / 亡灵节 / 圣诞）</li>
+        <li>人群分层个性化推荐</li>
+        <li>跨产品交叉推荐</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 项目 1 设计稿（中英对照）============ -->
+<section id="p1-designs">
+  <h2>🎨 项目 1 · 设计稿（中英对照）</h2>
+  <p>本节展示项目 1 信息触达方案的 6 张高保真设计稿。每张图提供 <span style="color:var(--es); font-weight:700;">🇪🇸 西班牙语原版</span> 与 <span style="color:var(--cn); font-weight:700;">🇨🇳 中文对照版</span> 两种语言版本。设计稿与原型页面在 <code>info/prototype/index.html</code> 可交互浏览。</p>
+
+  <h3>设计稿 #1 · 首页横幅（首贷优惠）</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./info/design/design-01-首页横幅.png" alt="首页横幅 es-MX">
+      <div class="caption">首贷优惠 Banner · #FFD400 拉美黄 · 首页顶部常驻</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./info/design/design-cn-01-首页横幅.png" alt="首页横幅 zh-CN">
+      <div class="caption">首贷优惠 Banner · 中文标注 · 用于设计评审与开发交付</div>
+    </div>
+  </div>
+
+  <h3>设计稿 #2 · 消息中心</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./info/design/design-02-消息中心.png" alt="消息中心 es-MX">
+      <div class="caption">消息中心列表 · 5 类彩色图标分类 · 含未读红点</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./info/design/design-cn-02-消息中心.png" alt="消息中心 zh-CN">
+      <div class="caption">消息中心列表 · 中文标注 · 5 tab 全类目</div>
+    </div>
+  </div>
+
+  <h3>设计稿 #3 · 还款提醒弹窗</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./info/design/design-03-还款提醒弹窗.png" alt="还款提醒弹窗 es-MX">
+      <div class="caption">还款前 1 天提醒 · 琥珀色 #FF9500 · 模态弹窗</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./info/design/design-cn-03-还款提醒弹窗.png" alt="还款提醒弹窗 zh-CN">
+      <div class="caption">还款提醒 · 中文标注 · 临近到期强提示</div>
+    </div>
+  </div>
+
+  <h3>设计稿 #4 · 逾期催收分级</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./info/design/design-04-逾期催收分级.png" alt="逾期催收分级 es-MX">
+      <div class="caption">轻/中/重三级逾期触达 · 黄→红→黑递进 · CNBV 催收时段合规</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./info/design/design-cn-04-逾期催收分级.png" alt="逾期催收分级 zh-CN">
+      <div class="caption">逾期分级 · 中文标注 · 3 级递进展示</div>
+    </div>
+  </div>
+
+  <h3>设计稿 #5 · 提额活动落地页</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./info/design/design-05-提额活动落地页.png" alt="提额活动落地页 es-MX">
+      <div class="caption">提额 3X 活动落地页 · 拉美黄+红 · 7 天有效期</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./info/design/design-cn-05-提额活动落地页.png" alt="提额活动落地页 zh-CN">
+      <div class="caption">提额活动 · 中文标注 · 与项目 2 提额券联动</div>
+    </div>
+  </div>
+
+  <h3>设计稿 #6 · 合规授权页（opt-in）</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./info/design/design-06-合规授权页.png" alt="合规授权页 es-MX">
+      <div class="caption">LFPDPPP opt-in 授权页 · 5 类 toggle · 营销偏好中心入口</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./info/design/design-cn-06-合规授权页.png" alt="合规授权页 zh-CN">
+      <div class="caption">通知授权 · 中文标注 · LFPDPPP 合规</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 项目 2 ============ -->
+<section id="p2">
+  <h2>🎟️ 项目 2：优惠券使用率提升</h2>
+
+  <h3>2.1 业务背景</h3>
+  <div class="card card-pink">
+    <h4 style="margin-top:0;">行业现状</h4>
+    <ul>
+      <li><strong>市场</strong>：墨西哥现金贷市场竞争白热化，营销费用高</li>
+      <li><strong>券玩法</strong>：cashback / 折扣 / 提额 / 邀请奖励 / 体验金 / 免息</li>
+      <li><strong>行业基准</strong>：业内优惠券核销率 8%-25%，本项目目标从 15% → 30%</li>
+      <li><strong>竞品</strong>：Kueski Pay / Stori Cashback / NuPay Promo / Albo Promos / Mercado Pago Cupones</li>
+    </ul>
+  </div>
+
+  <h3>2.2 需求分析与痛点</h3>
+  <div class="card card-orange">
+    <h4 style="margin-top:0;">5 环节漏斗 + 7 用户故事</h4>
+    <div class="tree">曝光(100%) → 点击(50%) → 领取(30%) → 使用(15%) → 完成(12%)
+                                  ↓          ↓          ↓ ← ← 核心流失区
+                                -50%      -40%      -50%</div>
+    <p><strong>核心结论：「领取→使用」是绝对死亡漏斗</strong>，流失 50%。这是 5 大策略要解决的核心命题。</p>
+    <h4>7 个用户痛点场景</h4>
+    <ol>
+      <li><strong>María 32 岁销售</strong>：都忘了有这张券 → 提醒时机错位</li>
+      <li><strong>Carlos 28 岁快递员</strong>：想用但找不到入口 → 入口迷失</li>
+      <li><strong>Lucía 41 岁老师</strong>：规则太复杂，怕被坑 → 规则不透明</li>
+      <li><strong>Roberto 35 岁小企业主</strong>：不需要提额券 → 用户分层粗糙</li>
+      <li><strong>Fernanda 25 岁大学生</strong>：push 排第 5 谁看 → 触达被噪音淹没</li>
+      <li><strong>Diego 30 岁工程师</strong>：邀请奖励 30 天没到 → 文案承诺与实际不一致</li>
+      <li><strong>Valeria 38 岁家庭主妇</strong>：卸载了，短信像诈骗 → 召回通道错</li>
+    </ol>
+  </div>
+
+  <h3>2.3 5 大策略 + 1 召回</h3>
+  <table>
+    <thead><tr><th>策略</th><th>目标漏斗环节</th><th>核心解法</th><th>预期提升</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>1 场景化推荐</strong></td>
+        <td>领取→使用</td>
+        <td>券不"找用户"，而是"在能用的地方出现"：申请页自动匹配、还款页自动抵扣、邀请页浮动按钮</td>
+        <td>50% → 65%</td>
+      </tr>
+      <tr>
+        <td><strong>2 智能时机</strong></td>
+        <td>曝光→点击 + 领取→使用</td>
+        <td>用户行为驱动的实时触发：还款日 D-3 提醒、券过期前 24h 提醒、放款后立即推提额券</td>
+        <td>Push 点击 8% → 18%</td>
+      </tr>
+      <tr>
+        <td><strong>3 规则透明化</strong></td>
+        <td>点击→领取</td>
+        <td>收益前置、限制后置、实时计算器、历史案例展示、T&C 一键展开</td>
+        <td>60% → 75%</td>
+      </tr>
+      <tr>
+        <td><strong>4 用户分层</strong></td>
+        <td>整套链路</td>
+        <td>5 类用户 × 各自专属券池：新/首借/复借/高净值/流失</td>
+        <td>人均券价值 +35%</td>
+      </tr>
+      <tr>
+        <td><strong>5 社交化裂变</strong></td>
+        <td>获客 + 召回</td>
+        <td>即时履约 + 阶梯奖励 + 进度可视化：1/3/5/10 阶梯、双向券、防刷</td>
+        <td>邀请贡献 9% → 18%</td>
+      </tr>
+      <tr>
+        <td><strong>6 流失召回（锦上添花）</strong></td>
+        <td>流失用户</td>
+        <td>按流失时长切换通道：30d→APP+Push，60d→+WhatsApp，90d→+邮件，180d+→不发券</td>
+        <td>召回率 ≥ 15%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>2.4 8+1 券体系</h3>
+  <table>
+    <thead><tr><th>#</th><th>券种</th><th>适用场景</th><th>有效期</th><th>主推人群</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>提额券</td><td>申请前</td><td>7 天</td><td>复借/高净值</td></tr>
+      <tr><td>2</td><td>利息折扣券</td><td>申请时</td><td>14 天</td><td>复借</td></tr>
+      <tr><td>3</td><td>免息券</td><td>申请时</td><td>30 天</td><td>新/首借</td></tr>
+      <tr><td>4</td><td>Cashback 券</td><td>还款时</td><td>30 天</td><td>复借/高净值</td></tr>
+      <tr><td>5</td><td>还款折扣券</td><td>还款日 D-3</td><td>T+3 天</td><td>首借/复借</td></tr>
+      <tr><td>6</td><td>罚息减免券</td><td>逾期 D+1</td><td>7 天</td><td>逾期用户</td></tr>
+      <tr><td>7</td><td>手续费减免券</td><td>申请流程</td><td>申请→放款</td><td>新/首借</td></tr>
+      <tr><td>8</td><td>邀请奖励券</td><td>邀请好友</td><td>90 天</td><td>复借/高净值</td></tr>
+      <tr><td>9（兜底）</td><td>体验金</td><td>新户首单</td><td>72 小时</td><td>新用户</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.5 4+1 用户分层</h3>
+  <table>
+    <thead><tr><th>类型</th><th>定义</th><th>主推券</th><th>触达通道</th><th>触达时机</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A 新用户</strong></td><td>注册 0-30d,未首借</td><td>体验金、免息券、手续费减免</td><td>WhatsApp + APP 内</td><td>D+1 / D+3 / D+7</td></tr>
+      <tr><td><strong>B 首借用户</strong></td><td>已首借 1 笔,还款中</td><td>还款折扣券、邀请券</td><td>APP 内 + Push</td><td>还款日 D-3 / D-1</td></tr>
+      <tr><td><strong>C 复借用户</strong></td><td>2+ 笔,活跃</td><td>利息折扣、提额券、阶梯邀请</td><td>Push + APP 内</td><td>距上次借款 D+20</td></tr>
+      <tr><td><strong>C-1 高净值子层</strong></td><td>复借 3+ 笔 + LTV > 50,000</td><td>专属提额券 + 邀请加速卡</td><td>邮件 + WhatsApp + 专属客服</td><td>每月固定</td></tr>
+      <tr><td><strong>D 流失用户</strong></td><td>30/60/90/180d 未活跃</td><td>召回券（分级）</td><td>APP/Push/WhatsApp/邮件</td><td>按时长</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.6 4 个 A/B 实验</h3>
+  <table>
+    <thead><tr><th>#</th><th>实验</th><th>假设</th><th>主指标</th><th>判定标准</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>申请页自动匹配券</td><td>顶部 banner 提升核销</td><td>该券核销率</td><td>B 组 +10pp 且 p<0.05</td></tr>
+      <tr><td>2</td><td>券过期前 24h 提醒通道</td><td>Push + WhatsApp 双通道</td><td>过期前 24h 召回率</td><td>C 组相对 A 组 +20%</td></tr>
+      <tr><td>3</td><td>邀请奖励即时到账 vs T+30</td><td>即时大幅提升完成率</td><td>邀请完成率</td><td>B 组 +200%</td></tr>
+      <tr><td>4</td><td>Feed 卡片 vs Push</td><td>Feed 关闭率更低</td><td>核销率 + 关闭率</td><td>B/C 关闭率显著低于 A</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.7 7 条合规铁律</h3>
+  <ol>
+    <li><strong>避免诱导多头借贷</strong>：邀请上限 5 人/月；不得用"借更多"作为券收益</li>
+    <li><strong>规则透明</strong>：任何券必须同屏挂 T&C（PROFECO 罚款 50-300 万 MXN）</li>
+    <li><strong>CAT 透明</strong>：提额券必须挂 CAT 计算器</li>
+    <li><strong>可关闭</strong>：设置 → 营销偏好 → 关闭 push（LFPDPPP）</li>
+    <li><strong>不绝对化</strong>：不得用 "100% garantizado / sin riesgo / dinero fácil"</li>
+    <li><strong>未成年人保护</strong>：任何券必须 18+ 才可领取</li>
+    <li><strong>逾期合规</strong>：罚息减免券不得在逾期 D+3 后推送（SMS 催收合规）</li>
+  </ol>
+
+  <h3>2.8 指标体系</h3>
+  <table>
+    <thead><tr><th>环节</th><th>指标</th><th>基线</th><th>目标</th><th>优秀</th></tr></thead>
+    <tbody>
+      <tr><td>曝光</td><td>触达率</td><td>65%</td><td>80%</td><td>90%</td></tr>
+      <tr><td>点击</td><td>点击率</td><td>8%</td><td>15%</td><td>22%</td></tr>
+      <tr><td>领取</td><td>领取率</td><td>60%</td><td>72%</td><td>80%</td></tr>
+      <tr><td><strong>使用</strong></td><td><strong>核销率</strong></td><td><strong>15%</strong></td><td><strong>30%</strong></td><td><strong>40%</strong></td></tr>
+      <tr><td>完成</td><td>履约率</td><td>80%</td><td>85%</td><td>92%</td></tr>
+    </tbody>
+  </table>
+  <p>业务指标：ROI 1:4 → 1:6 · CAC 280 → 220 MXN · 30d 复借 18% → 28% · 人均券价值 1,200 → 1,800 MXN · 邀请裂变 9% → 18%</p>
+
+  <h3>2.9 12 周落地路线</h3>
+  <div class="grid grid-3">
+    <div class="card card-yellow">
+      <h4 style="margin-top:0;">Phase 1（W1-W4）基础建设</h4>
+      <ul>
+        <li>券中心 1.0（8 种券入库）</li>
+        <li>申请/还款页自动匹配券</li>
+        <li>邀请奖励即时到账</li>
+        <li>券过期前 24h 提醒</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h4 style="margin-top:0;">Phase 2（W5-W8）智能升级</h4>
+      <ul>
+        <li>用户分层 1.0（5 类）</li>
+        <li>场景化卡片 Feed</li>
+        <li>阶梯邀请（1/3/5/10）</li>
+        <li>A/B 实验 1 + 2 上线</li>
+      </ul>
+    </div>
+    <div class="card card-pink">
+      <h4 style="margin-top:0;">Phase 3（W9-W12）闭环优化</h4>
+      <ul>
+        <li>成长值体系</li>
+        <li>联合券（便利店合作）</li>
+        <li>流失召回分级</li>
+        <li>A/B 实验 3 + 4 上线</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 项目 2 设计稿（中英对照）============ -->
+<section id="p2-designs">
+  <h2>🎨 项目 2 · 设计稿（中英对照）</h2>
+  <p>本节展示项目 2 优惠券方案的 6 张高保真设计稿。每张图提供 <span style="color:var(--es); font-weight:700;">🇪🇸 西班牙语原版</span> 与 <span style="color:var(--cn); font-weight:700;">🇨🇳 中文对照版</span> 两种语言版本。设计稿与原型页面在 <code>coupon/prototype/index.html</code> 可交互浏览。</p>
+
+  <h3>设计稿 #1 · 优惠券中心（Mis cupones）</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./coupon/design/design-01-优惠券中心.png" alt="优惠券中心 es-MX">
+      <div class="caption">Mis cupones · 未使用/已使用/已过期 3 tab · 9 种券可呈现</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./coupon/design/design-cn-01-优惠券中心.png" alt="优惠券中心 zh-CN">
+      <div class="caption">我的优惠券 · 中文标注 · 3 tab 全类目</div>
+    </div>
+  </div>
+
+  <h3>设计稿 #2 · 场景化推荐弹窗</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./coupon/design/design-02-领券弹窗.png" alt="领券弹窗 es-MX">
+      <div class="caption">场景化推荐弹窗 · 收益前置 + T&C 透明（策略 3 规则透明化）</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./coupon/design/design-cn-02-领券弹窗.png" alt="领券弹窗 zh-CN">
+      <div class="caption">领券弹窗 · 中文标注 · 收益前置</div>
+    </div>
+  </div>
+
+  <h3>设计稿 #3 · 申请页自动匹配券（策略 1 落地）</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./coupon/design/design-03-申请页自动匹配券.png" alt="申请页自动匹配券 es-MX">
+      <div class="caption">申请页 banner · 自动抵扣 $250 · 策略 1 场景化推荐</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./coupon/design/design-cn-03-申请页自动匹配券.png" alt="申请页自动匹配券 zh-CN">
+      <div class="caption">申请页自动匹配券 · 中文标注 · 立省 $250 展示</div>
+    </div>
+  </div>
+
+  <h3>设计稿 #4 · 还款页使用券</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./coupon/design/design-04-还款页使用券.png" alt="还款页使用券 es-MX">
+      <div class="caption">还款页应用券 · 节省 $250 可视化 · 多种支付方式</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./coupon/design/design-cn-04-还款页使用券.png" alt="还款页使用券 zh-CN">
+      <div class="caption">还款页使用券 · 中文标注 · 实付 $4,750</div>
+    </div>
+  </div>
+
+  <h3>设计稿 #5 · 邀请奖励页（策略 5 社交化裂变）</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./coupon/design/design-05-邀请奖励页.png" alt="邀请奖励页 es-MX">
+      <div class="caption">阶梯邀请 + 进度可视化 · 1/3/5/10 档位 · 即时到账</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./coupon/design/design-cn-05-邀请奖励页.png" alt="邀请奖励页 zh-CN">
+      <div class="caption">邀请奖励 · 中文标注 · 阶梯 1/3/5/10</div>
+    </div>
+  </div>
+
+  <h3>设计稿 #6 · 流失召回页（策略 6）</h3>
+  <div class="design-pair">
+    <div class="design-card">
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
+      <img src="./coupon/design/design-06-流失召回页.png" alt="流失召回页 es-MX">
+      <div class="caption">流失用户专属高额券召回 · 7 天有效 · María 真实感证言</div>
+    </div>
+    <div class="design-card">
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
+      <img src="./coupon/design/design-cn-06-流失召回页.png" alt="流失召回页 zh-CN">
+      <div class="caption">流失召回 · 中文标注 · 专属 $500 抵扣券</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 落地路线 ============ -->
+<section id="roadmap">
+  <h2>🚀 联合落地路线</h2>
+
+  <h3>6 个月联合推进</h3>
+  <div class="grid grid-2">
+    <div class="card card-yellow">
+      <h4 style="margin-top:0;">M1-M2 · 基础建设</h4>
+      <p><strong>项目 1</strong>：触达中台搭建 · 4 触达形式 · 3 结点</p>
+      <p><strong>项目 2</strong>：券中心 1.0 · 申请/还款页自动匹配 · 邀请即时到账</p>
+      <p><strong>联合里程碑 W4</strong>：触达中台 + 券中心 1.0 上线（Go/No-Go：Push 触达率 ≥ 80%）</p>
+    </div>
+    <div class="card card-green">
+      <h4 style="margin-top:0;">M3-M4 · 智能升级</h4>
+      <p><strong>项目 1</strong>：12 形式 100% 覆盖 · A/B 平台上线</p>
+      <p><strong>项目 2</strong>：5 类用户分层 · 场景化 Feed · 阶梯邀请</p>
+      <p><strong>联合里程碑 W8</strong>：触达全形式 + 分层上线（Go/No-Go：分层准确率 ≥ 75%）</p>
+    </div>
+    <div class="card card-pink">
+      <h4 style="margin-top:0;">M5-M6 · 闭环优化</h4>
+      <p><strong>项目 1</strong>：节日日历 · 人群分层 · 跨产品交叉</p>
+      <p><strong>项目 2</strong>：成长值体系 · 联合券 · 流失召回分级</p>
+      <p><strong>联合里程碑 M6</strong>：4 个 A/B 出结果 · MAU 券用户 ≥ 35%</p>
+    </div>
+    <div class="card card-orange">
+      <h4 style="margin-top:0;">资源 & 组织</h4>
+      <p><strong>共用 Owner</strong>：触达中台 = 项目 1 PM；营销偏好 = 项目 1 PM；合规 = 法务；A/B = 数据组</p>
+      <p><strong>建议</strong>：设跨项目 PMO（产品总监），每周对齐，每月评审里程碑</p>
+      <p><strong>团队</strong>：产品/设计/客户端/服务端/数据/运营/风控 7 部门</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 验收对照 ============ -->
+<section id="verify">
+  <h2>✅ 验收对照总览</h2>
+
+  <h3>项目 1 · 信息触达</h3>
+  <table>
+    <thead><tr><th>验收项</th><th>要求</th><th>实际</th><th>状态</th></tr></thead>
+    <tbody>
+      <tr><td>触达形式</td><td>≥ 10</td><td>12</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>触达结点</td><td>≥ 10</td><td>12</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>矩阵交叉点</td><td>≥ 30</td><td>144</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>竞品对比</td><td>5+</td><td>6</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>HTML 原型</td><td>≥ 12</td><td>16</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>设计稿（西语）</td><td>≥ 6</td><td>6 张 2K PNG</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>设计稿（中文）</td><td>≥ 6</td><td>6 张 2K PNG</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>合规</td><td>CNBV/CONDUSEF/LFPDPPP/催收</td><td>全覆盖</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>指标</td><td>完整</td><td>5 层</td><td><span class="tag-must">✅</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>项目 2 · 优惠券</h3>
+  <table>
+    <thead><tr><th>验收项</th><th>要求</th><th>实际</th><th>状态</th></tr></thead>
+    <tbody>
+      <tr><td>券类型</td><td>≥ 8</td><td>8 + 1 兜底</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>用户分层</td><td>≥ 4</td><td>4 + 1 子层</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>提升策略</td><td>≥ 5</td><td>5 + 1 召回</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>竞品对比</td><td>5+</td><td>5+</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>HTML 原型</td><td>≥ 10</td><td>10+</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>设计稿（西语）</td><td>≥ 6</td><td>6 张 2K PNG</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>设计稿（中文）</td><td>≥ 6</td><td>6 张 2K PNG</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>A/B 实验</td><td>≥ 3</td><td>4</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>漏斗分析</td><td>完整</td><td>5 环节诊断</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>合规</td><td>多头借贷/规则透明/可关闭</td><td>7 铁律</td><td><span class="tag-must">✅</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>关联（联动）</h3>
+  <table>
+    <thead><tr><th>验收项</th><th>要求</th><th>实际</th><th>状态</th></tr></thead>
+    <tbody>
+      <tr><td>关联分析文档</td><td>完整</td><td>9 章节</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>触达形式复用</td><td>≥ 80%</td><td>100%</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>触达结点复用</td><td>≥ 80%</td><td>100%</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>共用底座</td><td>≥ 3</td><td>4 个</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>联合里程碑</td><td>≥ 3</td><td>6 个</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>风险对冲</td><td>≥ 3</td><td>5 大风险</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>联合指标合并</td><td>5 层</td><td>5 层</td><td><span class="tag-must">✅</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 附录 ============ -->
+<section id="appendix">
+  <h2>📎 附录</h2>
+
+  <h3>附录 A · 文件目录结构</h3>
+  <pre>APP-minmax/
+├── PréstamoMX-联合方案.html     ← 本文件（整合报告）
+├── 00-总览与导航.md
+├── 00-关联分析.md
+│
+├── info/                        ← 项目 1：信息触达方案
+│   ├── 01-业务背景.md
+│   ├── 02-需求分析与痛点.md
+│   ├── 03-竞品调研.md
+│   ├── 04-产品规划与设计思路.md
+│   ├── README.md
+│   ├── STATUS.md
+│   ├── prototype/                ← 16 页 HTML 原型
+│   │   ├── index.html
+│   │   ├── style.css
+│   │   └── script.js
+│   └── design/                   ← 12 张设计稿（6 西 + 6 中）
+│       ├── design-01-首页横幅.png        (es-MX)
+│       ├── design-02-消息中心.png        (es-MX)
+│       ├── design-03-还款提醒弹窗.png    (es-MX)
+│       ├── design-04-逾期催收分级.png    (es-MX)
+│       ├── design-05-提额活动落地页.png  (es-MX)
+│       ├── design-06-合规授权页.png      (es-MX)
+│       ├── design-cn-01-首页横幅.png     (zh-CN)
+│       ├── design-cn-02-消息中心.png     (zh-CN)
+│       ├── design-cn-03-还款提醒弹窗.png (zh-CN)
+│       ├── design-cn-04-逾期催收分级.png (zh-CN)
+│       ├── design-cn-05-提额活动落地页.png (zh-CN)
+│       └── design-cn-06-合规授权页.png   (zh-CN)
+│
+└── coupon/                      ← 项目 2：优惠券使用率提升
+    ├── 01-业务背景.md
+    ├── 02-需求分析与痛点.md
+    ├── 03-竞品调研.md
+    ├── 04-产品规划与设计思路.md
+    ├── README.md
+    ├── STATUS.md
+    ├── prototype/                ← 10+ 页 HTML 原型
+    │   ├── index.html
+    │   ├── styles.css
+    │   ├── app.js
+    │   └── _previews/
+    └── design/                   ← 12 张设计稿（6 西 + 6 中）
+        ├── design-01-优惠券中心.png
+        ├── design-02-领券弹窗.png
+        ├── design-03-申请页自动匹配券.png
+        ├── design-04-还款页使用券.png
+        ├── design-05-邀请奖励页.png
+        ├── design-06-流失召回页.png
+        └── design-cn-*.png (6 张中文对照版)</pre>
+
+  <h3>附录 B · 阅读路径建议</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4 style="margin-top:0;">老板视角（30 分钟）</h4>
+      <ol>
+        <li>本文件 → 一页摘要</li>
+        <li>关联分析 → 一页摘要 + 协同价值</li>
+        <li>项目 1 12 形式 + 12 结点</li>
+        <li>项目 2 5 策略 + 8+1 券</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0;">产品视角（2 小时）</h4>
+      <ol>
+        <li>本文件 + 关联分析</li>
+        <li>项目 1 4 份报告（业务/痛点/竞品/规划）</li>
+        <li>项目 2 4 份报告</li>
+        <li>两个 prototype/index.html</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0;">设计视角（1.5 小时）</h4>
+      <ol>
+        <li>两个 README.md</li>
+        <li>12 张西语 + 12 张中文设计稿</li>
+        <li>两个 prototype 交互</li>
+        <li>设计规范（配色/字号/圆角）</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0;">开发视角（4 小时）</h4>
+      <ol>
+        <li>关联分析 → 4 个共用底座</li>
+        <li>项目 1 矩阵 144 交叉点</li>
+        <li>项目 2 7 结点 × 券映射</li>
+        <li>项目 2 4 个 A/B 实验</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>附录 C · 设计规范</h3>
+  <table>
+    <thead><tr><th>维度</th><th>规范</th></tr></thead>
+    <tbody>
+      <tr><td>主色</td><td>#FFD400 拉美黄（CTA / 强调）</td></tr>
+      <tr><td>辅色 1</td><td>#00C853 信任绿（成功 / 节省 / 积极）</td></tr>
+      <tr><td>辅色 2</td><td>#FF3D71 拉美粉（召回 / 紧迫感 / 邀请）</td></tr>
+      <tr><td>辅色 3</td><td>#FF9500 琥珀橙（警告 / 提醒）</td></tr>
+      <tr><td>主黑</td><td>#1A1A1A（文字 / 头部）</td></tr>
+      <tr><td>背景灰</td><td>#F2F2F7</td></tr>
+      <tr><td>设备</td><td>iPhone 14 Pro · 375 × 812</td></tr>
+      <tr><td>圆角</td><td>24px（卡片）/ 12px（按钮）</td></tr>
+      <tr><td>标题字号</td><td>22-28px</td></tr>
+      <tr><td>正文字号</td><td>13-14px</td></tr>
+    </tbody>
+  </table>
+
+  <h3>附录 D · 下一步行动</h3>
+  <ol>
+    <li>召集 5 部门（产品/设计/运营/合规/数据）联合评审</li>
+    <li>项目 1 触达中台技术选型（4 周）</li>
+    <li>项目 2 券中心 1.0 需求评审（2 周）</li>
+    <li>跨项目 PMO 设立（本月内）</li>
+    <li>联合里程碑（W4 / W8 / W12 / M4 / M6）设定</li>
+    <li>4 个共用底座 owner 分配</li>
+  </ol>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  <div class="container" style="padding:0;">
+    <h3>PréstamoMX · 联合方案包 v1.0</h3>
+    <p>墨西哥现金贷 APP · 信息触达方案 + 优惠券使用率提升</p>
+    <p style="opacity:0.7; font-size:13px;">作者：产品小助手（agent-24e32ac69dcc） · 2026-08-16 · 本文档及 24 张设计稿（中英对照）已完整交付</p>
+    <p style="margin-top:16px; font-size:12px; opacity:0.5;">
+      文字部分来源于 <code style="color:#FFD400;">info/</code> 和 <code style="color:#FFD400;">coupon/</code> 目录下的 8 份 markdown 报告。
+      设计稿位于 <code style="color:#FFD400;">info/design/</code> 和 <code style="color:#FFD400;">coupon/design/</code>。
+      HTML 原型位于 <code style="color:#FFD400;">info/prototype/</code> 和 <code style="color:#FFD400;">coupon/prototype/</code>。
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

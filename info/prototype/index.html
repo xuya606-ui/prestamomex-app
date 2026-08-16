@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PréstamoMX · Prototipo de Notificaciones y Mensajería</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-header">
+  <h1>📱 PréstamoMX · 触达体系交互原型</h1>
+  <p class="subtitle">墨西哥现金贷 APP · 14 个核心触达场景 · 西语文案 · iPhone 14 Pro (375 × 812)</p>
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">Todos (14)</button>
+    <button class="filter-btn" data-filter="push">Push (3)</button>
+    <button class="filter-btn" data-filter="modal">弹窗 (4)</button>
+    <button class="filter-btn" data-filter="inline">页面内 (4)</button>
+    <button class="filter-btn" data-filter="overlay">浮层 (3)</button>
+  </div>
+</div>
+
+<div class="grid" id="grid">
+
+  <!-- 1. 首页横幅 -->
+  <div class="phone" data-type="inline">
+    <div class="phone-label">01 · 首页横幅 Home Banner</div>
+    <div class="device">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="home-banner">
+          <div class="banner-content">
+            <div class="banner-tag">🎉 PRIMER PRÉSTAMO</div>
+            <div class="banner-title">¡Hasta $25,000 MXN en 5 minutos!</div>
+            <div class="banner-desc">CAT 89.5% · Sin papeleo</div>
+            <button class="banner-cta">Solicitar ahora →</button>
+          </div>
+          <div class="banner-close">×</div>
+        </div>
+        <div class="home-content">
+          <div class="greeting">Hola, Juan 👋</div>
+          <div class="balance-card">
+            <div class="balance-label">Tu línea de crédito</div>
+            <div class="balance-amount">$15,000 <span>MXN</span></div>
+            <div class="balance-cta">Solicitar</div>
+          </div>
+          <div class="quick-actions">
+            <div class="action">📥 Préstamo</div>
+            <div class="action">💳 Pagar</div>
+            <div class="action">📊 Historial</div>
+            <div class="action">⚙️ Más</div>
+          </div>
+          <div class="promo-strip">
+            <div class="promo-icon">⭐</div>
+            <div>
+              <div class="promo-title">Invita y gana $200</div>
+              <div class="promo-sub">Por cada amigo que solicite</div>
+            </div>
+            <div class="promo-arrow">›</div>
+          </div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 消息中心 -->
+  <div class="phone" data-type="inline">
+    <div class="phone-label">02 · 消息中心 Centro de Mensajes</div>
+    <div class="device">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="page-header-mini">
+          <div class="back">‹</div>
+          <div class="title">Mensajes</div>
+          <div class="more">⋯</div>
+        </div>
+        <div class="msg-tabs">
+          <div class="msg-tab active">Todos</div>
+          <div class="msg-tab">Pagos</div>
+          <div class="msg-tab">Promos</div>
+        </div>
+        <div class="msg-list">
+          <div class="msg-item unread">
+            <div class="msg-icon" style="background:#FFD400">💰</div>
+            <div class="msg-body">
+              <div class="msg-title">¡Préstamo aprobado!</div>
+              <div class="msg-text">Tu solicitud de $5,000 MXN fue aprobada...</div>
+              <div class="msg-time">Hace 5 min</div>
+            </div>
+            <div class="msg-dot"></div>
+          </div>
+          <div class="msg-item unread">
+            <div class="msg-icon" style="background:#FF3B30">⏰</div>
+            <div class="msg-body">
+              <div class="msg-title">Recordatorio de pago</div>
+              <div class="msg-text">Tu pago de $1,250 MXN vence mañana. Paga en OXXO o SPEI.</div>
+              <div class="msg-time">Hace 2 h</div>
+            </div>
+            <div class="msg-dot"></div>
+          </div>
+          <div class="msg-item">
+            <div class="msg-icon" style="background:#00C853">✅</div>
+            <div class="msg-body">
+              <div class="msg-title">Pago recibido</div>
+              <div class="msg-text">Recibimos tu pago de $1,250 MXN. ¡Gracias!</div>
+              <div class="msg-time">Ayer</div>
+            </div>
+          </div>
+          <div class="msg-item">
+            <div class="msg-icon" style="background:#5856D6">🎁</div>
+            <div class="msg-body">
+              <div class="msg-title">¡Tienes un cupón!</div>
+              <div class="msg-text">Usa PROMO2026 y obtén $100 MXN de descuento.</div>
+              <div class="msg-time">Hace 2 días</div>
+            </div>
+          </div>
+          <div class="msg-item">
+            <div class="msg-icon" style="background:#8E8E93">📋</div>
+            <div class="msg-body">
+              <div class="msg-title">Tu comprobante de pago</div>
+              <div class="msg-text">Comprobante #MX240816 disponible para descarga.</div>
+              <div class="msg-time">Hace 3 días</div>
+            </div>
+          </div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Push 通知样式 -->
+  <div class="phone" data-type="push">
+    <div class="phone-label">03 · Push 通知样式</div>
+    <div class="device" style="background:linear-gradient(180deg, #4A90E2 0%, #357ABD 100%);">
+      <div class="notch"></div>
+      <div class="status-bar status-bar-light">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#fff"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#fff"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="push-stack">
+          <div class="push-card">
+            <div class="push-row">
+              <div class="push-app-icon">P</div>
+              <div class="push-meta">
+                <div class="push-app">PréstamoMX · ahora</div>
+                <div class="push-title">¡Préstamo aprobado! 🎉</div>
+                <div class="push-body">Tu solicitud de $5,000 MXN fue aprobada. Toca para ver detalles.</div>
+              </div>
+            </div>
+          </div>
+          <div class="push-card push-card-amber">
+            <div class="push-row">
+              <div class="push-app-icon">P</div>
+              <div class="push-meta">
+                <div class="push-app">PréstamoMX · ahora</div>
+                <div class="push-title">Recordatorio: pago mañana</div>
+                <div class="push-body">Tu pago de $1,250 MXN vence mañana 16/08. Paga en OXXO o SPEI.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="height:120px"></div>
+        <div class="home-indicator home-indicator-light"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Toast 浮窗 -->
+  <div class="phone" data-type="overlay">
+    <div class="phone-label">04 · Toast 浮窗</div>
+    <div class="device">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="toast-bg">
+          <div class="toast-card">
+            <div class="toast-icon" style="background:#00C853">✓</div>
+            <div class="toast-text">Pago realizado con éxito</div>
+          </div>
+        </div>
+        <div class="toast-bg" style="top:200px">
+          <div class="toast-card" style="background:#1a1a1a; color:#fff;">
+            <div class="toast-icon" style="background:#FFD400; color:#1a1a1a">!</div>
+            <div class="toast-text" style="color:#fff">Verifica tu conexión a internet</div>
+          </div>
+        </div>
+        <div class="toast-bg" style="top:300px">
+          <div class="toast-card" style="background:#FF3B30; color:#fff;">
+            <div class="toast-icon" style="background:#fff; color:#FF3B30">✕</div>
+            <div class="toast-text" style="color:#fff">Tarjeta rechazada. Intenta otra.</div>
+          </div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 模态弹窗 - 审批通过 -->
+  <div class="phone" data-type="modal">
+    <div class="phone-label">05 · 模态弹窗 · 审批通过</div>
+    <div class="device" style="background:#f2f2f7">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="dimmed-bg"></div>
+        <div class="modal-center">
+          <div class="modal-card">
+            <div class="modal-emoji">🎉</div>
+            <div class="modal-title">¡Felicidades!</div>
+            <div class="modal-subtitle">Tu préstamo fue aprobado</div>
+            <div class="modal-amount">$5,000 <span>MXN</span></div>
+            <div class="modal-detail-row">
+              <div>Plazo</div><div>30 días</div>
+            </div>
+            <div class="modal-detail-row">
+              <div>CAT</div><div>89.5%</div>
+            </div>
+            <div class="modal-detail-row">
+              <div>Total a pagar</div><div class="bold">$5,738 MXN</div>
+            </div>
+            <div class="modal-cat-note">*Incluye IVA. CAT = Costo Anual Total.</div>
+            <button class="modal-btn-primary">Recibir dinero ahora</button>
+            <button class="modal-btn-secondary">Más tarde</button>
+          </div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Slide-up 抽屉 - 提额活动 -->
+  <div class="phone" data-type="modal">
+    <div class="phone-label">06 · Slide-up 抽屉 · 提额活动</div>
+    <div class="device" style="background:linear-gradient(180deg, #667eea 0%, #764ba2 100%);">
+      <div class="notch"></div>
+      <div class="status-bar status-bar-light">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#fff"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#fff"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="slideup-handle-bar"></div>
+        <div class="slideup-card">
+          <div class="slideup-close">×</div>
+          <div class="slideup-badge">⭐ CLIENTE PREFERENTE</div>
+          <div class="slideup-title">¡Tu límite subió!</div>
+          <div class="slideup-amount">
+            <div class="old-amount">$5,000</div>
+            <div class="new-amount">$15,000 MXN</div>
+          </div>
+          <div class="slideup-bullets">
+            <div class="bullet">✓ Tasa preferencial 35% CAT</div>
+            <div class="bullet">✓ Aprobación en 60 segundos</div>
+            <div class="bullet">✓ Sin papeleo adicional</div>
+          </div>
+          <button class="slideup-cta">Solicitar ahora</button>
+          <div class="slideup-disclaimer">*CAT 35.2% sin IVA. Sujeto a aprobación crediticia.</div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. 运营浮窗 - 客服助手 -->
+  <div class="phone" data-type="overlay">
+    <div class="phone-label">07 · 运营浮窗 · 客服助手</div>
+    <div class="device">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen" style="background:#f2f2f7">
+        <div class="page-header-mini">
+          <div class="back">‹</div>
+          <div class="title">Mi cuenta</div>
+          <div class="more">⋯</div>
+        </div>
+        <div style="height:600px"></div>
+        <div class="floating-widget">
+          <div class="fw-icon">💬</div>
+          <div class="fw-label">Ayuda</div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. 引导蒙层 - 首贷 3 步 -->
+  <div class="phone" data-type="overlay">
+    <div class="phone-label">08 · 引导蒙层 · 首贷 3 步</div>
+    <div class="device">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen" style="background:#f2f2f7">
+        <div class="dimmed-bg dimmed-bg-light"></div>
+        <div class="coach-mask">
+          <div class="coach-spotlight"></div>
+          <div class="coach-bubble">
+            <div class="coach-step">Paso 1 de 3</div>
+            <div class="coach-title">Solicita tu préstamo</div>
+            <div class="coach-desc">Toca el botón verde "Solicitar" para elegir tu monto y plazo.</div>
+            <div class="coach-dots">
+              <div class="dot active"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <button class="coach-btn">Siguiente →</button>
+          </div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. 模态弹窗 - 还款提醒 -->
+  <div class="phone" data-type="modal">
+    <div class="phone-label">09 · 还款提醒弹窗 · D-1</div>
+    <div class="device" style="background:#f2f2f7">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="dimmed-bg"></div>
+        <div class="modal-center">
+          <div class="modal-card">
+            <div class="modal-emoji">⏰</div>
+            <div class="modal-title">¡Pago mañana!</div>
+            <div class="modal-subtitle">No olvides tu pago de mañana</div>
+            <div class="modal-amount modal-amount-amber">$1,250 <span>MXN</span></div>
+            <div class="modal-pay-options">
+              <div class="pay-opt">🏦 SPEI</div>
+              <div class="pay-opt">🏪 OXXO</div>
+              <div class="pay-opt">💳 Tarjeta</div>
+            </div>
+            <div class="modal-cat-note">Vence: 17/08/2026 · CAT 89.5% · Incluye IVA</div>
+            <button class="modal-btn-primary">Pagar ahora</button>
+            <button class="modal-btn-secondary">Recordar más tarde</button>
+          </div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. 逾期分级 - 轻度 (1-7天) -->
+  <div class="phone" data-type="modal">
+    <div class="phone-label">10 · 逾期轻度 · 1-7 天</div>
+    <div class="device" style="background:#fff3e0">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="dimmed-bg"></div>
+        <div class="modal-center">
+          <div class="modal-card overdue-light">
+            <div class="modal-emoji">⚠️</div>
+            <div class="overdue-tag-light">Pago atrasado · 3 días</div>
+            <div class="modal-title">Tu pago está atrasado</div>
+            <div class="modal-subtitle">Realiza tu pago hoy para evitar cargos extra</div>
+            <div class="modal-amount modal-amount-amber">$1,250 <span>MXN</span></div>
+            <div class="overdue-info">
+              <div>Cargo por mora: <b>$45 MXN</b></div>
+              <div>Total a pagar: <b>$1,295 MXN</b></div>
+            </div>
+            <button class="modal-btn-primary">Pagar ahora</button>
+            <button class="modal-btn-secondary">Hablar con asesor</button>
+          </div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. 逾期分级 - 中度 (7-30天) -->
+  <div class="phone" data-type="modal">
+    <div class="phone-label">11 · 逾期中度 · 7-30 天</div>
+    <div class="device" style="background:#ffe0e0">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="dimmed-bg"></div>
+        <div class="modal-center">
+          <div class="modal-card overdue-mid">
+            <div class="modal-emoji">🚨</div>
+            <div class="overdue-tag-mid">Pago atrasado · 15 días</div>
+            <div class="modal-title">Situación importante</div>
+            <div class="modal-subtitle">Tu crédito está en riesgo. Te ofrecemos una solución.</div>
+            <div class="modal-amount modal-amount-red">$1,450 <span>MXN</span></div>
+            <div class="overdue-info overdue-info-mid">
+              <div>💡 <b>Refinanciar</b> a 3 mensualidades</div>
+              <div>💡 Reporte a Buró en 5 días</div>
+              <div>💡 Llamada de gestor asignada</div>
+            </div>
+            <button class="modal-btn-primary modal-btn-whatsapp">
+              <span style="margin-right:6px">📱</span> Negociar por WhatsApp
+            </button>
+            <button class="modal-btn-secondary">Llamar a cobranza</button>
+          </div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12. 逾期分级 - 重度 (30+天) -->
+  <div class="phone" data-type="modal">
+    <div class="phone-label">12 · 逾期重度 · 30+ 天</div>
+    <div class="device" style="background:#1a1a1a">
+      <div class="notch"></div>
+      <div class="status-bar status-bar-light">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#fff"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#fff"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="dimmed-bg" style="background:rgba(0,0,0,0.85)"></div>
+        <div class="modal-center">
+          <div class="modal-card overdue-heavy">
+            <div class="modal-emoji modal-emoji-large">📞</div>
+            <div class="overdue-tag-heavy">⚠️ MORA GRAVE · 45 días</div>
+            <div class="modal-title modal-title-light">Acción legal en proceso</div>
+            <div class="modal-subtitle modal-subtitle-light">Regulariza tu situación hoy mismo</div>
+            <div class="modal-amount modal-amount-red-light">$2,180 <span>MXN</span></div>
+            <div class="overdue-heavy-list">
+              <div>✗ Reporte activo en Buró de Crédito</div>
+              <div>✗ Llamadas de gestor (L-V 9-20h)</div>
+              <div>✗ Visita domiciliaria programada</div>
+              <div>✗ Demanda judicial en 15 días</div>
+            </div>
+            <div class="compliance-note">REDECO: Despacho "Cobranza Legal MX" · Reg. #2018-0456</div>
+            <button class="modal-btn-primary modal-btn-red">
+              <span style="margin-right:6px">📞</span> Llamar a cobranza ahora
+            </button>
+            <button class="modal-btn-whatsapp-outline">
+              <span style="margin-right:6px">💬</span> Negociar por WhatsApp
+            </button>
+          </div>
+        </div>
+        <div class="home-indicator home-indicator-light"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. 提额活动落地页 -->
+  <div class="phone" data-type="inline">
+    <div class="phone-label">13 · 提额活动落地页</div>
+    <div class="device" style="background:linear-gradient(180deg, #FFD400 0%, #FFA000 100%);">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="lp-header">
+          <div class="back">‹</div>
+          <div class="lp-title">Promo especial</div>
+          <div class="share-icon">↗</div>
+        </div>
+        <div class="lp-body">
+          <div class="lp-emoji">💰</div>
+          <div class="lp-headline">¡Tu línea de crédito<br>creció <span class="hl">3X</span>!</div>
+          <div class="lp-old">Antes: $5,000 MXN</div>
+          <div class="lp-new">Ahora: $15,000 MXN</div>
+          <div class="lp-card">
+            <div class="lp-card-row">
+              <div class="lp-card-label">Tasa preferencial</div>
+              <div class="lp-card-value">35% CAT*</div>
+            </div>
+            <div class="lp-card-row">
+              <div class="lp-card-label">Aprobación</div>
+              <div class="lp-card-value">60 segundos</div>
+            </div>
+            <div class="lp-card-row">
+              <div class="lp-card-label">Primer pago</div>
+              <div class="lp-card-value">Hasta 60 días</div>
+            </div>
+          </div>
+          <div class="lp-timer">⏱ Oferta válida por 24:00:00</div>
+          <button class="lp-cta">Solicitar $15,000 MXN →</button>
+          <div class="lp-disclaimer">*CAT 35.2% sin IVA. Sujeto a aprobación crediticia. Promoción válida hasta 17/08/2026.</div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. 合规 opt-in 授权页 -->
+  <div class="phone" data-type="modal">
+    <div class="phone-label">14 · 合规 opt-in 授权页</div>
+    <div class="device" style="background:#f2f2f7">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="modal-center">
+          <div class="modal-card optin-card">
+            <div class="optin-icon">🔔</div>
+            <div class="modal-title">Aviso de Privacidad</div>
+            <div class="modal-subtitle">¿Cómo quieres que te contactemos?</div>
+            <div class="optin-row">
+              <div class="optin-text">
+                <div class="optin-title">Notificaciones push</div>
+                <div class="optin-desc">Estado de solicitudes, recordatorios de pago.</div>
+              </div>
+              <div class="optin-toggle on"><div class="optin-knob"></div></div>
+            </div>
+            <div class="optin-row">
+              <div class="optin-text">
+                <div class="optin-title">SMS</div>
+                <div class="optin-desc">Verificación, alertas críticas de pago.</div>
+              </div>
+              <div class="optin-toggle on"><div class="optin-knob"></div></div>
+            </div>
+            <div class="optin-row">
+              <div class="optin-text">
+                <div class="optin-title">Email</div>
+                <div class="optin-desc">Comprobantes, estados de cuenta.</div>
+              </div>
+              <div class="optin-toggle"><div class="optin-knob"></div></div>
+            </div>
+            <div class="optin-row">
+              <div class="optin-text">
+                <div class="optin-title">WhatsApp</div>
+                <div class="optin-desc">Asesoría, ofertas personalizadas.</div>
+              </div>
+              <div class="optin-toggle"><div class="optin-knob"></div></div>
+            </div>
+            <div class="optin-row">
+              <div class="optin-text">
+                <div class="optin-title">Promociones y marketing</div>
+                <div class="optin-desc">Ofertas, nuevos productos, encuestas.</div>
+              </div>
+              <div class="optin-toggle"><div class="optin-knob"></div></div>
+            </div>
+            <div class="optin-footer">
+              Puedes cambiar estas preferencias en cualquier momento desde Configuración. Ver <a href="#">Aviso de Privacidad</a>.
+            </div>
+            <button class="modal-btn-primary">Guardar preferencias</button>
+            <button class="modal-btn-secondary">Más tarde</button>
+          </div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 15. 复借邀请弹窗 -->
+  <div class="phone" data-type="modal">
+    <div class="phone-label">15 · 复借邀请弹窗 · D+7</div>
+    <div class="device" style="background:#f2f2f7">
+      <div class="notch"></div>
+      <div class="status-bar">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#1a1a1a"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#1a1a1a"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="dimmed-bg"></div>
+        <div class="modal-center">
+          <div class="modal-card rebirth-card">
+            <div class="rebirth-gift">🎁</div>
+            <div class="rebirth-ribbon">CLIENTE RECURRENTE</div>
+            <div class="modal-title">¡Te extrañamos, Juan!</div>
+            <div class="rebirth-amount">$10,000 MXN</div>
+            <div class="rebirth-bonus">con tasa preferencial <b>35% CAT</b></div>
+            <div class="rebirth-features">
+              <div class="rf">✓ Aprobación en 60s</div>
+              <div class="rf">✓ Sin papeleo extra</div>
+              <div class="rf">✓ Primer pago a 60 días</div>
+            </div>
+            <button class="modal-btn-primary">Solicitar $10,000 →</button>
+            <button class="modal-btn-secondary">Quizá más tarde</button>
+            <div class="rebirth-foot">Válido por 7 días · *CAT 35.2% sin IVA</div>
+          </div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. 流失召回 Push (60天) -->
+  <div class="phone" data-type="push">
+    <div class="phone-label">16 · 流失召回 · 60 天</div>
+    <div class="device" style="background:linear-gradient(180deg, #2c3e50 0%, #34495e 100%);">
+      <div class="notch"></div>
+      <div class="status-bar status-bar-light">
+        <span>9:41</span>
+        <span class="status-icons">
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M1 8h2v2H1zm4-2h2v4H5zm4-2h2v6H9zm4-2h2v8h-2z" fill="#fff"/></svg>
+          <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 1C4 1 1.5 2.5 0 4l1.5 1.5C2.7 4.3 4.7 3.5 7 3.5s4.3.8 5.5 2L14 4C12.5 2.5 10 1 7 1z" fill="#fff"/></svg>
+          <span class="battery">100%</span>
+        </span>
+      </div>
+      <div class="screen">
+        <div class="push-stack">
+          <div class="push-card push-card-recall">
+            <div class="push-row">
+              <div class="push-app-icon" style="background:#FFD400; color:#1a1a1a">P</div>
+              <div class="push-meta">
+                <div class="push-app">PréstamoMX · ahora</div>
+                <div class="push-title">Juan, tenemos algo para ti 💛</div>
+                <div class="push-body">Tu antiguo límite de $5,000 MXN sigue esperándote. Tasa preferencial del 35% CAT solo por hoy.</div>
+              </div>
+            </div>
+          </div>
+          <div class="push-card" style="opacity:0.6">
+            <div class="push-row">
+              <div class="push-app-icon" style="background:#00C853; color:#fff">$</div>
+              <div class="push-meta">
+                <div class="push-app">PréstamoMX · hace 1 día</div>
+                <div class="push-title">¿Te olvidaste de nosotros?</div>
+                <div class="push-body">Regresa y obtén $100 MXN de regalo en tu próximo préstamo.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="height:200px"></div>
+        <div class="home-indicator home-indicator-light"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <p>📐 设计尺寸：iPhone 14 Pro · 375 × 812 · 拉美风格配色（#FFD400 拉美黄 / #00C853 信任绿 / #FF3B30 警示红 / #1A1A1A 主黑灰）</p>
+  <p>🌐 文案语言：es-MX · 主题：现金贷触达体系 · 适用读者：产品/设计/运营/合规</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

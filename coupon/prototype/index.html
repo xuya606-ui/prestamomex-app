@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, initial-scale=1">
+<title>Préstamo APP · Cupones · Prototipo v1.0</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===================== 顶部说明栏 ===================== -->
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">●</div>
+    <div>
+      <div class="brand-title">Préstamo MX · Cupones</div>
+      <div class="brand-sub">Prototipo Interactivo v1.0 · 14 pantallas · es-MX</div>
+    </div>
+  </div>
+  <div class="legend">
+    <span class="dot dot-pink"></span>CTA principal
+    <span class="dot dot-green"></span>Beneficio
+    <span class="dot dot-grey"></span>Neutral
+    <span class="dot dot-yellow"></span>Urgencia
+  </div>
+</header>
+
+<!-- ===================== 左侧导航 ===================== -->
+<aside class="sidebar">
+  <div class="nav-section">Inicio</div>
+  <button class="nav-item" data-screen="home">P1 · 首页入口</button>
+
+  <div class="nav-section">Centro de cupones</div>
+  <button class="nav-item" data-screen="center-all">P2 · 全部券</button>
+  <button class="nav-item" data-screen="center-unused">P3 · 未使用(默认)</button>
+  <button class="nav-item" data-screen="center-used">P4 · 已使用</button>
+  <button class="nav-item" data-screen="center-expired">P5 · 已过期</button>
+
+  <div class="nav-section">Detalles y pop-ups</div>
+  <button class="nav-item" data-screen="claim-modal">P6 · 领券弹窗(场景化)</button>
+  <button class="nav-item" data-screen="rule-detail">P7 · 券规则详情</button>
+  <button class="nav-item" data-screen="expiry-warning">P8 · 过期前 24h 提醒</button>
+
+  <div class="nav-section">En uso (escenas)</div>
+  <button class="nav-item" data-screen="apply-page">P9 · 申请页自动匹配券</button>
+  <button class="nav-item" data-screen="repay-page">P10 · 还款页使用券</button>
+  <button class="nav-item" data-screen="invite-page">P11 · 邀请好友页</button>
+
+  <div class="nav-section">Adquisición y recuperación</div>
+  <button class="nav-item" data-screen="campaign-landing">P12 · 活动落地页</button>
+  <button class="nav-item" data-screen="recover-page">P13 · 流失召回页</button>
+
+  <div class="nav-section">Ajustes</div>
+  <button class="nav-item" data-screen="preferences">P14 · 营销偏好设置</button>
+</aside>
+
+<!-- ===================== 中央画板 ===================== -->
+<main class="canvas">
+  <div class="canvas-bg">
+    <div class="iphone-frame" id="iphone-frame">
+      <!-- iOS Status Bar -->
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="status-icons">
+          <span class="signal">●●●●</span>
+          <span class="wifi">⤴</span>
+          <span class="battery">100%</span>
+        </div>
+      </div>
+
+      <!-- 屏幕内容区域:所有 screen 在此切换 -->
+      <div class="screen" id="screen">
+
+        <!-- ============== P1 · 首页 ============== -->
+        <div class="screen-page" data-page="home">
+          <div class="home-header">
+            <div class="home-greeting">
+              <div class="small">Buen día,</div>
+              <div class="big">María</div>
+            </div>
+            <div class="bell">🔔</div>
+          </div>
+
+          <div class="balance-card">
+            <div class="balance-label">Tu línea disponible</div>
+            <div class="balance-amount">$8,000 <span class="currency">MXN</span></div>
+            <button class="btn-pink">Solicitar préstamo</button>
+          </div>
+
+          <!-- 场景化入口 · 我的优惠券(策略 1) -->
+          <div class="coupon-entry" onclick="goScreen('center-unused')">
+            <div class="coupon-entry-left">
+              <div class="ticket-icon">🎟️</div>
+              <div>
+                <div class="ce-title">Tienes 3 cupones</div>
+                <div class="ce-sub">2 vencen pronto · Ahorra hasta $850</div>
+              </div>
+            </div>
+            <div class="arrow">›</div>
+          </div>
+
+          <!-- 快捷功能 -->
+          <div class="quick-grid">
+            <div class="quick-item"><div class="qi-icon">💸</div><div>Pagar</div></div>
+            <div class="quick-item" onclick="goScreen('repay-page')"><div class="qi-icon">📅</div><div>Préstamos</div></div>
+            <div class="quick-item" onclick="goScreen('invite-page')"><div class="qi-icon">👥</div><div>Invitar</div></div>
+            <div class="quick-item" onclick="goScreen('campaign-landing')"><div class="qi-icon">🎁</div><div>Promos</div></div>
+          </div>
+
+          <!-- 场景化推荐 Feed(策略 2) -->
+          <div class="section-title">Para ti</div>
+          <div class="feed-card" onclick="goScreen('claim-modal')">
+            <div class="feed-icon" style="background:#FFE5EE">💰</div>
+            <div class="feed-body">
+              <div class="feed-title">50% descuento en intereses</div>
+              <div class="feed-sub">Para tu próximo préstamo · Vence en 5 días</div>
+            </div>
+            <button class="btn-mini-pink">Usar</button>
+          </div>
+          <div class="feed-card" onclick="goScreen('rule-detail')">
+            <div class="feed-icon" style="background:#E5F8EE">📈</div>
+            <div class="feed-body">
+              <div class="feed-title">Aumenta tu línea a $20,000</div>
+              <div class="feed-sub">Cupón exclusivo · Solo 7 días</div>
+            </div>
+            <button class="btn-mini-green">Ver</button>
+          </div>
+
+          <div class="home-spacer"></div>
+        </div>
+
+        <!-- ============== P2 · 全部券 ============== -->
+        <div class="screen-page" data-page="center-all" style="display:none">
+          <div class="nav-header">
+            <div class="back">‹</div>
+            <div class="title">Mis cupones</div>
+            <div class="right-icon">⋯</div>
+          </div>
+          <div class="tab-row">
+            <div class="tab active">Todos <span class="badge">5</span></div>
+            <div class="tab">Sin usar <span class="badge">3</span></div>
+            <div class="tab">Usados</div>
+            <div class="tab">Vencidos</div>
+          </div>
+
+          <div class="coupon-card coupon-pink" onclick="goScreen('rule-detail')">
+            <div class="cc-left">
+              <div class="cc-value">$250 <span class="cc-cur">MXN</span></div>
+              <div class="cc-label">de descuento</div>
+            </div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">5% pronto pago</div>
+              <div class="cc-sub">Paga antes del viernes</div>
+              <div class="cc-meta">Vence en 2 días</div>
+            </div>
+          </div>
+
+          <div class="coupon-card coupon-green" onclick="goScreen('rule-detail')">
+            <div class="cc-left">
+              <div class="cc-value">$20K <span class="cc-cur">MXN</span></div>
+              <div class="cc-label">línea nueva</div>
+            </div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Aumento de línea</div>
+              <div class="cc-sub">Solo por 7 días</div>
+              <div class="cc-meta green">Recomendado para ti</div>
+            </div>
+          </div>
+
+          <div class="coupon-card coupon-yellow">
+            <div class="cc-left">
+              <div class="cc-value">50%</div>
+              <div class="cc-label">intereses</div>
+            </div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Descuento próximo préstamo</div>
+              <div class="cc-sub">Aplica para $5,000+ · 14 días</div>
+              <div class="cc-meta">5 días restantes</div>
+            </div>
+          </div>
+
+          <div class="section-title small">Usados</div>
+          <div class="coupon-card coupon-grey">
+            <div class="cc-left"><div class="cc-value">$100</div><div class="cc-label">cashback</div></div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Recompensa buen pagador</div>
+              <div class="cc-sub">Usado el 12 ago 2026</div>
+              <div class="cc-meta">$100 a tu cuenta</div>
+            </div>
+          </div>
+
+          <div class="section-title small">Vencidos</div>
+          <div class="coupon-card coupon-faded">
+            <div class="cc-left"><div class="cc-value">10%</div><div class="cc-label">comisión</div></div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Comisión cero</div>
+              <div class="cc-sub">Venció el 5 ago 2026</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============== P3 · 未使用 ============== -->
+        <div class="screen-page" data-page="center-unused" style="display:none">
+          <div class="nav-header">
+            <div class="back">‹</div>
+            <div class="title">Sin usar</div>
+            <div class="right-icon">⋯</div>
+          </div>
+          <div class="tab-row">
+            <div class="tab">Todos</div>
+            <div class="tab active">Sin usar <span class="badge">3</span></div>
+            <div class="tab">Usados</div>
+            <div class="tab">Vencidos</div>
+          </div>
+
+          <div class="urgency-banner" onclick="goScreen('expiry-warning')">
+            <div class="ub-icon">⏰</div>
+            <div>
+              <div class="ub-title">2 cupones vencen pronto</div>
+              <div class="ub-sub">Te quedan menos de 48 horas</div>
+            </div>
+            <div class="arrow">›</div>
+          </div>
+
+          <div class="coupon-card coupon-pink" onclick="goScreen('apply-page')">
+            <div class="cc-left"><div class="cc-value">$250</div><div class="cc-label">descuento</div></div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">5% pronto pago</div>
+              <div class="cc-sub">Paga antes del viernes</div>
+              <div class="cc-meta yellow">⚠ Vence en 2 días</div>
+            </div>
+          </div>
+
+          <div class="coupon-card coupon-yellow" onclick="goScreen('apply-page')">
+            <div class="cc-left"><div class="cc-value">50%</div><div class="cc-label">intereses</div></div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Descuento próximo préstamo</div>
+              <div class="cc-sub">Para $5,000 MXN o más</div>
+              <div class="cc-meta">5 días restantes</div>
+            </div>
+          </div>
+
+          <div class="coupon-card coupon-green" onclick="goScreen('recover-page')">
+            <div class="cc-left"><div class="cc-value">$20K</div><div class="cc-label">línea</div></div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Aumento de línea</div>
+              <div class="cc-sub">Por buen historial</div>
+              <div class="cc-meta green">Recomendado</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============== P4 · 已使用 ============== -->
+        <div class="screen-page" data-page="center-used" style="display:none">
+          <div class="nav-header">
+            <div class="back">‹</div>
+            <div class="title">Usados</div>
+            <div class="right-icon">⋯</div>
+          </div>
+          <div class="tab-row">
+            <div class="tab">Todos</div>
+            <div class="tab">Sin usar</div>
+            <div class="tab active">Usados</div>
+            <div class="tab">Vencidos</div>
+          </div>
+          <div class="used-summary">
+            <div class="us-num">5</div>
+            <div class="us-label">cupones usados en 2026</div>
+            <div class="us-saving">Has ahorrado <strong>$1,340 MXN</strong></div>
+          </div>
+          <div class="coupon-card coupon-grey">
+            <div class="cc-left"><div class="cc-value">$100</div><div class="cc-label">cashback</div></div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Buen pagador</div>
+              <div class="cc-sub">Usado · 12 ago 2026</div>
+            </div>
+          </div>
+          <div class="coupon-card coupon-grey">
+            <div class="cc-left"><div class="cc-value">$200</div><div class="cc-label">invitación</div></div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Recompensa · Diego</div>
+              <div class="cc-sub">Usado · 28 jul 2026</div>
+            </div>
+          </div>
+          <div class="coupon-card coupon-grey">
+            <div class="cc-left"><div class="cc-value">$150</div><div class="cc-label">descuento</div></div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Pronto pago · julio</div>
+              <div class="cc-sub">Usado · 15 jul 2026</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============== P5 · 已过期 ============== -->
+        <div class="screen-page" data-page="center-expired" style="display:none">
+          <div class="nav-header">
+            <div class="back">‹</div>
+            <div class="title">Vencidos</div>
+            <div class="right-icon">⋯</div>
+          </div>
+          <div class="tab-row">
+            <div class="tab">Todos</div>
+            <div class="tab">Sin usar</div>
+            <div class="tab">Usados</div>
+            <div class="tab active">Vencidos</div>
+          </div>
+          <div class="expired-tip">
+            <div class="et-icon">💡</div>
+            <div>
+              <div class="et-title">Activa las notificaciones</div>
+              <div class="et-sub">Te avisamos 24 h antes de que un cupón venza.</div>
+              <button class="btn-link" onclick="goScreen('preferences')">Activar →</button>
+            </div>
+          </div>
+          <div class="coupon-card coupon-faded">
+            <div class="cc-left"><div class="cc-value">10%</div><div class="cc-label">comisión</div></div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Comisión cero</div>
+              <div class="cc-sub">Venció el 5 ago 2026</div>
+            </div>
+          </div>
+          <div class="coupon-card coupon-faded">
+            <div class="cc-left"><div class="cc-value">50%</div><div class="cc-label">intereses</div></div>
+            <div class="cc-divider"></div>
+            <div class="cc-right">
+              <div class="cc-title">Descuento aniversario</div>
+              <div class="cc-sub">Venció el 1 ago 2026</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============== P6 · 领券弹窗 ============== -->
+        <div class="screen-page" data-page="claim-modal" style="display:none">
+          <div class="modal-backdrop">
+            <div class="modal-card">
+              <div class="modal-illust">🎉</div>
+              <div class="modal-eyebrow">Regalo para tu próximo préstamo</div>
+              <div class="modal-title">50% descuento en intereses</div>
+              <div class="modal-sub">Ahorra hasta <strong>$1,250 MXN</strong> en tu próximo préstamo de $5,000+</div>
+
+              <div class="modal-benefits">
+                <div class="mb-item">✓ Vence en 14 días</div>
+                <div class="mb-item">✓ Aplica para $5,000 MXN o más</div>
+                <div class="mb-item">✓ Se aplica automáticamente al pagar</div>
+              </div>
+
+              <div class="modal-terms">
+                <span class="info-icon">ⓘ</span>
+                <span>Aplica condiciones. <a href="#" onclick="event.stopPropagation();goScreen('rule-detail')">Ver T&C</a></span>
+              </div>
+
+              <button class="btn-pink btn-full">Reclamar cupón</button>
+              <button class="btn-text" onclick="goScreen('home')">Ahora no</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============== P7 · 券规则详情 ============== -->
+        <div class="screen-page" data-page="rule-detail" style="display:none">
+          <div class="nav-header">
+            <div class="back" onclick="goScreen('center-unused')">‹</div>
+            <div class="title">Detalles del cupón</div>
+            <div class="right-icon">ⓘ</div>
+          </div>
+
+          <div class="hero-coupon">
+            <div class="hc-value">50%</div>
+            <div class="hc-label">de descuento en intereses</div>
+            <div class="hc-save">Ahorra hasta <strong>$1,250 MXN</strong></div>
+          </div>
+
+          <div class="meta-row">
+            <div class="meta-cell">
+              <div class="mc-label">Vence</div>
+              <div class="mc-value">30 ago · 23:59</div>
+            </div>
+            <div class="meta-cell">
+              <div class="mc-label">Mínimo</div>
+              <div class="mc-value">$5,000 MXN</div>
+            </div>
+          </div>
+
+          <div class="section-title small">Calcula tu ahorro</div>
+          <div class="calc-box">
+            <div class="cb-row">
+              <span>Monto del préstamo</span>
+              <span class="cb-amount">$8,000</span>
+            </div>
+            <div class="cb-row">
+              <span>Interés normal (14 días)</span>
+              <span class="cb-amount">$560</span>
+            </div>
+            <div class="cb-row highlight">
+              <span>Con este cupón (−50%)</span>
+              <span class="cb-amount green">−$280</span>
+            </div>
+            <div class="cb-row total">
+              <span>Total a pagar</span>
+              <span class="cb-amount">$8,280</span>
+            </div>
+          </div>
+
+          <div class="section-title small">Cómo usarlo</div>
+          <div class="step-list">
+            <div class="step-item"><span class="step-num">1</span>Solicita un préstamo de $5,000+ antes del 30 ago</div>
+            <div class="step-item"><span class="step-num">2</span>El descuento se aplica automáticamente</div>
+            <div class="step-item"><span class="step-num">3</span>¡Listo! Pagas solo la mitad de intereses</div>
+          </div>
+
+          <div class="section-title small">Términos y condiciones</div>
+          <div class="tc-box">
+            <p>• Aplica para préstamos nuevos entre el 17 ago y 30 ago 2026.</p>
+            <p>• Monto mínimo $5,000 MXN, máximo $25,000 MXN.</p>
+            <p>• No acumulable con otros descuentos de intereses.</p>
+            <p>• CAT promedio sin IVA: 95.5% — Con descuento: 47.7%.</p>
+            <p>• Aplica condiciones. Sujeto a aprobación crediticia.</p>
+            <p>• Uniconsult México, S.A. de C.V. · CONDUSEF.</p>
+          </div>
+
+          <button class="btn-pink btn-full" onclick="goScreen('apply-page')">Usar este cupón</button>
+          <div class="home-spacer"></div>
+        </div>
+
+        <!-- ============== P8 · 过期前 24h 提醒 ============== -->
+        <div class="screen-page" data-page="expiry-warning" style="display:none">
+          <div class="modal-backdrop">
+            <div class="modal-card">
+              <div class="modal-illust">⏰</div>
+              <div class="modal-eyebrow yellow-tag">¡Última oportunidad!</div>
+              <div class="modal-title">Tu cupón vence en 24 h</div>
+              <div class="modal-sub"><strong>5% pronto pago</strong> · te ahorra $250 MXN</div>
+
+              <div class="countdown">
+                <div class="cd-cell"><div class="cd-num">23</div><div class="cd-lab">h</div></div>
+                <div class="cd-cell"><div class="cd-num">47</div><div class="cd-lab">min</div></div>
+                <div class="cd-cell"><div class="cd-num">12</div><div class="cd-lab">s</div></div>
+              </div>
+
+              <div class="modal-benefits">
+                <div class="mb-item">✓ Paga antes del viernes a las 23:59</div>
+                <div class="mb-item">✓ Aplica a tu préstamo activo de $5,000 MXN</div>
+                <div class="mb-item">✓ Sin cláusulas ocultas</div>
+              </div>
+
+              <button class="btn-pink btn-full" onclick="goScreen('repay-page')">Pagar ahora y usar cupón</button>
+              <button class="btn-text">Recordar en 1 h</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============== P9 · 申请贷款页(自动匹配) ============== -->
+        <div class="screen-page" data-page="apply-page" style="display:none">
+          <div class="nav-header">
+            <div class="back" onclick="goScreen('home')">‹</div>
+            <div class="title">Solicitar préstamo</div>
+            <div class="right-icon">?</div>
+          </div>
+
+          <!-- 场景化券匹配(策略 1.1) -->
+          <div class="match-banner">
+            <div class="mb-icon">🎟️</div>
+            <div class="mb-body">
+              <div class="mb-eyebrow">Cupón aplicado automáticamente</div>
+              <div class="mb-title">50% descuento en intereses</div>
+              <div class="mb-save">Te ahorras <strong>$280 MXN</strong></div>
+            </div>
+            <div class="mb-check">✓</div>
+          </div>
+
+          <div class="amount-card">
+            <div class="ac-label">¿Cuánto necesitas?</div>
+            <div class="ac-amount">$8,000 <span class="currency">MXN</span></div>
+            <div class="ac-range">
+              <div class="range-track"><div class="range-fill" style="width:60%"></div><div class="range-thumb"></div></div>
+              <div class="range-labels"><span>$2,000</span><span>$20,000</span></div>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="fr-label">Plazo</div>
+            <div class="fr-pills">
+              <div class="pill">7 días</div>
+              <div class="pill active">14 días</div>
+              <div class="pill">30 días</div>
+            </div>
+          </div>
+
+          <div class="summary-box">
+            <div class="sb-row"><span>Monto solicitado</span><span class="sb-amt">$8,000</span></div>
+            <div class="sb-row"><span>Interés (con cupón)</span><span class="sb-amt">$280 <span class="old">$560</span></span></div>
+            <div class="sb-row sb-save"><span>Ahorras</span><span class="sb-amt green">−$280</span></div>
+            <div class="sb-row sb-total"><span>Total a pagar</span><span class="sb-amt">$8,280</span></div>
+          </div>
+
+          <div class="cat-box">
+            <div class="cat-row"><span>CAT (con cupón)</span><span class="cat-val">47.7% sin IVA</span></div>
+            <div class="cat-tip">Aplica condiciones. Sujeto a aprobación.</div>
+          </div>
+
+          <button class="btn-pink btn-full">Continuar</button>
+          <div class="home-spacer"></div>
+        </div>
+
+        <!-- ============== P10 · 还款页(使用券) ============== -->
+        <div class="screen-page" data-page="repay-page" style="display:none">
+          <div class="nav-header">
+            <div class="back" onclick="goScreen('home')">‹</div>
+            <div class="title">Pagar préstamo</div>
+            <div class="right-icon">?</div>
+          </div>
+
+          <!-- 场景化券匹配(策略 1.2) -->
+          <div class="match-banner green-bg">
+            <div class="mb-icon">🎟️</div>
+            <div class="mb-body">
+              <div class="mb-eyebrow">Cupón listo para usar</div>
+              <div class="mb-title">5% pronto pago</div>
+              <div class="mb-save">Paga $4,750 en vez de $5,000</div>
+            </div>
+            <div class="toggle on"><div class="tg-knob"></div></div>
+          </div>
+
+          <div class="repay-card">
+            <div class="rc-title">Tu préstamo activo</div>
+            <div class="rc-line"><span>Monto original</span><span class="rc-amt">$5,000</span></div>
+            <div class="rc-line"><span>Interés</span><span class="rc-amt">$200</span></div>
+            <div class="rc-line red"><span>Cupón 5% pronto pago</span><span class="rc-amt">−$250</span></div>
+            <div class="rc-divider"></div>
+            <div class="rc-line big"><span>Total a pagar hoy</span><span class="rc-amt">$4,750</span></div>
+            <div class="rc-tip">Vence el viernes 18 ago · 23:59</div>
+          </div>
+
+          <div class="method-section">
+            <div class="ms-title">Método de pago</div>
+            <div class="method-item active"><div class="mi-icon">💳</div><div class="mi-name">Tarjeta •••• 4521</div><div class="mi-check">✓</div></div>
+            <div class="method-item"><div class="mi-icon">🏪</div><div class="mi-name">Efectivo en OXXO</div><div class="mi-arrow">›</div></div>
+            <div class="method-item"><div class="mi-icon">🏦</div><div class="mi-name">Transferencia SPEI</div><div class="mi-arrow">›</div></div>
+          </div>
+
+          <button class="btn-pink btn-full">Confirmar pago de $4,750</button>
+          <div class="home-spacer"></div>
+        </div>
+
+        <!-- ============== P11 · 邀请好友 ============== -->
+        <div class="screen-page" data-page="invite-page" style="display:none">
+          <div class="nav-header">
+            <div class="back" onclick="goScreen('home')">‹</div>
+            <div class="title">Invita y gana</div>
+            <div class="right-icon">?</div>
+          </div>
+
+          <div class="invite-hero">
+            <div class="ih-emoji">🎁</div>
+            <div class="ih-title">Tú y tu amigo ganan $200</div>
+            <div class="ih-sub">Cuando tu amigo solicite y se apruebe su primer préstamo</div>
+          </div>
+
+          <div class="invite-progress">
+            <div class="ip-label">Progreso · Nivel Bronce</div>
+            <div class="ip-bar"><div class="ip-fill" style="width:40%"></div></div>
+            <div class="ip-text">2 de 5 amigos · <strong>+$600 MXN</strong> restantes</div>
+            <div class="ip-tiers">
+              <div class="tier done">1 amigo · $200</div>
+              <div class="tier done">3 amigos · $500</div>
+              <div class="tier active">5 amigos · $1,000</div>
+              <div class="tier">10 amigos · $2,500 VIP</div>
+            </div>
+          </div>
+
+          <div class="invite-actions">
+            <button class="btn-pink btn-full">Compartir mi enlace</button>
+            <div class="ia-secondary">
+              <button class="btn-outline">📱 WhatsApp</button>
+              <button class="btn-outline">📋 Copiar</button>
+            </div>
+          </div>
+
+          <div class="section-title small">Tus invitaciones</div>
+          <div class="inv-row done"><div class="ir-avatar">DR</div><div class="ir-info"><div class="ir-name">Diego R.</div><div class="ir-status green">✓ Aprobado · 28 jul</div></div><div class="ir-amt green">+$200</div></div>
+          <div class="inv-row done"><div class="ir-avatar">LM</div><div class="ir-info"><div class="ir-name">Lucía M.</div><div class="ir-status green">✓ Aprobado · 15 jul</div></div><div class="ir-amt green">+$200</div></div>
+          <div class="inv-row pending"><div class="ir-avatar">CF</div><div class="ir-info"><div class="ir-name">Carlos F.</div><div class="ir-status">⏳ En revisión</div></div><div class="ir-amt">+$200</div></div>
+          <div class="inv-row pending"><div class="ir-avatar">VR</div><div class="ir-info"><div class="ir-name">Valeria R.</div><div class="ir-status">⏳ Pendiente de préstamo</div></div><div class="ir-amt">+$200</div></div>
+
+          <div class="tc-box small-tc">
+            <p>• Máximo 5 invitaciones con recompensa por mes.</p>
+            <p>• La recompensa se acredita en máximo 1 minuto tras el primer préstamo aprobado.</p>
+            <p>• Aplica condiciones. CONDUSEF.</p>
+          </div>
+          <div class="home-spacer"></div>
+        </div>
+
+        <!-- ============== P12 · 活动落地页 ============== -->
+        <div class="screen-page" data-page="campaign-landing" style="display:none">
+          <div class="nav-header dark">
+            <div class="back white">‹</div>
+            <div class="title white">Promo</div>
+            <div class="right-icon white">⋯</div>
+          </div>
+
+          <div class="campaign-hero">
+            <div class="ch-bg"></div>
+            <div class="ch-eyebrow">⚡限时 · Solo 48 horas</div>
+            <div class="ch-title">0% interés los primeros 14 días</div>
+            <div class="ch-sub">Solicita entre $5,000 y $25,000 MXN</div>
+            <div class="ch-clock">
+              <div class="clk-cell"><div class="clk-num">01</div><div class="clk-lab">días</div></div>
+              <div class="clk-cell"><div class="clk-num">23</div><div class="clk-lab">h</div></div>
+              <div class="clk-cell"><div class="clk-num">47</div><div class="clk-lab">min</div></div>
+            </div>
+          </div>
+
+          <div class="campaign-body">
+            <div class="section-title">¿Cómo funciona?</div>
+            <div class="step-list">
+              <div class="step-item"><span class="step-num">1</span>Solicita tu préstamo con el cupón ya aplicado</div>
+              <div class="step-item"><span class="step-num">2</span>0% de interés durante los primeros 14 días</div>
+              <div class="step-item"><span class="step-num">3</span>Después del día 14, interés normal (CAT 95.5%)</div>
+            </div>
+
+            <div class="section-title">Lo que dicen los usuarios</div>
+            <div class="testimonial">
+              <div class="t-quote">"Pedí $10,000 y aproveché los 14 días sin interés para juntar el pago. ¡Excelente!"</div>
+              <div class="t-author">— Roberto M., Monterrey</div>
+            </div>
+
+            <div class="section-title small">Términos</div>
+            <div class="tc-box">
+              <p>• "0% interés" aplica solo a los primeros 14 días desde la fecha de desembolso. Después del día 14, se cobra interés ordinario (Tasa anual fija 95.5% sin IVA).</p>
+              <p>• CAT promedio: 95.5% sin IVA. Vigencia: 17-19 ago 2026.</p>
+              <p>• Aplica condiciones. Sujeto a aprobación crediticia. CONDUSEF.</p>
+            </div>
+
+            <button class="btn-pink btn-full" onclick="goScreen('apply-page')">Aprovechar ahora</button>
+            <button class="btn-text">No me interesa</button>
+          </div>
+          <div class="home-spacer"></div>
+        </div>
+
+        <!-- ============== P13 · 流失召回页 ============== -->
+        <div class="screen-page" data-page="recover-page" style="display:none">
+          <div class="nav-header">
+            <div class="back" onclick="goScreen('home')">‹</div>
+            <div class="title">Te extrañamos, María</div>
+            <div class="right-icon">?</div>
+          </div>
+
+          <div class="recover-hero">
+            <div class="rh-emoji">👋</div>
+            <div class="rh-title">Tu línea te está esperando</div>
+            <div class="rh-sub">Han pasado 60 días desde tu último préstamo. Hiciste un gran trabajo pagando a tiempo.</div>
+          </div>
+
+          <div class="recover-offer">
+            <div class="ro-tag">Oferta personalizada</div>
+            <div class="ro-line">$8,000 <span class="currency">MXN</span> → <span class="green">$12,000 MXN</span></div>
+            <div class="ro-sub">Línea aumentada + 0% interés por 14 días</div>
+            <div class="ro-bonus">+$200 MXN cashback si pagas puntual</div>
+          </div>
+
+          <div class="section-title small">¿Por qué volver?</div>
+            <div class="benefit-row">
+              <div class="br-icon" style="background:#FFE5EE">💰</div>
+              <div>
+                <div class="br-title">Línea más alta</div>
+                <div class="br-sub">Porque pagaste puntual — te premiamos.</div>
+              </div>
+            </div>
+            <div class="benefit-row">
+              <div class="br-icon" style="background:#E5F8EE">⏰</div>
+              <div>
+                <div class="br-title">0% interés por 14 días</div>
+                <div class="br-sub">Tienes 2 semanas para pagar sin intereses.</div>
+              </div>
+            </div>
+            <div class="benefit-row">
+              <div class="br-icon" style="background:#FFF8E1">🎁</div>
+              <div>
+                <div class="br-title">+$200 cashback</div>
+                <div class="br-sub">Recompensa por ser buen pagador.</div>
+              </div>
+            </div>
+
+          <button class="btn-pink btn-full" onclick="goScreen('apply-page')">Reactivar mi línea</button>
+          <button class="btn-text">No gracias, cerrar oferta</button>
+
+          <div class="tc-box small-tc">
+            <p>• Oferta válida 7 días desde la emisión.</p>
+            <p>• CAT promedio: 95.5% sin IVA. Después del día 14 aplica interés ordinario.</p>
+            <p>• Aplica condiciones. CONDUSEF.</p>
+          </div>
+          <div class="home-spacer"></div>
+        </div>
+
+        <!-- ============== P14 · 营销偏好 ============== -->
+        <div class="screen-page" data-page="preferences" style="display:none">
+          <div class="nav-header">
+            <div class="back" onclick="goScreen('home')">‹</div>
+            <div class="title">Preferencias de marketing</div>
+            <div class="right-icon"></div>
+          </div>
+
+          <div class="prefs-section">
+            <div class="ps-title">Canales</div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">Notificaciones APP</div>
+                <div class="pr-sub">Recomendado · menos ruido</div>
+              </div>
+              <div class="toggle on"><div class="tg-knob"></div></div>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">WhatsApp</div>
+                <div class="pr-sub">Recordatorios de pago y cupones</div>
+              </div>
+              <div class="toggle on"><div class="tg-knob"></div></div>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">Push notifications</div>
+                <div class="pr-sub">Cupones y vencimientos</div>
+              </div>
+              <div class="toggle on"><div class="tg-knob"></div></div>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">Email</div>
+                <div class="pr-sub">Resumen mensual y promociones</div>
+              </div>
+              <div class="toggle"><div class="tg-knob"></div></div>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">SMS</div>
+                <div class="pr-sub">Solo eventos críticos (pago atrasado)</div>
+              </div>
+              <div class="toggle on"><div class="tg-knob"></div></div>
+            </div>
+          </div>
+
+          <div class="prefs-section">
+            <div class="ps-title">Categorías de cupones</div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">Descuentos en intereses</div>
+                <div class="pr-sub">Recomendado</div>
+              </div>
+              <div class="toggle on"><div class="tg-knob"></div></div>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">Aumentos de línea</div>
+                <div class="pr-sub">Recomendado</div>
+              </div>
+              <div class="toggle on"><div class="tg-knob"></div></div>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">Pronto pago</div>
+                <div class="pr-sub"></div>
+              </div>
+              <div class="toggle on"><div class="tg-knob"></div></div>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">Cashback</div>
+                <div class="pr-sub"></div>
+              </div>
+              <div class="toggle on"><div class="tg-knob"></div></div>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">Invitaciones</div>
+                <div class="pr-sub"></div>
+              </div>
+              <div class="toggle"><div class="tg-knob"></div></div>
+            </div>
+          </div>
+
+          <div class="prefs-section">
+            <div class="ps-title">Horario silencioso</div>
+            <div class="pref-row">
+              <div>
+                <div class="pr-name">No molestar</div>
+                <div class="pr-sub">22:00 — 08:00</div>
+              </div>
+              <div class="toggle on"><div class="tg-knob"></div></div>
+            </div>
+          </div>
+
+          <div class="privacy-note">
+            <span class="info-icon">🔒</span>
+            <span>Puedes cambiar estas preferencias en cualquier momento. Tus datos están protegidos por la LFPDPPP. <a href="#">Política de privacidad</a></span>
+          </div>
+
+          <div class="home-spacer"></div>
+        </div>
+
+      </div>
+
+      <!-- iOS Home Indicator -->
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <div class="canvas-info">
+    <h2>Prototipo v1.0</h2>
+    <p>14 pantallas que cubren el ciclo completo de cupones: descubrimiento → reclamo → uso → cumplimiento → recuperación.</p>
+    <ul>
+      <li><strong>P1 首页</strong>:场景化入口 + 智能 Feed</li>
+      <li><strong>P2-P5 优惠券中心</strong>:4 个状态 tab</li>
+      <li><strong>P6 领券弹窗</strong>:收益前置 + 限制后置</li>
+      <li><strong>P7 券详情</strong>:实时计算器 + T&C</li>
+      <li><strong>P8 过期前 24h 提醒</strong>:倒计时 + 行动 CTA</li>
+      <li><strong>P9 申请页</strong>:自动匹配 50% 利息折扣券</li>
+      <li><strong>P10 还款页</strong>:toggle 一键使用还款折扣券</li>
+      <li><strong>P11 邀请页</strong>:阶梯奖励 + 进度可视化</li>
+      <li><strong>P12 活动落地页</strong>:限时 0% 利息</li>
+      <li><strong>P13 流失召回</strong>:60 天未活跃,专属高额券</li>
+      <li><strong>P14 营销偏好</strong>:用户可控 + 合规</li>
+    </ul>
+    <p class="canvas-foot">点击左侧任一页面切换。所有文案为 es-MX,符合 CONDUSEF / LFPDPPP 合规要求。</p>
+  </div>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
