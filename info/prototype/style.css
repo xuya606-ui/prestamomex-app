@@ -1233,3 +1233,313 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ====== 12 触达形式展示区 ====== */
+.form-types-section {
+  margin: 40px 0;
+  padding: 30px 24px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.form-types-section .section-title h2 {
+  font-size: 24px; margin: 0 0 6px 0; color: #1A1A1A;
+}
+.form-types-section .section-title p {
+  color: #6B7280; font-size: 13px; margin: 0 0 24px 0;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.form-card {
+  background: #F8F9FB;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #E5E7EB;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.form-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.fc-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px;
+  background: #fff;
+  border-bottom: 1px solid #E5E7EB;
+}
+.fc-num {
+  background: #1A1A1A; color: #FFD400;
+  font-weight: 800; padding: 3px 8px; border-radius: 6px;
+  font-size: 11px; font-family: "SF Mono", Menlo, monospace;
+}
+.fc-prio {
+  font-size: 10px; padding: 2px 6px; border-radius: 4px;
+  font-weight: 700; letter-spacing: 0.5px;
+}
+.fc-prio.p0 { background: #FF3D71; color: #fff; }
+.fc-prio.p1 { background: #FF9500; color: #fff; }
+.fc-prio.p2 { background: #8E8E93; color: #fff; }
+.fc-visual {
+  height: 110px;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff;
+  border-bottom: 1px solid #E5E7EB;
+  padding: 12px;
+  overflow: hidden;
+}
+.fc-body { padding: 12px 14px 14px; }
+.fc-body h3 { margin: 0 0 2px 0; font-size: 15px; color: #1A1A1A; }
+.fc-en { color: #6B7280; font-size: 11px; margin: 0 0 10px 0; font-style: italic; }
+.fc-meta {
+  width: 100%; font-size: 11px; color: #4A4A4A;
+  border-collapse: collapse;
+}
+.fc-meta td { padding: 3px 0; vertical-align: top; line-height: 1.5; }
+.fc-meta td:first-child {
+  color: #8E8E93; width: 38px; font-weight: 600;
+}
+
+/* --- 各形式的视觉示意 --- */
+.push-demo {
+  display: flex; gap: 8px; align-items: flex-start;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 8px 10px;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.pd-icon {
+  width: 28px; height: 28px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 14px; flex-shrink: 0;
+}
+.pd-content { flex: 1; min-width: 0; }
+.pd-app { font-size: 9px; color: #8E8E93; }
+.pd-title { font-size: 11px; font-weight: 600; color: #1A1A1A; margin-top: 1px; }
+.pd-body { font-size: 10px; color: #4A4A4A; margin-top: 1px; }
+
+.banner-demo {
+  display: flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #FFD400 0%, #FF6B35 100%);
+  color: #1A1A1A;
+  border-radius: 10px; padding: 8px 10px;
+  width: 100%; height: 50px;
+  position: relative;
+}
+.bd-content { flex: 1; min-width: 0; }
+.bd-tag { font-size: 8px; font-weight: 800; letter-spacing: 0.5px; }
+.bd-title { font-size: 11px; font-weight: 800; margin-top: 1px; }
+.bd-close { font-size: 14px; font-weight: 700; opacity: 0.7; }
+
+.modal-demo {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.md-bg {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.4);
+  border-radius: 8px;
+}
+.md-card {
+  position: relative; z-index: 1;
+  background: #fff; border-radius: 12px;
+  padding: 10px 16px; text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.md-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 800;
+}
+.md-title { font-size: 12px; font-weight: 800; color: #1A1A1A; margin-top: 4px; }
+.md-sub { font-size: 10px; color: #6B7280; }
+
+.sms-demo {
+  width: 100%; display: flex; justify-content: center;
+}
+.sms-bubble {
+  background: #E5E5EA;
+  border-radius: 14px;
+  padding: 8px 12px;
+  max-width: 90%;
+  position: relative;
+}
+.sms-sender { font-size: 9px; color: #6B7280; font-weight: 600; }
+.sms-body { font-size: 10px; color: #1A1A1A; margin-top: 2px; line-height: 1.4; }
+.sms-time { font-size: 8px; color: #8E8E93; text-align: right; margin-top: 2px; }
+
+.email-demo {
+  width: 100%; display: flex; justify-content: center; align-items: center;
+}
+.em-envelope {
+  width: 60px; height: 40px;
+  background: #fff;
+  border: 2px solid #1A1A1A;
+  border-radius: 4px;
+  position: relative;
+}
+.em-flap {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 18px;
+  background: linear-gradient(135deg, #FFD400 0%, #FF6B35 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.em-line {
+  position: absolute; left: 6px; right: 6px; top: 24px;
+  height: 2px; background: #E5E7EB; border-radius: 1px;
+}
+.em-line.short { top: 32px; width: 50%; }
+
+.im-demo {
+  width: 100%; display: flex; flex-direction: column; gap: 4px;
+}
+.im-bubble {
+  max-width: 80%;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+}
+.im-bubble.incoming {
+  background: #fff; border: 1px solid #E5E7EB;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+.im-bubble.outgoing {
+  background: #FFD400; color: #1A1A1A;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.toast-demo {
+  width: 100%; height: 100%;
+  position: relative;
+}
+.td-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, #F4F5F7 0%, #E5E7EB 100%);
+  border-radius: 8px;
+}
+.td-toast {
+  position: absolute; bottom: 8px; left: 8px; right: 8px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 10px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.slideup-demo {
+  width: 100%; height: 100%;
+  position: relative;
+}
+.sd-bg {
+  position: absolute; inset: 0;
+  background: #F4F5F7;
+  border-radius: 8px;
+}
+.sd-drawer {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: #fff;
+  border-radius: 12px 12px 0 0;
+  padding: 8px 12px 12px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+.sd-handle {
+  width: 32px; height: 3px; background: #E5E7EB;
+  border-radius: 2px; margin: 0 auto 6px;
+}
+.sd-title { font-size: 10px; font-weight: 700; color: #1A1A1A; }
+.sd-cta {
+  margin-top: 6px;
+  background: #FFD400; color: #1A1A1A;
+  font-size: 9px; font-weight: 700;
+  padding: 4px 8px; border-radius: 6px;
+  display: inline-block;
+}
+
+.mask-demo {
+  width: 100%; height: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.md-dark {
+  position: absolute; inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+.md-spotlight {
+  position: absolute; top: 30%; left: 20%;
+  width: 50px; height: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #FFD400;
+  border-radius: 4px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+}
+.md-bubble {
+  position: absolute; bottom: 12px; left: 8px; right: 8px;
+  background: #FFD400; color: #1A1A1A;
+  font-size: 9px; font-weight: 700;
+  padding: 5px 8px; border-radius: 6px;
+  text-align: center;
+}
+
+.badge-demo {
+  position: relative;
+  display: inline-block;
+}
+.bd-app-icon {
+  font-size: 40px;
+  line-height: 1;
+}
+.bd-num {
+  position: absolute; top: -4px; right: -8px;
+  background: #FF3D71; color: #fff;
+  font-size: 10px; font-weight: 800;
+  padding: 2px 6px; border-radius: 10px;
+  min-width: 18px; text-align: center;
+  border: 2px solid #fff;
+}
+
+.float-demo {
+  width: 100%; height: 100%;
+  position: relative;
+}
+.fd-bg {
+  position: absolute; inset: 0;
+  background: #F4F5F7;
+  border-radius: 8px;
+}
+.fd-btn {
+  position: absolute; bottom: 8px; right: 8px;
+  background: #FFD400; color: #1A1A1A;
+  font-size: 11px; font-weight: 800;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  text-align: center;
+  line-height: 1;
+}
+.fd-btn span { font-size: 7px; margin-top: 1px; }
+
+.widget-demo {
+  width: 90px; height: 90px;
+  background: linear-gradient(135deg, #FFD400 0%, #FF6B35 100%);
+  border-radius: 16px;
+  padding: 6px 8px;
+  color: #1A1A1A;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.wd-time { font-size: 8px; font-weight: 700; }
+.wd-content { margin-top: 2px; }
+.wd-row { font-size: 8px; display: flex; align-items: center; gap: 3px; }
+.wd-amount { font-size: 16px; font-weight: 800; margin-top: 1px; }
+.wd-sub { font-size: 7px; opacity: 0.85; }

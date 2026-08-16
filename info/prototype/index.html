@@ -707,6 +707,349 @@
 
 </div>
 
+<!-- ============ 12 触达形式 · APP 内层现样式展示 ============ -->
+<section class="form-types-section">
+  <div class="section-title">
+    <h2>🎨 12 触达形式 · APP 内的层现样式展示</h2>
+    <p>每种形式在 APP 内如何呈现 · 含优先级 / 频次 / 关闭方式 / 合规约束。v1.1 增量 · 用于设计/开发评审对照</p>
+  </div>
+
+  <div class="form-grid">
+
+    <!-- 1. Push 推送 -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">01</span>
+        <span class="fc-prio p0">P0</span>
+      </div>
+      <div class="fc-visual">
+        <div class="push-demo">
+          <div class="pd-icon" style="background:#FFD400;color:#1A1A1A">P</div>
+          <div class="pd-content">
+            <div class="pd-app">PréstamoMX · ahora</div>
+            <div class="pd-title">¡Listo! Tu préstamo de $5,000</div>
+            <div class="pd-body">Ya está en tu cuenta. Ver detalles ›</div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>Push 推送</h3>
+        <p class="fc-en">Push Notification · 系统级</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>系统层（锁屏/通知中心）</td></tr>
+          <tr><td>触发</td><td>事件触发 ≤ 30 秒</td></tr>
+          <tr><td>频次</td><td>≤ 3 条/天/用户</td></tr>
+          <tr><td>关闭</td><td>系统通知设置</td></tr>
+          <tr><td>合规</td><td>营销 opt-in / 催收 9-20 时段</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2. 站内横幅 -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">02</span>
+        <span class="fc-prio p0">P0</span>
+      </div>
+      <div class="fc-visual">
+        <div class="banner-demo">
+          <div class="bd-bg"></div>
+          <div class="bd-content">
+            <div class="bd-tag">🎉 PRIMER PRÉSTAMO</div>
+            <div class="bd-title">¡Hasta $25,000 MXN en 5 min!</div>
+          </div>
+          <div class="bd-close">×</div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>站内横幅</h3>
+        <p class="fc-en">Home Banner · 页面顶部常驻</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>APP 内页面顶部</td></tr>
+          <tr><td>触发</td><td>用户进入页面</td></tr>
+          <tr><td>频次</td><td>同时 ≤ 2 个</td></tr>
+          <tr><td>关闭</td><td>"今日不再" / 主动 ×</td></tr>
+          <tr><td>合规</td><td>含 CAT 和"incluye IVA"</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3. 模态弹窗 -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">03</span>
+        <span class="fc-prio p0">P0</span>
+      </div>
+      <div class="fc-visual">
+        <div class="modal-demo">
+          <div class="md-bg"></div>
+          <div class="md-card">
+            <div class="md-icon" style="background:#00C853;color:#fff">✓</div>
+            <div class="md-title">¡Aprobado!</div>
+            <div class="md-sub">$5,000 MXN</div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>模态弹窗</h3>
+        <p class="fc-en">Modal Dialog · 强制用户阅读</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>APP 最顶层（背景模糊）</td></tr>
+          <tr><td>触发</td><td>强结果 / 合规授权</td></tr>
+          <tr><td>频次</td><td>1 次/天/类型</td></tr>
+          <tr><td>关闭</td><td>仅按钮（合规类不可 X）</td></tr>
+          <tr><td>合规</td><td>利率披露/ARCO 必用</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4. 短信 -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">04</span>
+        <span class="fc-prio p0">P0</span>
+      </div>
+      <div class="fc-visual">
+        <div class="sms-demo">
+          <div class="sms-bubble">
+            <div class="sms-sender">PréstamoMX</div>
+            <div class="sms-body">Mañana vence tu pago de $1,250 MXN. Paga en OXXO o SPEI. CAT 89.5%</div>
+            <div class="sms-time">9:41</div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>短信 SMS</h3>
+        <p class="fc-en">SMS · 系统短信</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>系统短信 App</td></tr>
+          <tr><td>触发</td><td>还款提醒/验证码/放款</td></tr>
+          <tr><td>频次</td><td>≤ 2 条/天/类型</td></tr>
+          <tr><td>关闭</td><td>回复 STOP（双订阅）</td></tr>
+          <tr><td>合规</td><td>含 short code / 催收 9-20</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 5. 邮件 -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">05</span>
+        <span class="fc-prio p1">P1</span>
+      </div>
+      <div class="fc-visual">
+        <div class="email-demo">
+          <div class="em-envelope">
+            <div class="em-flap"></div>
+            <div class="em-line"></div>
+            <div class="em-line short"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>邮件 Email</h3>
+        <p class="fc-en">Email · 异步长内容</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>用户邮箱</td></tr>
+          <tr><td>触发</td><td>注册/账单/活动</td></tr>
+          <tr><td>频次</td><td>≤ 1 封/天/用户</td></tr>
+          <tr><td>关闭</td><td>底部 unsubscribe</td></tr>
+          <tr><td>合规</td><td>LFPDPPP · 含物理地址</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 6. IM/WhatsApp -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">06</span>
+        <span class="fc-prio p0">P0</span>
+      </div>
+      <div class="fc-visual">
+        <div class="im-demo">
+          <div class="im-bubble incoming">
+            <div class="im-text">Hola Juan, ¿cómo te fue con tu último préstamo?</div>
+          </div>
+          <div class="im-bubble outgoing">
+            <div class="im-text">Bien, gracias</div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>IM / WhatsApp</h3>
+        <p class="fc-en">In-App IM / WhatsApp Business</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>APP 内 / WhatsApp</td></tr>
+          <tr><td>触发</td><td>客服/催收主动</td></tr>
+          <tr><td>频次</td><td>催收 ≤ 2 条/天</td></tr>
+          <tr><td>关闭</td><td>用户主动结束/屏蔽</td></tr>
+          <tr><td>合规</td><td>WA Business API / 9-20</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 7. Toast -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">07</span>
+        <span class="fc-prio p0">P0</span>
+      </div>
+      <div class="fc-visual">
+        <div class="toast-demo">
+          <div class="td-bg"></div>
+          <div class="td-toast">✓ Tarjeta agregada con éxito</div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>Toast 浮窗</h3>
+        <p class="fc-en">Toast · 操作反馈</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>APP 内底部（不阻塞）</td></tr>
+          <tr><td>触发</td><td>操作完成 ≤ 1 秒</td></tr>
+          <tr><td>频次</td><td>≤ 1 条/页/操作</td></tr>
+          <tr><td>关闭</td><td>自动消失 3-5 秒</td></tr>
+          <tr><td>合规</td><td>无</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 8. Slide-up 抽屉 -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">08</span>
+        <span class="fc-prio p1">P1</span>
+      </div>
+      <div class="fc-visual">
+        <div class="slideup-demo">
+          <div class="sd-bg"></div>
+          <div class="sd-drawer">
+            <div class="sd-handle"></div>
+            <div class="sd-title">Tu nuevo límite es $15,000</div>
+            <div class="sd-cta">Solicitar ahora</div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>Slide-up 抽屉</h3>
+        <p class="fc-en">Slide-up · 半屏弹层</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>APP 内底部（半屏）</td></tr>
+          <tr><td>触发</td><td>活动/复借邀请</td></tr>
+          <tr><td>频次</td><td>≤ 1 次/天/用户</td></tr>
+          <tr><td>关闭</td><td>下滑 / 顶部 ×</td></tr>
+          <tr><td>合规</td><td>含 CAT / 截止日期</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 9. 引导蒙层 -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">09</span>
+        <span class="fc-prio p1">P1</span>
+      </div>
+      <div class="fc-visual">
+        <div class="mask-demo">
+          <div class="md-dark"></div>
+          <div class="md-spotlight"></div>
+          <div class="md-bubble">Toca aquí para agregar tu tarjeta</div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>引导蒙层</h3>
+        <p class="fc-en">Coach Mark · 首次引导</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>APP 内全屏遮罩</td></tr>
+          <tr><td>触发</td><td>首次进入新功能</td></tr>
+          <tr><td>频次</td><td>每功能仅 1 次</td></tr>
+          <tr><td>关闭</td><td>"知道了" / 蒙层外点</td></tr>
+          <tr><td>合规</td><td>ARCO 隐私说明必用</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 10. 状态栏角标 -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">10</span>
+        <span class="fc-prio p0">P0</span>
+      </div>
+      <div class="fc-visual">
+        <div class="badge-demo">
+          <div class="bd-app-icon">📱</div>
+          <div class="bd-num">12</div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>状态栏角标</h3>
+        <p class="fc-en">Badge · 图标右上数字</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>桌面/APP 图标右上</td></tr>
+          <tr><td>触发</td><td>状态变化实时</td></tr>
+          <tr><td>频次</td><td>不限（99+ 上限）</td></tr>
+          <tr><td>关闭</td><td>用户清除未读</td></tr>
+          <tr><td>合规</td><td>无</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 11. 运营浮窗 -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">11</span>
+        <span class="fc-prio p1">P1</span>
+      </div>
+      <div class="fc-visual">
+        <div class="float-demo">
+          <div class="fd-bg"></div>
+          <div class="fd-btn">💬<br><span>Chat</span></div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>运营浮窗</h3>
+        <p class="fc-en">Floating Widget · 客服/活动常驻</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>APP 内右下悬浮</td></tr>
+          <tr><td>触发</td><td>APP 内常驻</td></tr>
+          <tr><td>频次</td><td>同时 ≤ 1 个</td></tr>
+          <tr><td>关闭</td><td>长按关 24 小时</td></tr>
+          <tr><td>合规</td><td>客服显示服务时间</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 12. 桌面 Widget -->
+    <div class="form-card">
+      <div class="fc-header">
+        <span class="fc-num">12</span>
+        <span class="fc-prio p2">P2</span>
+      </div>
+      <div class="fc-visual">
+        <div class="widget-demo">
+          <div class="wd-time">9:41</div>
+          <div class="wd-content">
+            <div class="wd-row"><span>💰</span><span>PréstamoMX</span></div>
+            <div class="wd-amount">$1,250</div>
+            <div class="wd-sub">Vence mañana</div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-body">
+        <h3>桌面 Widget</h3>
+        <p class="fc-en">Widget · 桌面小部件</p>
+        <table class="fc-meta">
+          <tr><td>层级</td><td>iOS 锁屏 / Android 桌面</td></tr>
+          <tr><td>触发</td><td>用户主动添加</td></tr>
+          <tr><td>频次</td><td>实时刷新</td></tr>
+          <tr><td>关闭</td><td>用户删除</td></tr>
+          <tr><td>合规</td><td>无</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <footer class="page-footer">
   <p>📐 设计尺寸：iPhone 14 Pro · 375 × 812 · 拉美风格配色（#FFD400 拉美黄 / #00C853 信任绿 / #FF3B30 警示红 / #1A1A1A 主黑灰）</p>
   <p>🌐 文案语言：es-MX · 主题：现金贷触达体系 · 适用读者：产品/设计/运营/合规</p>

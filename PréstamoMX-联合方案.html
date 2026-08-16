@@ -471,7 +471,7 @@
     </tbody>
   </table>
 
-  <h3>1.5 产品规划 · 12 触达结点</h3>
+  <h3>1.5 产品规划 · 12 触达结点 <span style="color:var(--danger); font-size:13px; padding:2px 8px; background:#FFE5EA; border-radius:4px;">v1.1 已扩展至 24 结点</span></h3>
   <div class="grid grid-3">
     <div class="card"><span class="num-circle">1</span><strong>注册成功</strong><br><small>引导完成实名（KYC）</small><br><small>目标：注册-实名 ≥ 60%</small></div>
     <div class="card"><span class="num-circle">2</span><strong>实名引导</strong><br><small>INE + 自拍 + 地址验证</small><br><small>目标：实名完成率 ≥ 80%</small></div>
@@ -485,6 +485,35 @@
     <div class="card"><span class="num-circle">10</span><strong>流失召回</strong><br><small>按天数分级</small><br><small>目标：召回率 ≥ 15%</small></div>
     <div class="card"><span class="num-circle">11</span><strong>提额/活动期</strong><br><small>提额券 + 活动日</small><br><small>目标：提额使用率 ≥ 50%</small></div>
     <div class="card"><span class="num-circle">12</span><strong>合规 opt-in</strong><br><small>营销授权 5 类</small><br><small>目标：授权完整率 ≥ 95%</small></div>
+  </div>
+  <div class="highlight-pink" style="margin-top:16px;">
+    <h4 style="margin-top:0;">🔼 v1.1 新增 12 个扩展触达结点（信贷核心流程深度挖掘）</h4>
+    <p style="margin-bottom:8px;">围绕贷前/贷中/贷后/运营/合规 5 大场景类型，新增 12 个补充结点，<strong>合计 24 结点</strong>。每个结点都给出：用户状态、目标、触达内容、推荐形式、转化目标、成功指标。</p>
+    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; font-size:13px;">
+      <div>· <strong>13 资料补充引导</strong>（INSUFFICIENT_DOCS）</div>
+      <div>· <strong>14 提额待激活</strong>（PENDING_LIMIT_ACTIVATION）</div>
+      <div>· <strong>15 券到期前 D-3 临期</strong>（与项目 2 联动）</div>
+      <div>· <strong>16 绑卡失败重试</strong>（PAYMENT_METHOD_FAIL）</div>
+      <div>· <strong>17 还款扣款失败</strong>（REPAY_FAIL）</div>
+      <div>· <strong>18 信用分变化</strong>（CREDIT_SCORE_CHANGE）</div>
+      <div>· <strong>19 生日/注册周年</strong>（BIRTHDAY/ANNIVERSARY）</div>
+      <div>· <strong>20 紧急联系人未设置</strong>（EMERGENCY_CONTACT）</div>
+      <div>· <strong>21 额度使用率过高</strong>（HIGH_UTILIZATION）</div>
+      <div>· <strong>22 推荐奖励到账</strong>（REFERRAL_BONUS）</div>
+      <div>· <strong>23 ARCO 权利请求</strong>（LFPDPPP 合规）</div>
+      <div>· <strong>24 节假日特别活动</strong>（HOLIDAY）</div>
+    </div>
+    <p style="margin-top:8px;">📄 详见 <code>info/04-产品规划与设计思路.md</code> §2.5 章节，<strong>288 个矩阵交叉点</strong>可生成。</p>
+  </div>
+  <div class="highlight" style="margin-top:16px;">
+    <h4 style="margin-top:0;">🎨 12 触达形式 · APP 内的层现样式展示</h4>
+    <p style="margin-bottom:8px;">v1.1 在 <code>info/prototype/index.html</code> 末尾新增 <strong>12 触达形式展示区</strong>，每种形式一个 card，包含：</p>
+    <ul style="font-size:13px;">
+      <li>CSS 视觉模拟（push 通知样式、横幅、模态弹窗、短信气泡、邮件、IM、Toast、Slide-up、蒙层、角标、浮窗、Widget）</li>
+      <li>优先级标签 P0/P1/P2</li>
+      <li>层级位置 / 触发场景 / 频次 / 关闭方式 / 合规约束 5 维元数据</li>
+    </ul>
+    <p style="margin-bottom:0;">用于设计/开发评审对照，可直接当 style guide 使用。</p>
   </div>
 
   <h3>1.6 业务场景矩阵（12×12 关键节选）</h3>
@@ -706,15 +735,27 @@
     </ol>
   </div>
 
-  <h3>2.3 5 大策略 + 1 召回</h3>
+  <h3>2.3 5 大策略 + 1 召回 <span style="color:var(--danger); font-size:13px; padding:2px 8px; background:#FFE5EA; border-radius:4px;">v1.1 更新</span></h3>
   <table>
     <thead><tr><th>策略</th><th>目标漏斗环节</th><th>核心解法</th><th>预期提升</th></tr></thead>
     <tbody>
       <tr>
-        <td><strong>1 场景化推荐</strong></td>
+        <td><strong>1 场景化推荐（v1.1 调整）</strong></td>
         <td>领取→使用</td>
-        <td>券不"找用户"，而是"在能用的地方出现"：申请页自动匹配、还款页自动抵扣、邀请页浮动按钮</td>
+        <td>券不"找用户"，而是"在能用的地方出现"：<strong>申请页不自动选中</strong>，用虚线 banner 提示+手动选；还款页手动 toggle；邀请页浮动按钮</td>
         <td>50% → 65%</td>
+      </tr>
+      <tr>
+        <td><strong>1.5 手动引导设计原则（v1.1 新增）</strong></td>
+        <td>决策权</td>
+        <td>申请页"继续"按钮 = <code>Continuar sin cupón</code>（不强调使用）；<code>Elegir otro cupón</code> 文本入口；尊重 CONDUSEF 抗诱导合规</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>1.6 临期/非临期分区（v1.1 新增）</strong></td>
+        <td>临期券核销</td>
+        <td>券中心分两区：🔥 即将到期（≤7天，红色虚线+角标）置顶 / 📋 常规券（>7天）置底；点击临期区进入 P8 过期提醒</td>
+        <td>临期核销 35% → 55%</td>
       </tr>
       <tr>
         <td><strong>2 智能时机</strong></td>
@@ -777,11 +818,17 @@
     </tbody>
   </table>
 
-  <h3>2.6 4 个 A/B 实验</h3>
+  <h3>2.6 4 个 A/B 实验 <span style="color:var(--danger); font-size:13px; padding:2px 8px; background:#FFE5EA; border-radius:4px;">v1.1 更新</span></h3>
   <table>
     <thead><tr><th>#</th><th>实验</th><th>假设</th><th>主指标</th><th>判定标准</th></tr></thead>
     <tbody>
-      <tr><td>1</td><td>申请页自动匹配券</td><td>顶部 banner 提升核销</td><td>该券核销率</td><td>B 组 +10pp 且 p<0.05</td></tr>
+      <tr>
+        <td>1</td>
+        <td><strong>申请页券的展示方式（3 组对照）</strong></td>
+        <td>提示+手动选择比"自动应用"或"完全不展示"都更好——既不丢转化,又不丢用户信任</td>
+        <td>主=该券核销率；辅=申请转化率、用户投诉率</td>
+        <td>C 组核销 > A 组；C 组投诉不显著 > A 组；C 组核销不显著 < B 组</td>
+      </tr>
       <tr><td>2</td><td>券过期前 24h 提醒通道</td><td>Push + WhatsApp 双通道</td><td>过期前 24h 召回率</td><td>C 组相对 A 组 +20%</td></tr>
       <tr><td>3</td><td>邀请奖励即时到账 vs T+30</td><td>即时大幅提升完成率</td><td>邀请完成率</td><td>B 组 +200%</td></tr>
       <tr><td>4</td><td>Feed 卡片 vs Push</td><td>Feed 关闭率更低</td><td>核销率 + 关闭率</td><td>B/C 关闭率显著低于 A</td></tr>

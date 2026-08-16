@@ -338,6 +338,39 @@ html, body {
 .cc-meta { font-size: 10px; color: #FF3D71; margin-top: 6px; font-weight: 500; }
 .cc-meta.green { color: #00C853; }
 .cc-meta.yellow { color: #FFB300; }
+.cc-meta.red { color: #FF3D71; font-weight: 700; }
+
+/* ===== 区域分组标题（临期/非临期）===== */
+.section-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; margin: 14px 0 10px 0;
+  border-radius: 10px;
+}
+.section-header .sh-icon { font-size: 18px; }
+.section-header .sh-body { flex: 1; }
+.section-header .sh-title { font-size: 13px; font-weight: 700; color: #1A1A1A; }
+.section-header .sh-sub { font-size: 11px; color: #6B7280; margin-top: 2px; }
+.section-header .sh-action { font-size: 12px; color: #FF3D71; font-weight: 600; }
+.section-urgent { background: linear-gradient(135deg, #FFF1F4 0%, #FFE5EA 100%); border: 1px solid #FF3D71; }
+.section-urgent .sh-title { color: #C70036; }
+.section-normal { background: #F4F5F7; border: 1px solid #E5E7EB; }
+.section-normal .sh-title { color: #4A4A4A; }
+
+/* 临期券边框（红色虚线 + 顶部条） */
+.urgent-border {
+  border: 1.5px solid #FF3D71 !important;
+  border-left: 4px solid #FF3D71 !important;
+  box-shadow: 0 0 0 1px rgba(255, 61, 113, 0.1);
+  position: relative;
+}
+.urgent-border::before {
+  content: "🔥 Pronto a vencer";
+  position: absolute; top: -8px; right: 8px;
+  background: #FF3D71; color: #fff;
+  font-size: 9px; font-weight: 700;
+  padding: 2px 6px; border-radius: 6px;
+  letter-spacing: 0.3px;
+}
 
 .coupon-pink { border-color: #FFD3E0; }
 .coupon-pink .cc-value, .coupon-pink .cc-label { color: #FF3D71; }
@@ -491,6 +524,41 @@ html, body {
 .match-banner.green-bg {
   background: linear-gradient(135deg, #E5F8EE 0%, #F0FBF4 100%);
   border-color: #00C853;
+}
+
+/* 未选中状态：虚线边 + 灰底（引导用户手动选） */
+.match-banner.selectable {
+  background: #FAFAFC;
+  border: 1.5px dashed #C7CCD3;
+  cursor: pointer;
+}
+.match-banner.selectable .mb-eyebrow { color: #6B7280; }
+.match-banner.selectable .mb-title { color: #1A1A1A; }
+.match-banner .mb-select-btn {
+  background: #FF3D71; color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 6px 12px; border-radius: 8px;
+  white-space: nowrap;
+}
+.match-banner .mb-check {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: #00C853; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
+}
+
+/* 用券省息提示（仅显示节省的利息金额） */
+.coupon-saving-tip {
+  background: #FFF8E1;
+  border: 1px solid #FFD400;
+  border-radius: 10px; padding: 10px 12px;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+.coupon-saving-tip .cst-icon { font-size: 16px; }
+.coupon-saving-tip .cst-text { flex: 1; color: #1A1A1A; }
+.coupon-saving-tip .cst-amount { color: #C79100; font-weight: 800; font-size: 14px; }
 }
 .mb-icon { font-size: 28px; }
 .mb-body { flex: 1; }

@@ -204,7 +204,7 @@
           </div>
         </div>
 
-        <!-- ============== P3 · 未使用 ============== -->
+        <!-- ============== P3 · 未使用（分临期/非临期）============== -->
         <div class="screen-page" data-page="center-unused" style="display:none">
           <div class="nav-header">
             <div class="back">‹</div>
@@ -218,32 +218,42 @@
             <div class="tab">Vencidos</div>
           </div>
 
-          <div class="urgency-banner" onclick="goScreen('expiry-warning')">
-            <div class="ub-icon">⏰</div>
-            <div>
-              <div class="ub-title">2 cupones vencen pronto</div>
-              <div class="ub-sub">Te quedan menos de 48 horas</div>
+          <!-- ====== 区域 1：即将到期（≤ 7 天）====== -->
+          <div class="section-header section-urgent" onclick="goScreen('expiry-warning')">
+            <div class="sh-icon">🔥</div>
+            <div class="sh-body">
+              <div class="sh-title">即将到期 · Vencen pronto</div>
+              <div class="sh-sub">2 cupones · quedan menos de 48 h</div>
             </div>
-            <div class="arrow">›</div>
+            <div class="sh-action">Ver todos ›</div>
           </div>
 
-          <div class="coupon-card coupon-pink" onclick="goScreen('apply-page')">
+          <div class="coupon-card coupon-pink urgent-border" onclick="goScreen('apply-page')">
             <div class="cc-left"><div class="cc-value">$250</div><div class="cc-label">descuento</div></div>
             <div class="cc-divider"></div>
             <div class="cc-right">
               <div class="cc-title">5% pronto pago</div>
               <div class="cc-sub">Paga antes del viernes</div>
-              <div class="cc-meta yellow">⚠ Vence en 2 días</div>
+              <div class="cc-meta red">⚠ Vence en 2 días</div>
             </div>
           </div>
 
-          <div class="coupon-card coupon-yellow" onclick="goScreen('apply-page')">
+          <div class="coupon-card coupon-yellow urgent-border" onclick="goScreen('apply-page')">
             <div class="cc-left"><div class="cc-value">50%</div><div class="cc-label">intereses</div></div>
             <div class="cc-divider"></div>
             <div class="cc-right">
               <div class="cc-title">Descuento próximo préstamo</div>
               <div class="cc-sub">Para $5,000 MXN o más</div>
-              <div class="cc-meta">5 días restantes</div>
+              <div class="cc-meta yellow">⚠ Vence en 5 días</div>
+            </div>
+          </div>
+
+          <!-- ====== 区域 2：非临期（> 7 天）====== -->
+          <div class="section-header section-normal">
+            <div class="sh-icon">📋</div>
+            <div class="sh-body">
+              <div class="sh-title">常规券 · Para usar después</div>
+              <div class="sh-sub">1 cupón · válido más de 7 días</div>
             </div>
           </div>
 
@@ -253,7 +263,7 @@
             <div class="cc-right">
               <div class="cc-title">Aumento de línea</div>
               <div class="cc-sub">Por buen historial</div>
-              <div class="cc-meta green">Recomendado</div>
+              <div class="cc-meta green">Recomendado · 14 días</div>
             </div>
           </div>
         </div>
@@ -460,7 +470,7 @@
           </div>
         </div>
 
-        <!-- ============== P9 · 申请贷款页(自动匹配) ============== -->
+        <!-- ============== P9 · 申请贷款页(不自动选中) ============== -->
         <div class="screen-page" data-page="apply-page" style="display:none">
           <div class="nav-header">
             <div class="back" onclick="goScreen('home')">‹</div>
@@ -468,15 +478,15 @@
             <div class="right-icon">?</div>
           </div>
 
-          <!-- 场景化券匹配(策略 1.1) -->
-          <div class="match-banner">
+          <!-- 场景化券提示(策略 1.1 · 不自动选中) -->
+          <div class="match-banner selectable" onclick="goScreen('center-unused')">
             <div class="mb-icon">🎟️</div>
             <div class="mb-body">
-              <div class="mb-eyebrow">Cupón aplicado automáticamente</div>
+              <div class="mb-eyebrow">Tienes 1 cupón disponible</div>
               <div class="mb-title">50% descuento en intereses</div>
-              <div class="mb-save">Te ahorras <strong>$280 MXN</strong></div>
+              <div class="mb-save">Usa este cupón para ahorrar $280 MXN de intereses</div>
             </div>
-            <div class="mb-check">✓</div>
+            <div class="mb-select-btn">Elegir</div>
           </div>
 
           <div class="amount-card">
@@ -497,19 +507,20 @@
             </div>
           </div>
 
-          <div class="summary-box">
-            <div class="sb-row"><span>Monto solicitado</span><span class="sb-amt">$8,000</span></div>
-            <div class="sb-row"><span>Interés (con cupón)</span><span class="sb-amt">$280 <span class="old">$560</span></span></div>
-            <div class="sb-row sb-save"><span>Ahorras</span><span class="sb-amt green">−$280</span></div>
-            <div class="sb-row sb-total"><span>Total a pagar</span><span class="sb-amt">$8,280</span></div>
+          <!-- 用券省息提示（仅显示节省的利息，不显示总金额/总利息） -->
+          <div class="coupon-saving-tip">
+            <div class="cst-icon">💡</div>
+            <div class="cst-text">Si usas el cupón, pagarás <span class="cst-amount">$280 MXN</span> menos de intereses</div>
           </div>
 
+          <!-- CAT 披露（合规必带） -->
           <div class="cat-box">
-            <div class="cat-row"><span>CAT (con cupón)</span><span class="cat-val">47.7% sin IVA</span></div>
-            <div class="cat-tip">Aplica condiciones. Sujeto a aprobación.</div>
+            <div class="cat-row"><span>CAT</span><span class="cat-val">47.7% sin IVA</span></div>
+            <div class="cat-tip">Aplica condiciones. Sujeto a aprobación crediticia.</div>
           </div>
 
-          <button class="btn-pink btn-full">Continuar</button>
+          <button class="btn-pink btn-full">Continuar sin cupón</button>
+          <button class="btn-text" onclick="goScreen('center-unused')">Elegir otro cupón</button>
           <div class="home-spacer"></div>
         </div>
 
