@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PréstamoMX · 墨西哥现金贷 APP 联合方案 v1.1</title>
+<title>PréstamoMX · 墨西哥现金贷 APP 联合方案 v1.2</title>
 <style>
   :root {
     --primary: #FFD400;
@@ -223,7 +223,7 @@
   <div class="hero-inner">
     <h1>PréstamoMX · 联合方案</h1>
     <p style="font-size:18px; margin-top:8px;">墨西哥现金贷 APP · 信息触达方案 + 优惠券使用率提升</p>
-    <p style="font-size:14px; opacity:0.85;">v1.1 · 2026-08-16 · 整合 12 触达形式 + 24 触达结点 + 8+1 券体系 + 关联分析</p>
+    <p style="font-size:14px; opacity:0.85;">v1.2 · 2026-08-16 · 整合 12 触达形式 + <strong>26 触达结点</strong> + 8+1 券体系 + <strong>首借红包</strong> + <strong>优先节点 + 实名/放款流程触达</strong></p>
     <div>
       <span class="tag">🇲🇽 墨西哥</span>
       <span class="tag">📱 现金贷 APP</span>
@@ -236,15 +236,16 @@
     <!-- 版本选择器 -->
     <div class="version-switcher">
       <span class="vs-label">📌 当前版本</span>
-      <span class="vs-pill current">v1.1 · c324c7c · 2026-08-16 23:00</span>
+      <span class="vs-pill current">v1.2 · 基于 v1.1 + 4 个参考资料优化</span>
       <span class="vs-link">
         切换：
+        <a href="#v1-1">v1.1</a> ·
         <a href="#v1-0">v1.0</a> ·
         <a href="#changelog">全部历史</a> ·
         <a href="https://github.com/xuya606-ui/prestamomex-app/commits/main" target="_blank" rel="noopener">GitHub commits ›</a>
       </span>
       <div class="vs-actions">
-        <a class="vs-btn" href="https://github.com/xuya606-ui/prestamomex-app/archive/refs/heads/main.zip" target="_blank" rel="noopener">⬇ 下载 ZIP (v1.1)</a>
+        <a class="vs-btn" href="https://github.com/xuya606-ui/prestamomex-app/archive/refs/heads/main.zip" target="_blank" rel="noopener">⬇ 下载 ZIP (main)</a>
         <a class="vs-btn" href="https://github.com/xuya606-ui/prestamomex-app" target="_blank" rel="noopener">⭐ 仓库</a>
       </div>
     </div>
@@ -315,12 +316,55 @@
 
   <div class="version-timeline">
 
-    <div class="version-entry current" id="v1-1">
+    <div class="version-entry current" id="v1-2">
+      <div class="ve-head">
+        <span class="ve-version">v1.2</span>
+        <a class="ve-hash" href="https://github.com/xuya606-ui/prestamomex-app/commits/main" target="_blank" rel="noopener">local</a>
+        <span class="ve-tag">current</span>
+        <span class="ve-date">2026-08-16 23:55 · 基于参考资料优化</span>
+      </div>
+      <div class="ve-stats">📊 引用 4 个参考资料 · 关键数字修正 · 2 个新触达结点</div>
+      <div class="ve-changes">
+        <h4>📚 参考资料分析</h4>
+        <ul>
+          <li><strong>智能纪要：优惠券信息传达方案讨论 2026-07-31.docx</strong>（328K）—— 业务脑暴会议，关键决策：基线核销率 40%、优先 2 节点、5 优先形式、<strong>首借红包包装</strong>、端外/端内权责</li>
+          <li><strong>墨西哥APP"实名认证"流程图.pdf</strong>（1.1M）—— 3 验证（撞证件/撞脸/人证比对）+ 3 帽子（OCR 2次/活体 5次/实名 10次）+ 14 拒绝标签 + 100 撞脸封号</li>
+          <li><strong>墨西哥APP"放款"流程图.pdf</strong>（2.0M）—— 状态机 0/-3/1/-4/20/-5/22/-10/21 + pay_status 5101/0000/601/7001-7003 + 自动放款限额（3000/天/500/小时/1500 首贷）</li>
+          <li><strong>竞品方案参考.mp4</strong>（92M）—— 文件太大不入版本控制，本地用</li>
+        </ul>
+        <h4>🎟️ 优惠券项目（基于会议纪要）</h4>
+        <ul>
+          <li><strong>核销率基线修正</strong>：15% → <strong>40%</strong>（会议口径）；目标：40% → <strong>48%</strong>（+8pp，至少 +20% 相对提升）</li>
+          <li><strong>2 个优先落地节点</strong>：①退出流程挽留触达 ②未出额首页触达</li>
+          <li><strong>5 个优先落地形式</strong>：翻牌/刮刮乐、凑单门槛、时效倒计时、优惠对比、首借红包</li>
+          <li><strong>首借红包包装</strong>（会议重点决策）：所有首借用户券统一标识为"首借红包"</li>
+          <li><strong>端外/端内权责</strong>：龙哥团队（端外/APP 打开率）vs 当前团队（端内/券使用率）</li>
+          <li><strong>新合规铁律</strong>：禁止强制用户完成额外动作才能领券（会议强调）</li>
+          <li><strong>二期延后</strong>：提额降息券、多券自动选最优（会议决定放第二期）</li>
+        </ul>
+        <h4>📡 信息触达项目（基于流程图）</h4>
+        <ul>
+          <li><strong>结点 25：实名认证状态触达</strong>（KYC_STATUS）—— 14 拒绝标签 + 100 撞脸封号 + 3 个阈值（活体 5次/OCR 2次/实名 10次）</li>
+          <li><strong>结点 26：放款状态触达</strong>（LOAN_STATUS）—— status 0/-3/1/-4/20/-5/22/-10/21 全状态机 + 实名撞脸 → 放款同步拒绝的合规联动</li>
+        </ul>
+        <h4>📄 文档同步</h4>
+        <ul>
+          <li>coupon/04-产品规划与设计思路.md：新增 §9.5 增量章节（端外/端内权责、2 优先节点、5 优先形式、首借红包、弹窗优先级、迭代节奏）</li>
+          <li>info/04-产品规划与设计思路.md：新增 §2.6 实名+放款流程触达（结点 25-26）</li>
+          <li>.gitignore：排除 92M 视频</li>
+        </ul>
+      </div>
+      <div class="ve-actions">
+        <a href="https://github.com/xuya606-ui/prestamomex-app/commits/main" target="_blank" rel="noopener">🔍 View commits</a>
+        <a href="#changelog">⬆ Back to top</a>
+      </div>
+    </div>
+
+    <div class="version-entry" id="v1-1">
       <div class="ve-head">
         <span class="ve-version">v1.1</span>
         <a class="ve-hash" href="https://github.com/xuya606-ui/prestamomex-app/commit/c324c7c" target="_blank" rel="noopener">c324c7c</a>
-        <span class="ve-tag">current</span>
-        <span class="ve-date">2026-08-16 23:00 · 11 minutes ago</span>
+        <span class="ve-date">2026-08-16 23:00 · 55 minutes ago</span>
       </div>
       <div class="ve-stats">📊 +961 / -40 行 · 11 文件改动</div>
       <div class="ve-changes">
@@ -356,7 +400,7 @@
       <div class="ve-head">
         <span class="ve-version">v1.0</span>
         <a class="ve-hash" href="https://github.com/xuya606-ui/prestamomex-app/commit/bbf952a" target="_blank" rel="noopener">bbf952a</a>
-        <span class="ve-date">2026-08-16 22:40 · 31 minutes ago</span>
+        <span class="ve-date">2026-08-16 22:40 · 75 minutes ago</span>
       </div>
       <div class="ve-stats">📊 首次发布 · 全量交付</div>
       <div class="ve-changes">
@@ -640,7 +684,7 @@
     <p>👉 查看完整展示：<code>info/prototype/index.html</code> 末尾的「12 触达形式展示区」，共 12 个 form-card × 5 维元数据表。可直接当 style guide 用。</p>
   </div>
 
-  <h3>1.5 产品规划 · 24 触达结点 <span class="tag-version">v1.1 +12</span></h3>
+  <h3>1.5 产品规划 · 26 触达结点 <span class="tag-version">v1.2 +2 流程触达</span></h3>
   <div class="grid grid-3">
     <div class="card"><span class="num-circle">1</span><strong>注册成功</strong><br><small>引导完成实名（KYC）</small><br><small>目标：注册-实名 ≥ 60%</small></div>
     <div class="card"><span class="num-circle">2</span><strong>实名引导</strong><br><small>INE + 自拍 + 地址验证</small><br><small>目标：实名完成率 ≥ 80%</small></div>
@@ -656,23 +700,25 @@
     <div class="card"><span class="num-circle">12</span><strong>合规 opt-in</strong><br><small>营销授权 5 类</small><br><small>目标：授权完整率 ≥ 95%</small></div>
   </div>
   <div class="highlight-pink" style="margin-top:16px;">
-    <h4 style="margin-top:0;">🔼 v1.1 新增 12 个扩展触达结点（信贷核心流程深度挖掘）</h4>
-    <p style="margin-bottom:8px;">围绕贷前/贷中/贷后/运营/合规 5 大场景类型，新增 12 个补充结点，<strong>合计 24 结点</strong>。</p>
+    <h4 style="margin-top:0;">🔼 v1.1+v1.2 新增 14 个扩展触达结点（信贷核心流程深度挖掘 + 流程图触达）</h4>
+    <p style="margin-bottom:8px;">围绕贷前/贷中/贷后/运营/合规 5 大场景类型，新增 14 个补充结点，<strong>合计 26 结点</strong>。</p>
     <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; font-size:13px;">
-      <div>· <strong>13 资料补充引导</strong>（INSUFFICIENT_DOCS）</div>
-      <div>· <strong>14 提额待激活</strong>（PENDING_LIMIT_ACTIVATION）</div>
-      <div>· <strong>15 券到期前 D-3 临期</strong>（<strong>与项目 2 联动</strong>）</div>
-      <div>· <strong>16 绑卡失败重试</strong>（PAYMENT_METHOD_FAIL）</div>
-      <div>· <strong>17 还款扣款失败</strong>（REPAY_FAIL）</div>
-      <div>· <strong>18 信用分变化</strong>（CREDIT_SCORE_CHANGE）</div>
-      <div>· <strong>19 生日/注册周年</strong>（BIRTHDAY/ANNIVERSARY）</div>
-      <div>· <strong>20 紧急联系人未设置</strong>（EMERGENCY_CONTACT）</div>
-      <div>· <strong>21 额度使用率过高</strong>（HIGH_UTILIZATION）</div>
-      <div>· <strong>22 推荐奖励到账</strong>（REFERRAL_BONUS）</div>
-      <div>· <strong>23 ARCO 权利请求</strong>（LFPDPPP 合规）</div>
-      <div>· <strong>24 节假日特别活动</strong>（HOLIDAY）</div>
+      <div>· <strong>13 资料补充引导</strong>（INSUFFICIENT_DOCS）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>14 提额待激活</strong>（PENDING_LIMIT_ACTIVATION）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>15 券到期前 D-3 临期</strong>（<strong>与项目 2 联动</strong>）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>16 绑卡失败重试</strong>（PAYMENT_METHOD_FAIL）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>17 还款扣款失败</strong>（REPAY_FAIL）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>18 信用分变化</strong>（CREDIT_SCORE_CHANGE）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>19 生日/注册周年</strong>（BIRTHDAY/ANNIVERSARY）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>20 紧急联系人未设置</strong>（EMERGENCY_CONTACT）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>21 额度使用率过高</strong>（HIGH_UTILIZATION）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>22 推荐奖励到账</strong>（REFERRAL_BONUS）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>23 ARCO 权利请求</strong>（LFPDPPP 合规）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>24 节假日特别活动</strong>（HOLIDAY）<span class="tag-version">v1.1</span></div>
+      <div>· <strong>25 实名认证状态触达</strong>（KYC_STATUS · 14 拒绝标签 + 100 撞脸封号）<span class="tag-version">v1.2</span></div>
+      <div>· <strong>26 放款状态触达</strong>（LOAN_STATUS · status 9 状态 + 实名撞脸 → 放款拒绝联动）<span class="tag-version">v1.2</span></div>
     </div>
-    <p style="margin-top:8px;">📄 详见 <code>info/04-产品规划与设计思路.md</code> §2.5 章节，<strong>288 个矩阵交叉点</strong>可生成。</p>
+    <p style="margin-top:8px;">📄 详见 <code>info/04-产品规划与设计思路.md</code> §2.5+§2.6 章节。<strong>v1.2 新增 25-26 结点基于实名认证+放款流程图</strong>。</p>
   </div>
 
   <h3>1.6 业务场景矩阵（12×12 关键节选）</h3>
@@ -894,7 +940,16 @@
     </ol>
   </div>
 
-  <h3>2.3 5+2 策略 <span class="tag-version">v1.1 +1.5/1.6</span></h3>
+  <h3>2.3 5+2 策略 <span class="tag-version">v1.1 +1.5/1.6</span> + v1.2 增量</h3>
+  <div class="highlight" style="margin-bottom:16px;">
+    <h4 style="margin-top:0;">🎁 v1.2 新增 · 首借红包包装（会议重点决策）</h4>
+    <p style="margin-bottom:8px;">把"首借用户"账户内的所有优惠券<strong>统一包装</strong>为「首借红包」(Bonificación Primer Préstamo)，在券中心/触达文案/弹窗中<strong>统一标识</strong>。</p>
+    <ul style="font-size:13px;">
+      <li>强化"专属"心智，避免用户觉得是通用福利</li>
+      <li>端内只做"包装"，<strong>不调整后端发券规则</strong>（龙哥团队职责）</li>
+      <li>影响：券中心 banner / 申请页"首借红包可省 $X" / 退出挽留弹窗 / 未出额首页</li>
+    </ul>
+  </div>
   <table>
     <thead><tr><th>策略</th><th>目标漏斗环节</th><th>核心解法</th><th>预期提升</th></tr></thead>
     <tbody>
@@ -1005,18 +1060,19 @@
     <li><strong>逾期合规</strong>：罚息减免券不得在逾期 D+3 后推送（SMS 催收合规）</li>
   </ol>
 
-  <h3>2.8 指标体系</h3>
+  <h3>2.8 指标体系 <span class="tag-version">v1.2 修正基线</span></h3>
   <table>
-    <thead><tr><th>环节</th><th>指标</th><th>基线</th><th>目标</th><th>优秀</th></tr></thead>
+    <thead><tr><th>环节</th><th>指标</th><th>基线 (v1.2 修正)</th><th>目标</th><th>优秀</th></tr></thead>
     <tbody>
       <tr><td>曝光</td><td>触达率</td><td>65%</td><td>80%</td><td>90%</td></tr>
       <tr><td>点击</td><td>点击率</td><td>8%</td><td>15%</td><td>22%</td></tr>
       <tr><td>领取</td><td>领取率</td><td>60%</td><td>72%</td><td>80%</td></tr>
-      <tr><td><strong>使用</strong></td><td><strong>核销率</strong></td><td><strong>15%</strong></td><td><strong>30%</strong></td><td><strong>40%</strong></td></tr>
+      <tr><td><strong>使用</strong></td><td><strong>核销率</strong></td><td><strong>40% (会议口径)</strong></td><td><strong>48% (+8pp, 至少 +20% 相对提升)</strong></td><td><strong>55%</strong></td></tr>
       <tr><td>完成</td><td>履约率</td><td>80%</td><td>85%</td><td>92%</td></tr>
     </tbody>
   </table>
   <p>业务指标：ROI 1:4 → 1:6 · CAC 280 → 220 MXN · 30d 复借 18% → 28% · 人均券价值 1,200 → 1,800 MXN · 邀请裂变 9% → 18%</p>
+  <p><small>📌 v1.2 修正：会议基线核销率 <strong>40%</strong>，目标 <strong>48%</strong>（+8pp 绝对 / +20% 相对提升），符合"使用率至少 20% 提升"的会议要求。</small></p>
 
   <h3>2.9 12 周落地路线</h3>
   <div class="grid grid-3">
