@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PréstamoMX · 墨西哥现金贷 APP 联合方案 v1.0</title>
+<title>PréstamoMX · 墨西哥现金贷 APP 联合方案 v1.1</title>
 <style>
   :root {
     --primary: #FFD400;
@@ -44,11 +44,44 @@
 
   /* Layout */
   .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
-  .hero { background: linear-gradient(135deg, #FFD400 0%, #FF6B35 100%); color: #1A1A1A; padding: 56px 24px; border-radius: 0 0 24px 24px; margin-bottom: 24px; }
+  .hero { background: linear-gradient(135deg, #FFD400 0%, #FF6B35 100%); color: #1A1A1A; padding: 56px 24px 0 24px; border-radius: 0 0 24px 24px; margin-bottom: 0; }
+  .hero-inner { max-width: 1200px; margin: 0 auto; }
   .hero h1 { font-size: 42px; }
-  .hero p { font-size: 16px; opacity: 0.9; }
-  .hero .tag { display: inline-block; background: rgba(0,0,0,0.85); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-right: 6px; margin-top: 12px; }
-  .nav { position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); z-index: 100; padding: 12px 24px; border-bottom: 1px solid var(--line); margin: 0 -24px 24px -24px; }
+  .hero p { font-size: 16px; opacity: 0.9; margin-bottom: 8px; }
+  .hero .tag { display: inline-block; background: rgba(0,0,0,0.85); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-right: 6px; margin-top: 8px; }
+
+  /* Version Switcher */
+  .version-switcher {
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin: 24px 0 0 0;
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .version-switcher .vs-label { font-weight: 700; color: var(--ink); font-size: 14px; }
+  .version-switcher .vs-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 20px;
+    background: var(--ink); color: var(--primary);
+    font-size: 12px; font-weight: 700;
+    font-family: "SF Mono", Menlo, monospace;
+  }
+  .version-switcher .vs-pill.current { background: var(--success); color: white; }
+  .version-switcher .vs-link { color: var(--ink-2); font-size: 13px; }
+  .version-switcher .vs-link a { color: var(--ink-2); border-bottom: 1px dashed var(--ink-2); margin: 0 6px; }
+  .version-switcher .vs-link a:hover { color: var(--primary-dark); border-bottom-color: var(--primary-dark); }
+  .version-switcher .vs-actions { margin-left: auto; display: flex; gap: 8px; }
+  .version-switcher .vs-btn {
+    padding: 6px 12px; border-radius: 8px;
+    background: #1A1A1A; color: var(--primary);
+    font-size: 12px; font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .version-switcher .vs-btn:hover { background: #333; color: var(--primary); }
+
+  .nav { position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); z-index: 100; padding: 12px 24px; border-bottom: 1px solid var(--line); margin: 24px -24px 24px -24px; }
   .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; }
   .nav a { color: var(--ink-2); padding: 4px 8px; border-radius: 6px; }
   .nav a:hover { background: var(--bg); }
@@ -67,9 +100,7 @@
   .grid-2 { grid-template-columns: 1fr 1fr; }
   .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
   .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
-  @media (max-width: 900px) {
-    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 900px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
 
   /* Table */
   table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
@@ -78,13 +109,14 @@
   tr:nth-child(even) td { background: #FAFAFC; }
 
   /* Tags */
-  .tag-p0, .tag-p1, .tag-p2, .tag-must, .tag-opt, .tag-no { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+  .tag-p0, .tag-p1, .tag-p2, .tag-must, .tag-opt, .tag-no, .tag-version { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
   .tag-p0 { background: #FF3D71; color: white; }
   .tag-p1 { background: #FF9500; color: white; }
   .tag-p2 { background: #8E8E93; color: white; }
   .tag-must { background: #00C853; color: white; }
   .tag-opt { background: #FFD400; color: #1A1A1A; }
   .tag-no { background: #E5E5EA; color: #8E8E93; }
+  .tag-version { background: #1A1A1A; color: var(--primary); font-family: "SF Mono", Menlo, monospace; }
 
   /* Design comparison */
   .design-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0; }
@@ -97,18 +129,11 @@
   .design-card .caption { padding: 12px 16px; font-size: 13px; color: var(--ink-2); background: #FAFAFC; border-top: 1px solid var(--line); }
   @media (max-width: 900px) { .design-pair { grid-template-columns: 1fr; } }
 
-  /* Single image */
-  .design-single { background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); margin: 12px 0; max-width: 360px; }
-  .design-single .lang-bar { padding: 10px 16px; font-size: 13px; font-weight: 700; color: white; }
-  .design-single .lang-bar.es { background: var(--es); }
-  .design-single .lang-bar.cn { background: var(--cn); }
-  .design-single img { width: 100%; display: block; }
-  .design-single .caption { padding: 12px 16px; font-size: 13px; color: var(--ink-2); background: #FAFAFC; }
-
   /* Highlight box */
   .highlight { background: linear-gradient(135deg, #FFFBE0 0%, #FFF5E0 100%); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin: 16px 0; }
   .highlight-pink { background: linear-gradient(135deg, #FFE8EE 0%, #FFEDF1 100%); border: 1px solid var(--danger); border-radius: 12px; padding: 20px; margin: 16px 0; }
   .highlight-green { background: linear-gradient(135deg, #E5F8EC 0%, #E8FAEE 100%); border: 1px solid var(--success); border-radius: 12px; padding: 20px; margin: 16px 0; }
+  .highlight-ink { background: linear-gradient(135deg, #F5F5F7 0%, #FAFAFA 100%); border: 1px solid var(--ink); border-radius: 12px; padding: 20px; margin: 16px 0; }
 
   /* Stats */
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 16px 0; }
@@ -119,10 +144,9 @@
   .stat .num.green { color: var(--success); }
   .stat .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
-  /* Mermaid-like tree */
+  /* Tree */
   .tree { font-family: "SF Mono", Menlo, monospace; white-space: pre; background: #1A1A1A; color: #FFD400; padding: 20px; border-radius: 8px; overflow-x: auto; font-size: 12px; line-height: 1.5; }
 
-  /* Number circle */
   .num-circle { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; background: var(--primary); color: var(--ink); font-weight: 800; align-items: center; justify-content: center; font-size: 13px; margin-right: 6px; }
 
   /* TOC */
@@ -132,15 +156,63 @@
   .toc li { break-inside: avoid; }
   @media (max-width: 700px) { .toc ol { columns: 1; } }
 
+  /* Version history */
+  .version-timeline { position: relative; padding-left: 32px; margin: 16px 0; }
+  .version-timeline::before {
+    content: ""; position: absolute; left: 11px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--success) 0%, var(--primary) 50%, var(--line) 100%);
+  }
+  .version-entry {
+    position: relative; margin-bottom: 24px;
+    background: var(--card); border-radius: 12px;
+    padding: 20px; border: 1px solid var(--line);
+  }
+  .version-entry::before {
+    content: ""; position: absolute;
+    left: -27px; top: 24px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--primary); border: 3px solid var(--card);
+  }
+  .version-entry.current::before { background: var(--success); box-shadow: 0 0 0 4px rgba(0, 200, 83, 0.2); }
+  .version-entry .ve-head {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .version-entry .ve-version { font-size: 18px; font-weight: 800; }
+  .version-entry .ve-hash {
+    font-family: "SF Mono", Menlo, monospace;
+    background: var(--ink); color: var(--primary);
+    padding: 3px 8px; border-radius: 6px;
+    font-size: 12px; text-decoration: none;
+  }
+  .version-entry .ve-hash:hover { background: #333; color: var(--primary); }
+  .version-entry .ve-date { color: var(--muted); font-size: 13px; }
+  .version-entry .ve-tag {
+    background: var(--success); color: white;
+    padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;
+  }
+  .version-entry .ve-stats { color: var(--ink-2); font-size: 13px; margin: 8px 0 12px 0; }
+  .version-entry .ve-changes { font-size: 14px; }
+  .version-entry .ve-changes h4 { margin: 12px 0 6px 0; font-size: 14px; color: var(--ink); }
+  .version-entry .ve-changes ul { padding-left: 20px; }
+  .version-entry .ve-actions { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .version-entry .ve-actions a {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 10px; border-radius: 6px;
+    background: var(--bg); color: var(--ink-2);
+    font-size: 12px; text-decoration: none;
+    border: 1px solid var(--line);
+  }
+  .version-entry .ve-actions a:hover { background: var(--primary); color: var(--ink); }
+
   /* Footer */
   footer { background: #1A1A1A; color: #E8E8E8; padding: 40px 24px; border-radius: 24px 24px 0 0; margin-top: 40px; }
   footer h3 { color: var(--primary); }
   footer a { color: #FFD400; }
 
-  /* Print */
   @media print {
-    .nav { position: static; }
-    .card, .design-card, .design-single { break-inside: avoid; }
+    .nav, .version-switcher, .ve-actions { position: static; }
+    .card, .design-card, .version-entry { break-inside: avoid; }
   }
 </style>
 </head>
@@ -148,17 +220,33 @@
 
 <!-- ============ 顶部 Hero ============ -->
 <div class="hero">
-  <div class="container" style="padding-bottom:0; padding-top:0;">
+  <div class="hero-inner">
     <h1>PréstamoMX · 联合方案</h1>
     <p style="font-size:18px; margin-top:8px;">墨西哥现金贷 APP · 信息触达方案 + 优惠券使用率提升</p>
-    <p style="font-size:14px; opacity:0.85; margin-top:8px;">v1.0 · 2026-08-16 · 中文方案文档（界面文案含 es-MX 西语对照）</p>
-    <div style="margin-top:16px;">
-      <span class="tag">🇲🇽 墨西哥市场</span>
+    <p style="font-size:14px; opacity:0.85;">v1.1 · 2026-08-16 · 整合 12 触达形式 + 24 触达结点 + 8+1 券体系 + 关联分析</p>
+    <div>
+      <span class="tag">🇲🇽 墨西哥</span>
       <span class="tag">📱 现金贷 APP</span>
       <span class="tag">🎯 双项目联合</span>
-      <span class="tag">📐 12+12 触达体系</span>
-      <span class="tag">🎟️ 8+1 券体系</span>
-      <span class="tag">⚖️ CNBV/CONDUSEF/LFPDPPP 合规</span>
+      <span class="tag">📐 12 形式 / 24 结点</span>
+      <span class="tag">🎟️ 8+1 券</span>
+      <span class="tag">⚖️ CNBV/CONDUSEF/LFPDPPP</span>
+    </div>
+
+    <!-- 版本选择器 -->
+    <div class="version-switcher">
+      <span class="vs-label">📌 当前版本</span>
+      <span class="vs-pill current">v1.1 · c324c7c · 2026-08-16 23:00</span>
+      <span class="vs-link">
+        切换：
+        <a href="#v1-0">v1.0</a> ·
+        <a href="#changelog">全部历史</a> ·
+        <a href="https://github.com/xuya606-ui/prestamomex-app/commits/main" target="_blank" rel="noopener">GitHub commits ›</a>
+      </span>
+      <div class="vs-actions">
+        <a class="vs-btn" href="https://github.com/xuya606-ui/prestamomex-app/archive/refs/heads/main.zip" target="_blank" rel="noopener">⬇ 下载 ZIP (v1.1)</a>
+        <a class="vs-btn" href="https://github.com/xuya606-ui/prestamomex-app" target="_blank" rel="noopener">⭐ 仓库</a>
+      </div>
     </div>
   </div>
 </div>
@@ -167,13 +255,15 @@
 <nav class="nav">
   <div class="nav-inner">
     <a href="#summary">📋 摘要</a>
+    <a href="#changelog">🕐 版本历史</a>
     <a href="#correlation">🔗 关联分析</a>
     <a href="#p1">📡 项目1 触达</a>
     <a href="#p1-designs">🎨 项目1 设计稿</a>
     <a href="#p2">🎟️ 项目2 券</a>
     <a href="#p2-designs">🎨 项目2 设计稿</a>
     <a href="#roadmap">🚀 落地路线</a>
-    <a href="#verify">✅ 验收对照</a>
+    <a href="#verify">✅ 验收</a>
+    <a href="#how-to-rollback">⏪ 如何回溯</a>
     <a href="#appendix">📎 附录</a>
   </div>
 </nav>
@@ -196,28 +286,108 @@
 
   <div class="stats">
     <div class="stat"><div class="num yellow">12</div><div class="label">触达形式</div></div>
-    <div class="stat"><div class="num yellow">12</div><div class="label">触达结点</div></div>
-    <div class="stat"><div class="num">144</div><div class="label">矩阵交叉点</div></div>
-    <div class="stat"><div class="num pink">5+1</div><div class="label">提升策略</div></div>
+    <div class="stat"><div class="num yellow">24</div><div class="label">触达结点 <span style="font-size:11px;color:var(--success);">(v1.1 +12)</span></div></div>
+    <div class="stat"><div class="num">288</div><div class="label">矩阵交叉点</div></div>
+    <div class="stat"><div class="num pink">5+2</div><div class="label">提升策略 <span style="font-size:11px;color:var(--success);">(v1.1 +1.5/1.6)</span></div></div>
     <div class="stat"><div class="num pink">8+1</div><div class="label">券类型</div></div>
     <div class="stat"><div class="num green">4+1</div><div class="label">用户分层</div></div>
     <div class="stat"><div class="num green">4</div><div class="label">A/B 实验</div></div>
-    <div class="stat"><div class="num">12</div><div class="label">高保真设计稿（中英对照 ×6 ×2）</div></div>
+    <div class="stat"><div class="num">24</div><div class="label">高保真设计稿（中英对照 ×6 ×2）</div></div>
   </div>
 
   <h3>两项目核心指标对比</h3>
   <table>
-    <thead>
-      <tr><th>维度</th><th>项目 1 信息触达</th><th>项目 2 优惠券</th><th>联合目标</th></tr>
-    </thead>
+    <thead><tr><th>维度</th><th>项目 1 信息触达</th><th>项目 2 优惠券</th><th>联合目标</th></tr></thead>
     <tbody>
-      <tr><td>核心产出</td><td>12 形式 + 12 结点 + 144 矩阵</td><td>5 策略 + 8+1 券 + 5 分层</td><td>触达 × 内容双轮驱动</td></tr>
+      <tr><td>核心产出</td><td>12 形式 + 24 结点 + 288 矩阵</td><td>7 策略 + 8+1 券 + 5 分层</td><td>触达 × 内容双轮驱动</td></tr>
       <tr><td>核心目标</td><td>触达体系 100% 覆盖</td><td>核销率 15% → 30%</td><td>MAU 券用户占比 0 → 35%</td></tr>
       <tr><td>关键指标</td><td>触达率 ≥ 95%、打开率 ≥ 20%</td><td>ROI 1:4 → 1:6、复借 18% → 28%</td><td>复借率 18% → 30%+</td></tr>
-      <tr><td>合规底线</td><td>CNBV/CONDUSEF/LFPDPPP</td><td>抗诱导多头、规则透明</td><td>投诉率 < 0.15%</td></tr>
+      <tr><td>合规底线</td><td>CNBV/CONDUSEF/LFPDPPP</td><td>抗诱导多头、规则透明</td><td>投诉率 &lt; 0.15%</td></tr>
       <tr><td>落地周期</td><td>6 个月分 3 阶段</td><td>12 周分 3 阶段</td><td>6 个月联合完成</td></tr>
     </tbody>
   </table>
+</section>
+
+<!-- ============ 版本历史 ============ -->
+<section id="changelog">
+  <h2>🕐 版本历史 & 变更记录</h2>
+  <p>所有内容均托管在 GitHub：<a href="https://github.com/xuya606-ui/prestamomex-app" target="_blank" rel="noopener">github.com/xuya606-ui/prestamomex-app</a> · 私有仓库 · 每个 commit 可追溯。</p>
+
+  <div class="version-timeline">
+
+    <div class="version-entry current" id="v1-1">
+      <div class="ve-head">
+        <span class="ve-version">v1.1</span>
+        <a class="ve-hash" href="https://github.com/xuya606-ui/prestamomex-app/commit/c324c7c" target="_blank" rel="noopener">c324c7c</a>
+        <span class="ve-tag">current</span>
+        <span class="ve-date">2026-08-16 23:00 · 11 minutes ago</span>
+      </div>
+      <div class="ve-stats">📊 +961 / -40 行 · 11 文件改动</div>
+      <div class="ve-changes">
+        <h4>🎟️ 优惠券项目</h4>
+        <ul>
+          <li><strong>P3 未使用页</strong>：新增临期/非临期两个分区（🔥 红色虚线+角标 vs 📋 灰色普通）</li>
+          <li><strong>P9 申请页</strong>：券<strong>不自动选中</strong>，改为虚线 banner + <code>Elegir</code> 手动按钮</li>
+          <li><strong>P9 借款页</strong>：删除总金额/总利息展示，<strong>只显示用券可省的利息金额</strong>（透明原则）</li>
+          <li><strong>04 文档</strong>：新增策略 1.5（手动引导设计原则）+ 策略 1.6（临期/非临期状态机制）</li>
+          <li><strong>04 文档</strong>：实验 1 改为 3 组对照（自动 / 提示+手动 / 不展示）</li>
+          <li><strong>设计稿</strong>：<code>design-01-优惠券中心.png</code> / <code>design-03-申请页自动匹配券.png</code> 及对应中文版全部重新生成</li>
+        </ul>
+        <h4>📡 信息触达项目</h4>
+        <ul>
+          <li><strong>prototype/index.html</strong>：新增「<strong>12 触达形式层现样式展示</strong>」专区（12 form card × CSS 视觉模拟 × 5 维元数据）</li>
+          <li><strong>04 文档</strong>：新增 §2.5，扩展 <strong>12 个触达结点（13-24）</strong>，合计 24 结点 / 288 交叉点
+            <br>覆盖：资料补充、提额待激活、券到期前、绑卡失败、扣款失败、信用分变化、生日周年、紧急联系人、额度使用率、推荐奖励、ARCO、节假日</li>
+        </ul>
+        <h4>📄 整合报告</h4>
+        <ul>
+          <li>PréstamoMX-联合方案.html：3 处同步更新（5 大策略表 / A/B 实验表 / 12 触达结点卡 + 扩展提示 + 12 形式展示入口）</li>
+        </ul>
+      </div>
+      <div class="ve-actions">
+        <a href="https://github.com/xuya606-ui/prestamomex-app/commit/c324c7c" target="_blank" rel="noopener">🔍 View commit</a>
+        <a href="https://github.com/xuya606-ui/prestamomex-app/commits/c324c7c" target="_blank" rel="noopener">📋 Browse files at this version</a>
+        <a href="https://github.com/xuya606-ui/prestamomex-app/archive/c324c7c.zip" target="_blank" rel="noopener">⬇ Download v1.1 ZIP</a>
+        <a href="#changelog">⬆ Back to top</a>
+      </div>
+    </div>
+
+    <div class="version-entry" id="v1-0">
+      <div class="ve-head">
+        <span class="ve-version">v1.0</span>
+        <a class="ve-hash" href="https://github.com/xuya606-ui/prestamomex-app/commit/bbf952a" target="_blank" rel="noopener">bbf952a</a>
+        <span class="ve-date">2026-08-16 22:40 · 31 minutes ago</span>
+      </div>
+      <div class="ve-stats">📊 首次发布 · 全量交付</div>
+      <div class="ve-changes">
+        <h4>📦 完整方案包</h4>
+        <ul>
+          <li><strong>项目 1 信息触达</strong>：业务背景 + 需求分析 + 6 竞品调研 + 12 形式 + 12 结点 + 144 矩阵 + 5 层指标 + 6 月路线 + 16 页 HTML 原型 + 6 张西语 + 6 张中文 = 24 张设计稿</li>
+          <li><strong>项目 2 优惠券</strong>：业务背景 + 漏斗诊断 + 7 用户故事 + 5 策略 + 8+1 券 + 5 分层 + 4 A/B + 7 合规铁律 + 10+ 页 HTML 原型 + 6 张西语 + 6 张中文 = 24 张设计稿</li>
+          <li><strong>关联分析</strong>：9 章节，详述"渠道×内容"乘积关系 + 4 个共用底座 + 5 大风险对冲</li>
+          <li><strong>整合报告</strong>：PréstamoMX-联合方案.html（72KB · 单文件完整方案）</li>
+        </ul>
+        <h4>🇲🇽 合规</h4>
+        <ul>
+          <li>CNBV / CONDUSEF / LFPDPPP / REDECO 全面覆盖</li>
+          <li>催收时段 9-20 / 周末 10-18 / 节假日禁催</li>
+          <li>ARCO 四项权利 + opt-in 授权 + 抗诱导多头</li>
+        </ul>
+      </div>
+      <div class="ve-actions">
+        <a href="https://github.com/xuya606-ui/prestamomex-app/commit/bbf952a" target="_blank" rel="noopener">🔍 View commit</a>
+        <a href="https://github.com/xuya606-ui/prestamomex-app/commits/bbf952a" target="_blank" rel="noopener">📋 Browse files at this version</a>
+        <a href="https://github.com/xuya606-ui/prestamomex-app/archive/bbf952a.zip" target="_blank" rel="noopener">⬇ Download v1.0 ZIP</a>
+        <a href="#changelog">⬆ Back to top</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="highlight-ink">
+    <h4 style="margin-top:0;">⏪ 如何回溯到任意旧版本？</h4>
+    <p>所有 commit 都在 Git 上完整保留，可以 1 条命令回到任意历史版本。详见下方 <a href="#how-to-rollback">「如何回溯」</a> 章节。</p>
+  </div>
 </section>
 
 <!-- ============ 关联分析 ============ -->
@@ -236,38 +406,32 @@
   </div>
 
   <h3>1 · 总体架构</h3>
-  <div class="tree">
-┌─────────────────────────────────────────────────────────────┐
+  <div class="tree">┌─────────────────────────────────────────────────────────────┐
 │  项目 1：信息触达方案（管道层）                                │
 │  ┌────────────┐  ┌────────────┐  ┌────────────┐              │
-│  │ 12 触达形式 │  │ 12 触达结点 │  │ 144 矩阵    │              │
-│  │ Push/横幅  │  │ 注册/实名  │  │ 形式×结点   │              │
+│  │ 12 触达形式 │  │ 24 触达结点 │  │ 288 矩阵    │              │
+│  │ Push/横幅  │  │ 注册/放款… │  │ 形式×结点   │              │
 │  └─────┬──────┘  └─────┬──────┘  └─────┬──────┘              │
-│        │               │               │                    │
 │        └───── 管道定义层（被项目 2 完整复用） ────┘            │
 └─────────┬───────────────┬───────────────┬────────────────────┘
-          │               │               │
           ▼               ▼               ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  触达中台（共建底座）                                          │
 │  频次控制 | 静默保护 | 疲劳度 | 灰度发布 | 渠道下发              │
 └─────────┬───────────────┬───────────────┬────────────────────┘
-          │               │               │
           ▼               ▼               ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  项目 2：优惠券使用率提升（内容层）                            │
 │  ┌────────────┐  ┌────────────┐  ┌────────────┐              │
-│  │ 5 大策略    │  │ 8+1 券体系 │  │ 4+1 用户分层 │              │
+│  │ 7 大策略    │  │ 8+1 券体系 │  │ 4+1 用户分层 │              │
 │  │ 场景化/智能 │  │ 提额/免息  │  │ 新/首借/复借 │              │
 │  └─────┬──────┘  └─────┬──────┘  └─────┬──────┘              │
-│        │               │               │                    │
 │        └── 内容承载层（嵌入管道的具体物料） ──┘                │
 └─────────┬───────────────┬───────────────┬────────────────────┘
-          │               │               │
           ▼               ▼               ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  业务层（用户感知的产品能力）                                  │
-│  申请页自动匹配券 | 还款页自动抵扣 | 邀请即时到账 | 流失召回页   │
+│  申请页手动选券 | 临期/非临期分区 | 邀请即时到账 | 流失召回页   │
 └─────────────────────────────────────────────────────────────┘</div>
 
   <h3>2 · 触达形式层 · 直接复用关系</h3>
@@ -277,7 +441,7 @@
     <tbody>
       <tr><td>Push 推送</td><td>券到期前 24h 提醒、券发放通知</td><td>策略 2 智能时机</td></tr>
       <tr><td>站内横幅</td><td>首页「我的优惠券」入口、场景化推荐 Banner</td><td>策略 1 场景化推荐</td></tr>
-      <tr><td>模态弹窗</td><td>申请页券自动匹配、还款成功弹窗 + 邀请券</td><td>策略 1 / 激励循环</td></tr>
+      <tr><td>模态弹窗</td><td>申请页券手动选择引导、还款成功弹窗 + 邀请券</td><td>策略 1 / 激励循环</td></tr>
       <tr><td>短信 SMS</td><td>还款日 D-3 提醒、券发放通知</td><td>策略 2 智能时机</td></tr>
       <tr><td>邮件 Email</td><td>高净值用户专属券、月度账单 + 券包</td><td>用户分层 C-1</td></tr>
       <tr><td>WhatsApp / IM</td><td>催收 + 罚息减免券、邀请进度更新</td><td>策略 5 邀请 / 策略 6 召回</td></tr>
@@ -411,7 +575,6 @@
       <li><strong>主力玩家</strong>：Kueski / Stori / Albo / NuMexico / Mercado Crédito / Aplazo</li>
       <li><strong>目标用户</strong>：4 类画像（蓝领工人/年轻 Z 世代/中小企业主/中产家庭）</li>
     </ul>
-
     <h4>🇲🇽 监管要点（贯穿全文）</h4>
     <table>
       <thead><tr><th>法规</th><th>要求</th></tr></thead>
@@ -471,7 +634,13 @@
     </tbody>
   </table>
 
-  <h3>1.5 产品规划 · 12 触达结点 <span style="color:var(--danger); font-size:13px; padding:2px 8px; background:#FFE5EA; border-radius:4px;">v1.1 已扩展至 24 结点</span></h3>
+  <div class="highlight">
+    <h4 style="margin-top:0;">🎨 12 触达形式 · APP 内的层现样式展示 <span class="tag-version">v1.1</span></h4>
+    <p>每种形式在 APP 内如何呈现 · 含 CSS 视觉模拟 + 5 维元数据（层级 / 触发 / 频次 / 关闭 / 合规）。</p>
+    <p>👉 查看完整展示：<code>info/prototype/index.html</code> 末尾的「12 触达形式展示区」，共 12 个 form-card × 5 维元数据表。可直接当 style guide 用。</p>
+  </div>
+
+  <h3>1.5 产品规划 · 24 触达结点 <span class="tag-version">v1.1 +12</span></h3>
   <div class="grid grid-3">
     <div class="card"><span class="num-circle">1</span><strong>注册成功</strong><br><small>引导完成实名（KYC）</small><br><small>目标：注册-实名 ≥ 60%</small></div>
     <div class="card"><span class="num-circle">2</span><strong>实名引导</strong><br><small>INE + 自拍 + 地址验证</small><br><small>目标：实名完成率 ≥ 80%</small></div>
@@ -488,11 +657,11 @@
   </div>
   <div class="highlight-pink" style="margin-top:16px;">
     <h4 style="margin-top:0;">🔼 v1.1 新增 12 个扩展触达结点（信贷核心流程深度挖掘）</h4>
-    <p style="margin-bottom:8px;">围绕贷前/贷中/贷后/运营/合规 5 大场景类型，新增 12 个补充结点，<strong>合计 24 结点</strong>。每个结点都给出：用户状态、目标、触达内容、推荐形式、转化目标、成功指标。</p>
+    <p style="margin-bottom:8px;">围绕贷前/贷中/贷后/运营/合规 5 大场景类型，新增 12 个补充结点，<strong>合计 24 结点</strong>。</p>
     <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; font-size:13px;">
       <div>· <strong>13 资料补充引导</strong>（INSUFFICIENT_DOCS）</div>
       <div>· <strong>14 提额待激活</strong>（PENDING_LIMIT_ACTIVATION）</div>
-      <div>· <strong>15 券到期前 D-3 临期</strong>（与项目 2 联动）</div>
+      <div>· <strong>15 券到期前 D-3 临期</strong>（<strong>与项目 2 联动</strong>）</div>
       <div>· <strong>16 绑卡失败重试</strong>（PAYMENT_METHOD_FAIL）</div>
       <div>· <strong>17 还款扣款失败</strong>（REPAY_FAIL）</div>
       <div>· <strong>18 信用分变化</strong>（CREDIT_SCORE_CHANGE）</div>
@@ -504,16 +673,6 @@
       <div>· <strong>24 节假日特别活动</strong>（HOLIDAY）</div>
     </div>
     <p style="margin-top:8px;">📄 详见 <code>info/04-产品规划与设计思路.md</code> §2.5 章节，<strong>288 个矩阵交叉点</strong>可生成。</p>
-  </div>
-  <div class="highlight" style="margin-top:16px;">
-    <h4 style="margin-top:0;">🎨 12 触达形式 · APP 内的层现样式展示</h4>
-    <p style="margin-bottom:8px;">v1.1 在 <code>info/prototype/index.html</code> 末尾新增 <strong>12 触达形式展示区</strong>，每种形式一个 card，包含：</p>
-    <ul style="font-size:13px;">
-      <li>CSS 视觉模拟（push 通知样式、横幅、模态弹窗、短信气泡、邮件、IM、Toast、Slide-up、蒙层、角标、浮窗、Widget）</li>
-      <li>优先级标签 P0/P1/P2</li>
-      <li>层级位置 / 触发场景 / 频次 / 关闭方式 / 合规约束 5 维元数据</li>
-    </ul>
-    <p style="margin-bottom:0;">用于设计/开发评审对照，可直接当 style guide 使用。</p>
   </div>
 
   <h3>1.6 业务场景矩阵（12×12 关键节选）</h3>
@@ -585,7 +744,7 @@
   <h3>1.8 6 个月落地路线</h3>
   <div class="grid grid-3">
     <div class="card card-yellow">
-      <h4 style="margin-top:0;">Phase 1（Month 1-2）基础建设</h4>
+      <h4 style="margin-top:0;">Phase 1（M1-M2）基础建设</h4>
       <ul>
         <li>触达中台搭建（统一调度、频次控制、疲劳度）</li>
         <li>补齐 4 触达形式（Toast/Slide-up/横幅/浮窗）</li>
@@ -593,7 +752,7 @@
       </ul>
     </div>
     <div class="card card-green">
-      <h4 style="margin-top:0;">Phase 2（Month 3-4）体系完善</h4>
+      <h4 style="margin-top:0;">Phase 2（M3-M4）体系完善</h4>
       <ul>
         <li>引导蒙层、桌面 Widget、WhatsApp Business API</li>
         <li>A/B 测试平台 + 灰度发布能力</li>
@@ -601,7 +760,7 @@
       </ul>
     </div>
     <div class="card card-pink">
-      <h4 style="margin-top:0;">Phase 3（Month 5-6）精细化</h4>
+      <h4 style="margin-top:0;">Phase 3（M5-M6）精细化</h4>
       <ul>
         <li>节日触达日历（Buen Fin / 亡灵节 / 圣诞）</li>
         <li>人群分层个性化推荐</li>
@@ -735,7 +894,7 @@
     </ol>
   </div>
 
-  <h3>2.3 5 大策略 + 1 召回 <span style="color:var(--danger); font-size:13px; padding:2px 8px; background:#FFE5EA; border-radius:4px;">v1.1 更新</span></h3>
+  <h3>2.3 5+2 策略 <span class="tag-version">v1.1 +1.5/1.6</span></h3>
   <table>
     <thead><tr><th>策略</th><th>目标漏斗环节</th><th>核心解法</th><th>预期提升</th></tr></thead>
     <tbody>
@@ -818,7 +977,7 @@
     </tbody>
   </table>
 
-  <h3>2.6 4 个 A/B 实验 <span style="color:var(--danger); font-size:13px; padding:2px 8px; background:#FFE5EA; border-radius:4px;">v1.1 更新</span></h3>
+  <h3>2.6 4 个 A/B 实验 <span class="tag-version">v1.1 实验 1 已改</span></h3>
   <table>
     <thead><tr><th>#</th><th>实验</th><th>假设</th><th>主指标</th><th>判定标准</th></tr></thead>
     <tbody>
@@ -865,7 +1024,7 @@
       <h4 style="margin-top:0;">Phase 1（W1-W4）基础建设</h4>
       <ul>
         <li>券中心 1.0（8 种券入库）</li>
-        <li>申请/还款页自动匹配券</li>
+        <li>申请/还款页<strong>手动选券</strong>（不自动）</li>
         <li>邀请奖励即时到账</li>
         <li>券过期前 24h 提醒</li>
       </ul>
@@ -876,6 +1035,7 @@
         <li>用户分层 1.0（5 类）</li>
         <li>场景化卡片 Feed</li>
         <li>阶梯邀请（1/3/5/10）</li>
+        <li>临期/非临期分区展示</li>
         <li>A/B 实验 1 + 2 上线</li>
       </ul>
     </div>
@@ -894,19 +1054,19 @@
 <!-- ============ 项目 2 设计稿（中英对照）============ -->
 <section id="p2-designs">
   <h2>🎨 项目 2 · 设计稿（中英对照）</h2>
-  <p>本节展示项目 2 优惠券方案的 6 张高保真设计稿。每张图提供 <span style="color:var(--es); font-weight:700;">🇪🇸 西班牙语原版</span> 与 <span style="color:var(--cn); font-weight:700;">🇨🇳 中文对照版</span> 两种语言版本。设计稿与原型页面在 <code>coupon/prototype/index.html</code> 可交互浏览。</p>
+  <p>本节展示项目 2 优惠券方案的 6 张高保真设计稿（含 v1.1 重新生成的临期/非临期版 + 不自动选中版）。设计稿与原型页面在 <code>coupon/prototype/index.html</code> 可交互浏览。</p>
 
-  <h3>设计稿 #1 · 优惠券中心（Mis cupones）</h3>
+  <h3>设计稿 #1 · 优惠券中心（Mis cupones）<span class="tag-version">v1.1 临期/非临期分区</span></h3>
   <div class="design-pair">
     <div class="design-card">
-      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
-      <img src="./coupon/design/design-01-优惠券中心.png" alt="优惠券中心 es-MX">
-      <div class="caption">Mis cupones · 未使用/已使用/已过期 3 tab · 9 种券可呈现</div>
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX · v1.1</span></div>
+      <img src="./coupon/design/design-01-优惠券中心.png" alt="优惠券中心 es-MX v1.1">
+      <div class="caption">🔥 Vencen pronto（红）置顶 + 📋 Para usar después（灰）置底 · 临期券带 🔥 Pronto a vencer 角标</div>
     </div>
     <div class="design-card">
-      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
-      <img src="./coupon/design/design-cn-01-优惠券中心.png" alt="优惠券中心 zh-CN">
-      <div class="caption">我的优惠券 · 中文标注 · 3 tab 全类目</div>
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN · v1.1</span></div>
+      <img src="./coupon/design/design-cn-01-优惠券中心.png" alt="优惠券中心 zh-CN v1.1">
+      <div class="caption">即将到期（红）置顶 + 常规券（灰）置底 · 临期券角标「🔥 即将到期」</div>
     </div>
   </div>
 
@@ -924,17 +1084,17 @@
     </div>
   </div>
 
-  <h3>设计稿 #3 · 申请页自动匹配券（策略 1 落地）</h3>
+  <h3>设计稿 #3 · 申请页（不自动选中 + 只显示节省利息）<span class="tag-version">v1.1 重大调整</span></h3>
   <div class="design-pair">
     <div class="design-card">
-      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX</span></div>
-      <img src="./coupon/design/design-03-申请页自动匹配券.png" alt="申请页自动匹配券 es-MX">
-      <div class="caption">申请页 banner · 自动抵扣 $250 · 策略 1 场景化推荐</div>
+      <div class="lang-bar es"><span>🇪🇸 西班牙语原版</span><span class="label">es-MX · v1.1</span></div>
+      <img src="./coupon/design/design-03-申请页自动匹配券.png" alt="申请页不自动选中 es-MX v1.1">
+      <div class="caption">Banner 虚线边（未选中态）+ `Elegir` 按钮 + `Continuar sin cupón` + 只显示用券可省的利息</div>
     </div>
     <div class="design-card">
-      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN</span></div>
-      <img src="./coupon/design/design-cn-03-申请页自动匹配券.png" alt="申请页自动匹配券 zh-CN">
-      <div class="caption">申请页自动匹配券 · 中文标注 · 立省 $250 展示</div>
+      <div class="lang-bar cn"><span>🇨🇳 中文对照版</span><span class="label">zh-CN · v1.1</span></div>
+      <img src="./coupon/design/design-cn-03-申请页自动匹配券.png" alt="申请页不自动选中 zh-CN v1.1">
+      <div class="caption">Banner 虚线边 + 「选择」按钮 + 「不使用券继续」+ 只显示节省利息金额</div>
     </div>
   </div>
 
@@ -981,28 +1141,27 @@
   </div>
 </section>
 
-<!-- ============ 落地路线 ============ -->
+<!-- ============ 联合落地 ============ -->
 <section id="roadmap">
   <h2>🚀 联合落地路线</h2>
-
   <h3>6 个月联合推进</h3>
   <div class="grid grid-2">
     <div class="card card-yellow">
       <h4 style="margin-top:0;">M1-M2 · 基础建设</h4>
       <p><strong>项目 1</strong>：触达中台搭建 · 4 触达形式 · 3 结点</p>
-      <p><strong>项目 2</strong>：券中心 1.0 · 申请/还款页自动匹配 · 邀请即时到账</p>
+      <p><strong>项目 2</strong>：券中心 1.0 · 申请/还款页<strong>手动选券</strong> · 邀请即时到账 · <strong>临期/非临期分区</strong></p>
       <p><strong>联合里程碑 W4</strong>：触达中台 + 券中心 1.0 上线（Go/No-Go：Push 触达率 ≥ 80%）</p>
     </div>
     <div class="card card-green">
       <h4 style="margin-top:0;">M3-M4 · 智能升级</h4>
       <p><strong>项目 1</strong>：12 形式 100% 覆盖 · A/B 平台上线</p>
-      <p><strong>项目 2</strong>：5 类用户分层 · 场景化 Feed · 阶梯邀请</p>
+      <p><strong>项目 2</strong>：5 类用户分层 · 场景化 Feed · 阶梯邀请 · A/B 实验 1+2</p>
       <p><strong>联合里程碑 W8</strong>：触达全形式 + 分层上线（Go/No-Go：分层准确率 ≥ 75%）</p>
     </div>
     <div class="card card-pink">
       <h4 style="margin-top:0;">M5-M6 · 闭环优化</h4>
       <p><strong>项目 1</strong>：节日日历 · 人群分层 · 跨产品交叉</p>
-      <p><strong>项目 2</strong>：成长值体系 · 联合券 · 流失召回分级</p>
+      <p><strong>项目 2</strong>：成长值体系 · 联合券 · 流失召回分级 · A/B 实验 3+4</p>
       <p><strong>联合里程碑 M6</strong>：4 个 A/B 出结果 · MAU 券用户 ≥ 35%</p>
     </div>
     <div class="card card-orange">
@@ -1017,16 +1176,15 @@
 <!-- ============ 验收对照 ============ -->
 <section id="verify">
   <h2>✅ 验收对照总览</h2>
-
   <h3>项目 1 · 信息触达</h3>
   <table>
     <thead><tr><th>验收项</th><th>要求</th><th>实际</th><th>状态</th></tr></thead>
     <tbody>
       <tr><td>触达形式</td><td>≥ 10</td><td>12</td><td><span class="tag-must">✅</span></td></tr>
-      <tr><td>触达结点</td><td>≥ 10</td><td>12</td><td><span class="tag-must">✅</span></td></tr>
-      <tr><td>矩阵交叉点</td><td>≥ 30</td><td>144</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>触达结点 <span class="tag-version">v1.1</span></td><td>≥ 10</td><td><strong>24</strong> (v1.1 +12)</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>矩阵交叉点 <span class="tag-version">v1.1</span></td><td>≥ 30</td><td><strong>288</strong> (v1.1 144→288)</td><td><span class="tag-must">✅</span></td></tr>
       <tr><td>竞品对比</td><td>5+</td><td>6</td><td><span class="tag-must">✅</span></td></tr>
-      <tr><td>HTML 原型</td><td>≥ 12</td><td>16</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>HTML 原型</td><td>≥ 12</td><td>16 + 12 形式展示区</td><td><span class="tag-must">✅</span></td></tr>
       <tr><td>设计稿（西语）</td><td>≥ 6</td><td>6 张 2K PNG</td><td><span class="tag-must">✅</span></td></tr>
       <tr><td>设计稿（中文）</td><td>≥ 6</td><td>6 张 2K PNG</td><td><span class="tag-must">✅</span></td></tr>
       <tr><td>合规</td><td>CNBV/CONDUSEF/LFPDPPP/催收</td><td>全覆盖</td><td><span class="tag-must">✅</span></td></tr>
@@ -1040,12 +1198,12 @@
     <tbody>
       <tr><td>券类型</td><td>≥ 8</td><td>8 + 1 兜底</td><td><span class="tag-must">✅</span></td></tr>
       <tr><td>用户分层</td><td>≥ 4</td><td>4 + 1 子层</td><td><span class="tag-must">✅</span></td></tr>
-      <tr><td>提升策略</td><td>≥ 5</td><td>5 + 1 召回</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>提升策略 <span class="tag-version">v1.1</span></td><td>≥ 5</td><td><strong>5+2</strong> (v1.1 +1.5/1.6)</td><td><span class="tag-must">✅</span></td></tr>
       <tr><td>竞品对比</td><td>5+</td><td>5+</td><td><span class="tag-must">✅</span></td></tr>
-      <tr><td>HTML 原型</td><td>≥ 10</td><td>10+</td><td><span class="tag-must">✅</span></td></tr>
-      <tr><td>设计稿（西语）</td><td>≥ 6</td><td>6 张 2K PNG</td><td><span class="tag-must">✅</span></td></tr>
-      <tr><td>设计稿（中文）</td><td>≥ 6</td><td>6 张 2K PNG</td><td><span class="tag-must">✅</span></td></tr>
-      <tr><td>A/B 实验</td><td>≥ 3</td><td>4</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>HTML 原型</td><td>≥ 10</td><td>14 (v1.1 P3/P9 优化)</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>设计稿（西语）</td><td>≥ 6</td><td>6 张 2K PNG (v1.1 4 张重生成)</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>设计稿（中文）</td><td>≥ 6</td><td>6 张 2K PNG (v1.1 4 张重生成)</td><td><span class="tag-must">✅</span></td></tr>
+      <tr><td>A/B 实验</td><td>≥ 3</td><td>4 (v1.1 实验 1 改为 3 组对照)</td><td><span class="tag-must">✅</span></td></tr>
       <tr><td>漏斗分析</td><td>完整</td><td>5 环节诊断</td><td><span class="tag-must">✅</span></td></tr>
       <tr><td>合规</td><td>多头借贷/规则透明/可关闭</td><td>7 铁律</td><td><span class="tag-must">✅</span></td></tr>
     </tbody>
@@ -1066,13 +1224,72 @@
   </table>
 </section>
 
+<!-- ============ 如何回溯 ============ -->
+<section id="how-to-rollback">
+  <h2>⏪ 如何回溯到任意旧版本</h2>
+  <p>Git 的好处是 <strong>所有历史 commit 永久保留</strong>，可以 1 条命令回到任意历史状态。</p>
+
+  <h3>方法 1 · Git 命令（推荐 · 程序员）</h3>
+  <pre># 1. 查看所有历史 commit
+git log --oneline
+
+# 2. 回到指定版本（创建新分支保留当前进度）
+git checkout -b restore-v1.0 bbf952a
+# 此时工作区就是 v1.0 的状态
+
+# 3. 回到最新版
+git checkout main
+git pull</pre>
+
+  <h3>方法 2 · GitHub ZIP 下载（推荐 · 任何人）</h3>
+  <p>任意 commit 都可以下载为 zip 包：</p>
+  <pre># v1.1 当前版
+https://github.com/xuya606-ui/prestamomex-app/archive/c324c7c.zip
+
+# v1.0 首发版
+https://github.com/xuya606-ui/prestamomex-app/archive/bbf952a.zip
+
+# 最新 main 分支
+https://github.com/xuya606-ui/prestamomex-app/archive/refs/heads/main.zip
+
+# 任意 commit: 把 commit hash 替换进去即可
+# 格式：https://github.com/&lt;user&gt;/&lt;repo&gt;/archive/&lt;hash&gt;.zip</pre>
+
+  <h3>方法 3 · GitHub 网页浏览器查看</h3>
+  <p>在 <a href="https://github.com/xuya606-ui/prestamomex-app/commits/main" target="_blank" rel="noopener">commits 页面</a> 点击任意 commit，可以：</p>
+  <ul>
+    <li>📋 <strong>Browse files</strong>：查看该版本的文件树</li>
+    <li>🔍 <strong>View commit details</strong>：查看 diff（行级别改动）</li>
+    <li>⬇ <strong>Download ZIP</strong>：下载该版本完整包</li>
+    <li>🔀 <strong>Compare</strong>：对比任意两个 commit 的差异</li>
+  </ul>
+
+  <h3>方法 4 · 单个文件历史</h3>
+  <p>想看某个文件（比如 <code>info/04-产品规划与设计思路.md</code>）的历史？</p>
+  <pre>https://github.com/xuya606-ui/prestamomex-app/commits/main/info/04-产品规划与设计思路.md</pre>
+  <p>点开可看每个 commit 对该文件的修改。</p>
+
+  <h3>方法 5 · 创建 Release Tag（建议）</h3>
+  <p>如果想要更清晰的"版本号"管理，可以在 GitHub 上给重要 commit 打 tag：</p>
+  <pre>git tag v1.1 c324c7c
+git tag v1.0 bbf952a
+git push origin --tags</pre>
+  <p>打 tag 后，下载链接可以更简洁：<code>https://github.com/xuya606-ui/prestamomex-app/archive/refs/tags/v1.1.zip</code></p>
+
+  <div class="highlight-green">
+    <h4 style="margin-top:0;">💡 当前所有 commit</h4>
+    <pre>c324c7c v1.1: 4 项核心优化                  ← current
+bbf952a v1.0: 墨西哥现金贷APP联合方案          ← initial release</pre>
+  </div>
+</section>
+
 <!-- ============ 附录 ============ -->
 <section id="appendix">
   <h2>📎 附录</h2>
 
   <h3>附录 A · 文件目录结构</h3>
   <pre>APP-minmax/
-├── PréstamoMX-联合方案.html     ← 本文件（整合报告）
+├── PréstamoMX-联合方案.html     ← 本文件（带版本回溯的整合报告）
 ├── 00-总览与导航.md
 ├── 00-关联分析.md
 │
@@ -1080,47 +1297,21 @@
 │   ├── 01-业务背景.md
 │   ├── 02-需求分析与痛点.md
 │   ├── 03-竞品调研.md
-│   ├── 04-产品规划与设计思路.md
+│   ├── 04-产品规划与设计思路.md    ← v1.1 +12 触达结点
 │   ├── README.md
 │   ├── STATUS.md
-│   ├── prototype/                ← 16 页 HTML 原型
-│   │   ├── index.html
-│   │   ├── style.css
-│   │   └── script.js
+│   ├── prototype/                ← 16 页 HTML 原型 + 12 形式展示
 │   └── design/                   ← 12 张设计稿（6 西 + 6 中）
-│       ├── design-01-首页横幅.png        (es-MX)
-│       ├── design-02-消息中心.png        (es-MX)
-│       ├── design-03-还款提醒弹窗.png    (es-MX)
-│       ├── design-04-逾期催收分级.png    (es-MX)
-│       ├── design-05-提额活动落地页.png  (es-MX)
-│       ├── design-06-合规授权页.png      (es-MX)
-│       ├── design-cn-01-首页横幅.png     (zh-CN)
-│       ├── design-cn-02-消息中心.png     (zh-CN)
-│       ├── design-cn-03-还款提醒弹窗.png (zh-CN)
-│       ├── design-cn-04-逾期催收分级.png (zh-CN)
-│       ├── design-cn-05-提额活动落地页.png (zh-CN)
-│       └── design-cn-06-合规授权页.png   (zh-CN)
 │
 └── coupon/                      ← 项目 2：优惠券使用率提升
     ├── 01-业务背景.md
     ├── 02-需求分析与痛点.md
     ├── 03-竞品调研.md
-    ├── 04-产品规划与设计思路.md
+    ├── 04-产品规划与设计思路.md    ← v1.1 +策略 1.5/1.6
     ├── README.md
     ├── STATUS.md
-    ├── prototype/                ← 10+ 页 HTML 原型
-    │   ├── index.html
-    │   ├── styles.css
-    │   ├── app.js
-    │   └── _previews/
-    └── design/                   ← 12 张设计稿（6 西 + 6 中）
-        ├── design-01-优惠券中心.png
-        ├── design-02-领券弹窗.png
-        ├── design-03-申请页自动匹配券.png
-        ├── design-04-还款页使用券.png
-        ├── design-05-邀请奖励页.png
-        ├── design-06-流失召回页.png
-        └── design-cn-*.png (6 张中文对照版)</pre>
+    ├── prototype/                ← 14 页 HTML 原型（v1.1 P3/P9 优化）
+    └── design/                   ← 12 张设计稿（v1.1 4 张重生成）</pre>
 
   <h3>附录 B · 阅读路径建议</h3>
   <div class="grid grid-2">
@@ -1129,8 +1320,8 @@
       <ol>
         <li>本文件 → 一页摘要</li>
         <li>关联分析 → 一页摘要 + 协同价值</li>
-        <li>项目 1 12 形式 + 12 结点</li>
-        <li>项目 2 5 策略 + 8+1 券</li>
+        <li>项目 1 12 形式 + 24 结点</li>
+        <li>项目 2 7 策略 + 8+1 券</li>
       </ol>
     </div>
     <div class="card">
@@ -1149,13 +1340,14 @@
         <li>12 张西语 + 12 张中文设计稿</li>
         <li>两个 prototype 交互</li>
         <li>设计规范（配色/字号/圆角）</li>
+        <li><strong>12 触达形式展示区</strong>（v1.1 新增 style guide）</li>
       </ol>
     </div>
     <div class="card">
       <h4 style="margin-top:0;">开发视角（4 小时）</h4>
       <ol>
         <li>关联分析 → 4 个共用底座</li>
-        <li>项目 1 矩阵 144 交叉点</li>
+        <li>项目 1 矩阵 288 交叉点</li>
         <li>项目 2 7 结点 × 券映射</li>
         <li>项目 2 4 个 A/B 实验</li>
       </ol>
@@ -1187,6 +1379,7 @@
     <li>跨项目 PMO 设立（本月内）</li>
     <li>联合里程碑（W4 / W8 / W12 / M4 / M6）设定</li>
     <li>4 个共用底座 owner 分配</li>
+    <li>给 v1.0 / v1.1 在 GitHub 上打 tag（建议）</li>
   </ol>
 </section>
 
@@ -1194,13 +1387,19 @@
 
 <footer>
   <div class="container" style="padding:0;">
-    <h3>PréstamoMX · 联合方案包 v1.0</h3>
+    <h3>PréstamoMX · 联合方案包 v1.1</h3>
     <p>墨西哥现金贷 APP · 信息触达方案 + 优惠券使用率提升</p>
-    <p style="opacity:0.7; font-size:13px;">作者：产品小助手（agent-24e32ac69dcc） · 2026-08-16 · 本文档及 24 张设计稿（中英对照）已完整交付</p>
+    <p style="opacity:0.7; font-size:13px;">
+      作者：产品小助手（agent-24e32ac69dcc） · 2026-08-16 ·
+      仓库：<a href="https://github.com/xuya606-ui/prestamomex-app">github.com/xuya606-ui/prestamomex-app</a>
+    </p>
     <p style="margin-top:16px; font-size:12px; opacity:0.5;">
       文字部分来源于 <code style="color:#FFD400;">info/</code> 和 <code style="color:#FFD400;">coupon/</code> 目录下的 8 份 markdown 报告。
       设计稿位于 <code style="color:#FFD400;">info/design/</code> 和 <code style="color:#FFD400;">coupon/design/</code>。
       HTML 原型位于 <code style="color:#FFD400;">info/prototype/</code> 和 <code style="color:#FFD400;">coupon/prototype/</code>。
+    </p>
+    <p style="margin-top:8px; font-size:12px; opacity:0.5;">
+      📋 版本：v1.0 (bbf952a) · v1.1 (c324c7c) · 完整历史 → <a href="https://github.com/xuya606-ui/prestamomex-app/commits/main">commits</a>
     </p>
   </div>
 </footer>
